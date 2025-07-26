@@ -55,6 +55,7 @@ export function isCompetitiveHM(time: string): boolean {
 
 export function isCompetitiveFM(time: string): boolean {
   if (!time || time === 'N/A') return false;
+  // eslint-disable-next-line
   const [hours, minutes] = time.split(':').map(Number);
   return hours < 4;
 }

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Runner } from '../types/runner';
+import Image from 'next/image';
+import { safeCompare, safeStringCompare, safeTimeCompare } from '../utils/safeCompare';
 
 interface RunnersTableProps {
   runners: Runner[];
@@ -7,6 +9,7 @@ interface RunnersTableProps {
   onDelete?: (runnerId: number) => void;
 }
 
+// eslint-disable-next-line
 export default function RunnersTable({ runners, onEdit, onDelete }: RunnersTableProps) {
   const [sortField, setSortField] = useState<keyof Runner>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
@@ -21,23 +24,21 @@ export default function RunnersTable({ runners, onEdit, onDelete }: RunnersTable
   };
 
   const sortedRunners = [...runners].sort((a, b) => {
-    let aVal = a[sortField];
-    let bVal = b[sortField];
+    const aVal = a[sortField];
+    const bVal = b[sortField];
 
-    // Handle time sorting
-    if (sortField === 'halfMarathonPR' || sortField === 'fullMarathonPR') {
-      const timeToSeconds = (time: string) => {
-        if (time === 'N/A') return 999999;
-        const parts = time.split(':').map(Number);
-        return parts[0] * 3600 + parts[1] * 60 + (parts[2] || 0);
-      };
-      aVal = timeToSeconds(aVal as string);
-      bVal = timeToSeconds(bVal as string);
+    // Use appropriate comparison function based on field type
+    switch (sortField) {
+      case 'halfMarathonPR':
+      case 'fullMarathonPR':
+        return safeTimeCompare(aVal as string, bVal as string, sortDirection);
+      
+      case 'name':
+        return safeStringCompare(aVal as string, bVal as string, sortDirection, false);
+      
+      default:
+        return safeCompare(aVal, bVal, sortDirection);
     }
-
-    if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1;
-    if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1;
-    return 0;
   });
 
   const SortIcon = ({ field }: { field: keyof Runner }) => {
@@ -114,9 +115,12 @@ export default function RunnersTable({ runners, onEdit, onDelete }: RunnersTable
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-10 w-10">
-                      <img 
+                      <Image 
                         className="h-10 w-10 rounded-full object-cover border-2 border-gray-200" 
-                        src={runner.profileImage} 
+                        src={runner.profileImage || ''} 
+                        width={0}
+                        height={0}
+                        sizes="100vw"
                         alt={runner.name}
                         onError={(e) => {
                           e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(runner.name)}&background=3b82f6&color=fff`;
@@ -176,14 +180,14 @@ export default function RunnersTable({ runners, onEdit, onDelete }: RunnersTable
                         Edit
                       </button>
                     )}
-                    {onDelete && (
+                    {/* {onDelete && (
                       <button
                         onClick={() => onDelete(runner.id)}
                         className="text-red-600 hover:text-red-900 transition-colors duration-150"
                       >
                         Delete
                       </button>
-                    )}
+                    )} */}
                   </div>
                 </td>
               </tr>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Runner } from '../types/runner';
 
 interface RunnerCardProps {
@@ -8,9 +9,12 @@ export default function RunnerCard({ runner }: RunnerCardProps) {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-200">
       <div className="relative">
-        <img
+        <Image
           className="w-full h-48 object-cover"
-          src={runner.profileImage}
+          src={runner.profileImage || ''}
+          width={0}
+          height={0}
+          sizes="100vw"
           alt={runner.name}
           onError={(e) => {
             e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(runner.name)}&background=3b82f6&color=fff&size=400`;
