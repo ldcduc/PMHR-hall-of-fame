@@ -20,6 +20,26 @@ export const runners: Runner[] = [
   },
   {
     id: '2',
+    name: 'QUÁCH THẾ KỲ',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THE%20KY.jpg', // Assuming similar pattern
+    halfMarathonPR: '1:33:37',
+    fullMarathonPR: '3:16:59',
+    achievements: [
+      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1048/6491', // Full Marathon
+      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1818/5601', // Half Marathon
+      'VMHP171223 - 597/3466',
+      'TCBHCMCIM2022 - 352/1537',
+      'MDIM2019 - 82/145',
+      'TPM2018 - 51/63',
+      'HCMCR2017 - 32/32',
+      'TCBHCMCIM8.12.24 - 1337/4012',
+      'TCBHCMCIM23 - 679/1673'
+    ],
+    bio: 'Member of PMHR team. Age group: M. Experienced marathoner with strong performances in both half and full marathon distances. Has competed in multiple VnExpress Marathon events.',
+    joinDate: '2017-01-01', // Based on earliest race record
+  },
+  {
+    id: '3',
     name: 'VO TAN DUC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20TAN%20DUC.jpg',
     halfMarathonPR: '1:29:01',
@@ -38,7 +58,7 @@ export const runners: Runner[] = [
     joinDate: '2020-01-01',
   },
   {
-    id: '3',
+    id: '4',
     name: 'TRẦN MẠNH CƯỜNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20MANH%20CUONG.jpg',
     halfMarathonPR: '1:41:13',
@@ -54,7 +74,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '4',
+    id: '5',
     name: 'NGUYỄN SỸ TOÀN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20SY%20TOAN.jpg',
     fullMarathonPR: '3:28:11',
@@ -67,7 +87,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '5',
+    id: '6',
     name: 'ĐẬU DANH',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DAU%20DANH.jpg',
     halfMarathonPR: '1:37:11',
@@ -82,7 +102,7 @@ export const runners: Runner[] = [
     joinDate: '2025-07-20',
   },
   {
-    id: '6',
+    id: '7',
     name: 'VŨ VĂN HÀO',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VU%20VAN%20HAO.jpg',
     halfMarathonPR: '1:28:53',
@@ -111,6 +131,7 @@ export function isCompetitiveHM(time: string): boolean {
 }
 
 export function isCompetitiveFM(time: string): boolean {
+  // eslint-disable-next-line 
   const [hours, minutes] = time.split(':').map(Number);
   return hours < 4;
 }

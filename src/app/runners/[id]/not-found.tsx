@@ -9,7 +9,7 @@ export default function NotFound() {
         </div>
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Runner Not Found</h1>
         <p className="text-gray-600 mb-8">
-          The runner you're looking for doesn't exist in our records.
+          The runner you&apos;re looking for doesn&apos;t exist in our records.
         </p>
         <Link 
           href="/"

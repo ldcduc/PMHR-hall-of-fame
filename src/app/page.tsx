@@ -75,7 +75,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Club Statistics</h3>
-            <p className="text-gray-600">Our runners' achievements at a glance</p>
+            <p className="text-gray-600">Our runners&apos; achievements at a glance</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-md p-6 text-center">
@@ -90,7 +90,7 @@ export default function Home() {
             </div>
             <div className="bg-white rounded-lg shadow-md p-6 text-center">
               <div className="text-3xl font-bold text-green-600 mb-2">
-                {runners.reduce((sum, r) => sum + r.totalAchievements, 0)}
+                {runners.reduce((sum, r) => sum + (r.totalAchievements || 0), 0)}
               </div>
               <div className="text-gray-600">Total Achievements</div>
             </div>

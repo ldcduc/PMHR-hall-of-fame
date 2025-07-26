@@ -1,5 +1,5 @@
-import RunnerCard from '../components/RunnerCard';
-import { runners } from '../data/runners';
+import RunnerCard from '@/src/components/RunnerCard';
+import { runners } from '@/src/data/runners';
 
 export default function AllRunners() {
   return (

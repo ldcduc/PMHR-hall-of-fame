@@ -21,8 +21,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t congduc296/pmhr-hof:latest .
+          docker build -t congduc296/pmhr-hall-of-fame:latest .
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push congduc296/pmhr-hof:latest
+          docker push congduc296/pmhr-hall-of-fame:latest

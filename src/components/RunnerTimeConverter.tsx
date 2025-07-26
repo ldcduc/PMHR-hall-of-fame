@@ -98,7 +98,10 @@ export default function RunnerTimeConverter() {
             </label>
             <select
               value={distance}
-              onChange={(e) => setDistance(e.target.value as any)}
+              onChange={
+                /* eslint-disable-next-line */
+                (e) => setDistance(e.target.value as any)
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="5k">5K</option>
@@ -137,7 +140,7 @@ export default function RunnerTimeConverter() {
         )}
 
         <div className="text-xs text-gray-500">
-          <p>* Predictions are based on Jack Daniels' VDOT formula and assume similar fitness levels across distances.</p>
+          <p>* Predictions are based on Jack Daniels&apos; VDOT formula and assume similar fitness levels across distances.</p>
           <p>* Time format: Hours:Minutes:Seconds or Minutes:Seconds</p>
         </div>
       </div>

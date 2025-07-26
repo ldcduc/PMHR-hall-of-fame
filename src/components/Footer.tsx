@@ -1,4 +1,5 @@
 import Logo from './Logo';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -22,14 +23,14 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/" className="text-gray-300 hover:text-white transition-colors duration-150">
+                <Link href="/" className="text-gray-300 hover:text-white transition-colors duration-150">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/runners" className="text-gray-300 hover:text-white transition-colors duration-150">
+                <Link href="/runners" className="text-gray-300 hover:text-white transition-colors duration-150">
                   All Runners
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="/achievements" className="text-gray-300 hover:text-white transition-colors duration-150">
