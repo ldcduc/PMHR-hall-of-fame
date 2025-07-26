@@ -16,9 +16,6 @@ export default function RunnerCard({ runner }: RunnerCardProps) {
           height={0}
           sizes="100vw"
           alt={runner.name}
-          onError={(e) => {
-            e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(runner.name)}&background=3b82f6&color=fff&size=400`;
-          }}
         />
         {runner.isElite && (
           <div className="absolute top-2 right-2">

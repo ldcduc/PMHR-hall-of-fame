@@ -20,26 +20,6 @@ export const runners: Runner[] = [
   },
   {
     id: '2',
-    name: 'QUÁCH THẾ KỲ',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THE%20KY.jpg', // Assuming similar pattern
-    halfMarathonPR: '1:33:37',
-    fullMarathonPR: '3:16:59',
-    achievements: [
-      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1048/6491', // Full Marathon
-      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1818/5601', // Half Marathon
-      'VMHP171223 - 597/3466',
-      'TCBHCMCIM2022 - 352/1537',
-      'MDIM2019 - 82/145',
-      'TPM2018 - 51/63',
-      'HCMCR2017 - 32/32',
-      'TCBHCMCIM8.12.24 - 1337/4012',
-      'TCBHCMCIM23 - 679/1673'
-    ],
-    bio: 'Member of PMHR team. Age group: M. Experienced marathoner with strong performances in both half and full marathon distances. Has competed in multiple VnExpress Marathon events.',
-    joinDate: '2017-01-01', // Based on earliest race record
-  },
-  {
-    id: '3',
     name: 'VO TAN DUC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20TAN%20DUC.jpg',
     halfMarathonPR: '1:29:01',
@@ -56,6 +36,26 @@ export const runners: Runner[] = [
     ],
     bio: 'PMHR team member. Age group: M30-39. Strong competitor in both half and full marathon distances.',
     joinDate: '2020-01-01',
+  },
+  {
+    id: '3',
+    name: 'QUÁCH THẾ KỶ',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THE%20KY.jpg', // Assuming similar pattern
+    halfMarathonPR: '1:33:37',
+    fullMarathonPR: '3:16:59',
+    achievements: [
+      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1048/6491', // Full Marathon
+      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1818/5601', // Half Marathon
+      'VMHP171223 - 597/3466',
+      'TCBHCMCIM2022 - 352/1537',
+      'MDIM2019 - 82/145',
+      'TPM2018 - 51/63',
+      'HCMCR2017 - 32/32',
+      'TCBHCMCIM8.12.24 - 1337/4012',
+      'TCBHCMCIM23 - 679/1673'
+    ],
+    bio: 'Member of PMHR team. Age group: M. Experienced marathoner with strong performances in both half and full marathon distances. Has competed in multiple VnExpress Marathon events.',
+    joinDate: '2017-01-01', // Based on earliest race record
   },
   {
     id: '4',

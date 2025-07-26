@@ -43,12 +43,15 @@ export function safeCompare(
  * Safe comparison for time strings (HH:MM:SS format)
  */
 export function safeTimeCompare(
-  a: string | undefined,
-  b: string | undefined,
+  // eslint-disable-next-line
+  a: any,
+  // eslint-disable-next-line
+  b: any,
   direction: SortDirection = 'asc'
 ): number {
-  const timeToSeconds = (time: string | undefined): number => {
-    if (!time || time === 'N/A') return 999999;
+  // eslint-disable-next-line
+  const timeToSeconds = (time: any): number => {
+    if (!time || typeof time !== 'string' || time === 'N/A') return 999999;
     const parts = time.split(':').map(Number);
     return parts[0] * 3600 + parts[1] * 60 + (parts[2] || 0);
   };

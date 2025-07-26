@@ -131,9 +131,6 @@ export default function RunnersTable({ runners, onEdit, onDelete }: RunnersTable
                           className="h-10 w-10 rounded-full object-cover border-2 border-gray-200" 
                           src={runner.profileImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(runner.name)}&background=3b82f6&color=fff`}
                           alt={runner.name}
-                          onError={(e) => {
-                            e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(runner.name)}&background=3b82f6&color=fff`;
-                          }}
                         />
                       </div>
                       <div className="ml-4">

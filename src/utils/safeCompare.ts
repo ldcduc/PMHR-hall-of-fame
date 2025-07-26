@@ -64,12 +64,15 @@ export function safeCompare(
  * Safe comparison for time strings (HH:MM:SS or HH:MM format)
  */
 export function safeTimeCompare(
-  aTime: string | undefined,
-  bTime: string | undefined,
+  aTime: CompareValue,
+  bTime: CompareValue,
   direction: SortDirection = 'asc'
 ): number {
-  const timeToSeconds = (time: string | undefined): number => {
-    if (!time || time === 'N/A' || time.trim() === '') return 999999;
+  const timeToSeconds = (time: CompareValue): number => {
+    // Handle non-string values
+    if (time === null || time === undefined) return 999999;
+    if (typeof time !== 'string') return 999999;
+    if (time === 'N/A' || time.trim() === '') return 999999;
     
     try {
       const parts = time.split(':').map(Number);
@@ -95,13 +98,14 @@ export function safeTimeCompare(
  * Safe comparison for numeric strings
  */
 export function safeNumericCompare(
-  aVal: string | number | undefined,
-  bVal: string | number | undefined,
+  aVal: CompareValue,
+  bVal: CompareValue,
   direction: SortDirection = 'asc'
 ): number {
-  const toNumber = (val: string | number | undefined): number | undefined => {
+  const toNumber = (val: CompareValue): number | undefined => {
     if (val === undefined || val === null) return undefined;
     if (typeof val === 'number') return val;
+    if (typeof val !== 'string') return undefined;
     
     const parsed = parseFloat(val);
     return isNaN(parsed) ? undefined : parsed;
@@ -117,13 +121,14 @@ export function safeNumericCompare(
  * Safe comparison for strings with case-insensitive option
  */
 export function safeStringCompare(
-  aVal: string | undefined,
-  bVal: string | undefined,
+  aVal: CompareValue,
+  bVal: CompareValue,
   direction: SortDirection = 'asc',
   caseSensitive: boolean = false
 ): number {
-  const normalize = (val: string | undefined): string | undefined => {
+  const normalize = (val: CompareValue): string | undefined => {
     if (val === undefined || val === null) return undefined;
+    if (typeof val !== 'string') return String(val);
     return caseSensitive ? val.trim() : val.trim().toLowerCase();
   };
 
@@ -134,8 +139,23 @@ export function safeStringCompare(
 }
 
 /**
- * Safe comparison for dates
+ * Safe comparison for achievement arrays (sorts by count)
  */
+export function safeAchievementCompare(
+  aAchievements: CompareValue,
+  bAchievements: CompareValue,
+  direction: SortDirection = 'asc'
+): number {
+  const getCount = (achievements: CompareValue): number => {
+    if (Array.isArray(achievements)) return achievements.length;
+    if (achievements === null || achievements === undefined) return 0;
+    return 0;
+  };
+
+  const aCount = getCount(aAchievements);
+  const bCount = getCount(bAchievements);
+  return safeCompare(aCount, bCount, direction);
+}
 export function safeDateCompare(
   aDate: string | Date | undefined,
   bDate: string | Date | undefined,

@@ -12,7 +12,7 @@ interface PageProps {
 }
 
 export default function RunnerProfile({ params }: PageProps) {
-  const [imageError, setImageError] = useState(false);
+  const [imageError] = useState(false);
   const { id } = use(params);
   const runner = runners.find(r => r.id === id);
   
@@ -66,7 +66,6 @@ export default function RunnerProfile({ params }: PageProps) {
                 alt={runner.name}
                 fill
                 className="object-cover"
-                onError={() => setImageError(true)}
               />
               {/* Elite Status Badge - check if sub 1:45 HM or sub 4:00 FM */}
               {((runner.halfMarathonPR && runner.halfMarathonPR < '1:45:00') || 
