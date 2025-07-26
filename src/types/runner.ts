@@ -1,5 +1,5 @@
 export interface Runner {
-  id: number;
+  id: string;
   name: string;
   profileImage?: string;
   halfMarathonPR: string;
