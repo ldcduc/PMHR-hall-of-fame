@@ -33,6 +33,12 @@ const Header = () => {
               All Runners
             </Link>
             <Link
+              href="/lop-2024"
+              className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-0 after:bg-primary-600 after:transition-transform hover:after:scale-100"
+            >
+              LOP 2024
+            </Link>
+            <Link
               href="/events"
               className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-0 after:bg-primary-600 after:transition-transform hover:after:scale-100"
             >
@@ -77,6 +83,9 @@ const Header = () => {
               </Link>
               <Link href="/runners" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
                 All Runners
+              </Link>
+              <Link href="/lop-2024" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
+                LOP 2024
               </Link>
               <Link href="/events" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
                 Events
