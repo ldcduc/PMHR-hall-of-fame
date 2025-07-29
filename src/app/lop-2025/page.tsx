@@ -37,7 +37,7 @@ export default function LOP2025() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {[
-                                        { stt: 1, name: "Tran Thanh Cuong", distance: "610.01" },
+                    { stt: 1, name: "Tran Thanh Cuong", distance: "610.01" },
                     { stt: 2, name: "Hanh Nguyen", distance: "599.89" },
                     { stt: 3, name: "Vu Tien Dung", distance: "580.85" },
                     { stt: 4, name: "Khanh Dao 🇻🇳", distance: "417.6" },
@@ -165,7 +165,7 @@ export default function LOP2025() {
           {/* Table Statistics */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-md p-6 text-center">
-              <div className="text-3xl font-bold text-green-600 mb-2">104</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">107</div>
               <div className="text-gray-600">Total Legend Runners</div>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6 text-center">
@@ -219,7 +219,7 @@ export default function LOP2025() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Progress</h3>
-                    <p className="text-gray-600">104 Runners Qualified</p>
+                    <p className="text-gray-600">107 Runners Qualified</p>
                   </div>
                 </div>
                 
