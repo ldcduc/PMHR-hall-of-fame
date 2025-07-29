@@ -2,12 +2,13 @@
 import { Runner } from '../types/runner';
 
 export const runners: Runner[] = [
+  // Runners with Full Marathon records (sorted by FM time, fastest first)
   {
     id: '1',
     name: 'TRẦN THANH CƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20THANH%20CUONG.jpg',
     halfMarathonPR: '1:20:32',
-    fullMarathonPR: '3:07:10',
+    fullMarathonPR: '3:07:10', // Fastest FM
     achievements: [
       'HCMC Marathon 2025 - 534/5804',
       'HCMCIM 2020 - 114/321',
@@ -19,11 +20,31 @@ export const runners: Runner[] = [
     joinDate: '2020-01-01',
   },
   {
+    id: '36',
+    name: 'QUÁCH THỊ BÍCH THÙY', 
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THI%20BICH%20THUY.jpg',
+    halfMarathonPR: '1:32:40',
+    fullMarathonPR: '3:11:35', // 2nd fastest FM
+    isElite: true,
+    achievements: [
+      'VNEXPRESS MARATHON HUE 06/04/2025 - 47/548',
+      'Top 2 - FM - Nữ - MEKONG DELTA MARATHON 08/11/2020',
+      'Top 3 - FM - Nữ - MEKONG DELTA MARATHON HAU GIANG 17/07/2022',
+      'Top 3 - FM - Nữ - DAT MUI MARATHON CAMAU 09/10/2022',
+      'Top 3 - FM - Nữ - DAK LAK MARATHON 28/04/2024',
+      'Top 3 - FM - Nữ - DAK NONG MARATHON 01/06/2025',
+      'Top 2 - HM - Nữ - NONG THON VIET HALF MARATHON 05/01/2025',
+      'Top 2 - HM - Nữ - RANG HAM MAT RUN ♡ BUOC CHAY YEU THUONG 22/06/2025'
+    ],
+    bio: 'Elite runner with FPTR / PMHR team. Age group: F (Female). Multiple podium finishes in major Vietnamese marathons. Exceptional performer in both half and full marathon distances.',
+    joinDate: '2025-04-06',
+  },
+  {
     id: '2',
     name: 'VÕ TẤN ĐỨC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20TAN%20DUC.jpg',
     halfMarathonPR: '1:29:01',
-    fullMarathonPR: '3:12:31',
+    fullMarathonPR: '3:12:31', // 3rd fastest FM
     achievements: [
       'VPBANK VNEXPRESS MARATHON HO CHI MINH CITY MIDNIGHT 2025 - 748/5848',
       'HCMCM11.1.25 - 761/5804',
@@ -40,12 +61,12 @@ export const runners: Runner[] = [
   {
     id: '3',
     name: 'QUÁCH THẾ KỶ',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THE%20KY.jpg', // Assuming similar pattern
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THE%20KY.jpg',
     halfMarathonPR: '1:33:37',
     fullMarathonPR: '3:16:59',
     achievements: [
-      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1048/6491', // Full Marathon
-      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1818/5601', // Half Marathon
+      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1048/6491',
+      'VNEXPRESS MARATHON HAI PHONG 17/12/2023 - 1818/5601',
       'VMHP171223 - 597/3466',
       'TCBHCMCIM2022 - 352/1537',
       'MDIM2019 - 82/145',
@@ -55,7 +76,19 @@ export const runners: Runner[] = [
       'TCBHCMCIM23 - 679/1673'
     ],
     bio: 'Member of PMHR team. Age group: M. Experienced marathoner with strong performances in both half and full marathon distances. Has competed in multiple VnExpress Marathon events.',
-    joinDate: '2017-01-01', // Based on earliest race record
+    joinDate: '2017-01-01',
+  },
+  {
+    id: '8',
+    name: 'NGUYỄN QUANG THẮNG',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20QUANG%20THANG%202.jpg',
+    halfMarathonPR: 'undefined',
+    fullMarathonPR: '3:27:06',
+    achievements: [
+      'TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP LAN THU 60 - 24/03/2019 - 1848/6491',
+    ],
+    bio: 'Member of PMHR team. Age group: M (Male). Bib number: 4599. Full marathon specialist with achievement in TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP.',
+    joinDate: '2019-03-24',
   },
   {
     id: '4',
@@ -77,6 +110,7 @@ export const runners: Runner[] = [
     id: '5',
     name: 'NGUYỄN SỸ TOÀN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20SY%20TOAN.jpg',
+    halfMarathonPR: 'undefined',
     fullMarathonPR: '3:28:11',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 1829/5804',
@@ -123,19 +157,6 @@ export const runners: Runner[] = [
     joinDate: '2024-12-08',
   },
   {
-    id: '8',
-    name: 'NGUYỄN QUANG THẮNG',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20QUANG%20THANG%202.jpg',
-    halfMarathonPR: 'undefined', // Shows as red "undefined" in half marathon section
-    fullMarathonPR: '3:27:06', // From the rank 1848/6491 with time 03:27:06
-    achievements: [
-      'TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP LAN THU 60 - 24/03/2019 - 1848/6491',
-      // Note: The image shows additional achievement details but they appear to be cut off
-    ],
-    bio: 'Member of PMHR team. Age group: M (Male). Bib number: 4599. Full marathon specialist with achievement in TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP.',
-    joinDate: '2019-03-24', // Based on the race date shown
-  },
-  {
     id: '9',
     name: 'LÊ HOÀI PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HOAI%20PHUONG.jpg',
@@ -154,7 +175,7 @@ export const runners: Runner[] = [
     id: '10',
     name: 'TRẦN KHÁNH CHÂN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20KHANH%20CHAN.jpg',
-    halfMarathonPR: 'undefined', // Shows as red "undefined" in half marathon section
+    halfMarathonPR: 'undefined',
     fullMarathonPR: '3:30:31',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 2340/6491',
@@ -184,7 +205,7 @@ export const runners: Runner[] = [
     id: '12',
     name: 'TRẦN ĐẠI CHIẾN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20DAI%20CHIEN.jpg',
-    halfMarathonPR: 'undefined', // Shows as red "undefined" in half marathon section
+    halfMarathonPR: 'undefined',
     fullMarathonPR: '3:32:00',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 2461/6491',
@@ -193,6 +214,37 @@ export const runners: Runner[] = [
     ],
     bio: 'Member of G7 PLUS team. Age group: M30-39. Bib number: 40414. Full marathon specialist with consistent performance.',
     joinDate: '2025-01-12',
+  },
+  {
+    id: '37',
+    name: 'NGUYỄN THỊ THÚY LOAN',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20THUY%20LOAN.jpg',
+    halfMarathonPR: '1:39:17',
+    fullMarathonPR: '3:35:37',
+    achievements: [
+      'HCMC MARATHON 14/01/2024 - 178/548',
+      'HCMCM2024 - 104/274',
+      'VMHCMCM2023 - 82/137',
+      'BDNCHM27.4.25 - 99/386',
+      'TRMN19.1.25 - 221/352',
+      'DLMNR1.6.24 - 199/229'
+    ],
+    bio: 'Member of PMHR team. Age group: F<=19. Strong performer in both half and full marathon distances with consistent top finishes.',
+    joinDate: '2024-01-14',
+  },
+  {
+    id: '38',
+    name: 'ĐOÀN THÁI NHƯ',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DOAN%20THAI%20NHU.jpg',
+    halfMarathonPR: '1:44:16',
+    fullMarathonPR: '3:39:31',
+    achievements: [
+      'VNEXPRESS MARATHON HO CHI MINH CITY MIDNIGHT 12/02/2023 - 205/548',
+      'VMHCMCM2023 - 64/137',
+      'VMMNT2022 - 53/54'
+    ],
+    bio: 'Member of PMHR team. Age group: F (Female). Bib number: 91081. Strong performer in both half and full marathon distances.',
+    joinDate: '2023-02-12',
   },
   {
     id: '13',
@@ -255,6 +307,21 @@ export const runners: Runner[] = [
     ],
     bio: 'Member of PMHR team. Age group: M (Male). Bib number: 40952. Competitive in both half and full marathon distances.',
     joinDate: '2023-12-10',
+  },
+  {
+    id: '39',
+    name: 'TRANG THI NGỌC LAN',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRANG%20THI%20NGOC%20LAN.jpg',
+    halfMarathonPR: 'undefined',
+    fullMarathonPR: '3:46:24',
+    achievements: [
+      'VPBANK VNEXPRESS MARATHON HO CHI MINH CITY MIDNIGHT 23/02/2025 - 278/548',
+      'VMHCMCM23.2.25 - 248/484',
+      'HCMCM2024 - 184/274',
+      'LBM291023 - 186/209'
+    ],
+    bio: 'Member of PMHR team. Age group: F50-59. Bib number: 91336. Full marathon specialist showing strong performance in masters category.',
+    joinDate: '2025-02-23',
   },
   {
     id: '17',
@@ -325,6 +392,20 @@ export const runners: Runner[] = [
     ],
     bio: 'Member of eBRC - Câu lạc bộ chạy bộ Bến Cát / PMHR team. Age group: M30-39. Bib number: 40076. Full marathon specialist with consistent performance improvement.',
     joinDate: '2025-01-12',
+  },
+  {
+    id: '40',
+    name: 'THÁI THỊ PHƯƠNG',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/THAI%20THI%20PHUONG.jpg',
+    halfMarathonPR: '1:41:26',
+    fullMarathonPR: '3:50:41',
+    achievements: [
+      'DẠT SEN HỒNG MARATHON 15/10/2023 - 334/548',
+      'DSHM2023 - 134/193',
+      'VMHM261123 - 107/144'
+    ],
+    bio: 'Member of FPTR / PMHR team. Age group: F (Female). Bib number: 40324. Strong performer in both half and full marathon distances.',
+    joinDate: '2023-10-15',
   },
   {
     id: '22',
@@ -411,17 +492,31 @@ export const runners: Runner[] = [
     joinDate: '2023-10-29',
   },
   {
-    id: '28',
-    name: 'VÕ THÁI VŨ',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20THAI%20VU.jpg',
+    id: '35',
+    name: 'LÊ BÁ HOÀNH',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20BA%20HOANH.jpg',
     halfMarathonPR: 'undefined',
-    fullMarathonPR: '3:56:57',
+    fullMarathonPR: '3:54:58',
     achievements: [
-      'LONGBIEN MARATHON 29/10/2023 - 5664/6491',
-      'LBM291023 - 2473/2849'
+      'HCMC MARATHON 12/01/2025 - 5245/6491',
+      'HCMCM11.1.25 - 4652/5804',
+      'TCBHCMIM8.12.24 - 4653/5557'
     ],
-    bio: 'Member of PMHR team. Age group: M (Male). Bib number: 92451. Full marathon specialist.',
-    joinDate: '2023-10-29',
+    bio: 'Member of Phu My Era Runners team. Age group: M30-39. Bib number: 40339. Full marathon specialist with consistent performance across multiple races.',
+    joinDate: '2025-01-12',
+  },
+  {
+    id: '33',
+    name: 'ĐỖ TRUNG ÁI',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DO%20TRUNG%20AI.jpg',
+    halfMarathonPR: 'undefined',
+    fullMarathonPR: '3:55:13',
+    achievements: [
+      'HCMC MARATHON 12/01/2025 - 5288/6491',
+      'HCMCM11.1.25 - 4696/5804'
+    ],
+    bio: 'Age group: M40-49. Bib number: 40932. Full marathon specialist with consistent performance.',
+    joinDate: '2025-01-12',
   },
   {
     id: '29',
@@ -438,6 +533,45 @@ export const runners: Runner[] = [
     joinDate: '2024-12-08',
   },
   {
+    id: '34',
+    name: 'TÔN DUY NGHĨA',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TON%20DUY%20NGHIA.jpg',
+    halfMarathonPR: 'undefined',
+    fullMarathonPR: '3:56:52',
+    achievements: [
+      'HCMC MARATHON 12/01/2025 - 5648/6491',
+      'HCMCM11.1.25 - 5024/5804'
+    ],
+    bio: 'Age group: M50-59. Bib number: 41193. Full marathon specialist demonstrating strong endurance for his age group.',
+    joinDate: '2025-01-12',
+  },
+  {
+    id: '28',
+    name: 'VÕ THÁI VŨ',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20THAI%20VU.jpg',
+    halfMarathonPR: 'undefined',
+    fullMarathonPR: '3:56:57',
+    achievements: [
+      'LONGBIEN MARATHON 29/10/2023 - 5664/6491',
+      'LBM291023 - 2473/2849'
+    ],
+    bio: 'Member of PMHR team. Age group: M (Male). Bib number: 92451. Full marathon specialist.',
+    joinDate: '2023-10-29',
+  },
+  {
+    id: '41',
+    name: 'ĐỖ THU THỦY',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DO%20THU%20THUY.jpg',
+    halfMarathonPR: 'undefined',
+    fullMarathonPR: '3:57:07',
+    achievements: [
+      'VNEXPRESS MARATHON IMPERIAL HUE 16/04/2023 - 472/548',
+      'VMIH2023 - 137/153'
+    ],
+    bio: 'Member of PMHR team. Age group: F (Female). Bib number: 90680. Full marathon specialist.',
+    joinDate: '2023-04-16',
+  },
+  {
     id: '30',
     name: 'NGUYỄN HỮU TIẾNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20HUU%20TIENG.jpg',
@@ -449,6 +583,19 @@ export const runners: Runner[] = [
     ],
     bio: 'Member of PMHR team. Age group: M30-39. Bib number: 400619. Full marathon specialist.',
     joinDate: '2024-12-08',
+  },
+  {
+    id: '42',
+    name: 'NGUYỄN THỊ NGỌC NI',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20NGOC%20NI.jpg',
+    halfMarathonPR: 'undefined',
+    fullMarathonPR: '3:58:47',
+    achievements: [
+      'VIETNAM GOLD MARATHON - HO CHI MINH 20/07/2025 - 519/548',
+      'VGMHCM20.7.25 - 519/548'
+    ],
+    bio: 'Age group: F (Female). Bib number: 92159. Full marathon specialist.',
+    joinDate: '2025-07-20',
   },
   {
     id: '31',
@@ -476,157 +623,13 @@ export const runners: Runner[] = [
     bio: 'Member of PMHR team. Age group: M (Male). Bib number: 40700. Full marathon specialist.',
     joinDate: '2024-01-14',
   },
-  {
-    id: '33',
-    name: 'ĐỖ TRUNG ÁI',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DO%20TRUNG%20AI.jpg',
-    halfMarathonPR: 'undefined',
-    fullMarathonPR: '3:55:13',
-    achievements: [
-      'HCMC MARATHON 12/01/2025 - 5288/6491',
-      'HCMCM11.1.25 - 4696/5804'
-    ],
-    bio: 'Age group: M40-49. Bib number: 40932. Full marathon specialist with consistent performance.',
-    joinDate: '2025-01-12',
-  },
-  {
-    id: '34',
-    name: 'TÔN DUY NGHĨA',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TON%20DUY%20NGHIA.jpg',
-    halfMarathonPR: 'undefined',
-    fullMarathonPR: '3:56:52',
-    achievements: [
-      'HCMC MARATHON 12/01/2025 - 5648/6491',
-      'HCMCM11.1.25 - 5024/5804'
-    ],
-    bio: 'Age group: M50-59. Bib number: 41193. Full marathon specialist demonstrating strong endurance for his age group.',
-    joinDate: '2025-01-12',
-  },
-  {
-    id: '35',
-    name: 'LÊ BÁ HOÀNH',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20BA%20HOANH.jpg',
-    halfMarathonPR: 'undefined',
-    fullMarathonPR: '3:54:58',
-    achievements: [
-      'HCMC MARATHON 12/01/2025 - 5245/6491',
-      'HCMCM11.1.25 - 4652/5804',
-      'TCBHCMIM8.12.24 - 4653/5557'
-    ],
-    bio: 'Member of Phu My Era Runners team. Age group: M30-39. Bib number: 40339. Full marathon specialist with consistent performance across multiple races.',
-    joinDate: '2025-01-12',
-  },
-  {
-    id: '36',
-    name: 'QUÁCH THỊ BÍCH THÙY', 
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THI%20BICH%20THUY.jpg',
-    halfMarathonPR: '1:32:40',
-    fullMarathonPR: '3:11:35',
-    isElite: true, // Has star rating displayed
-    achievements: [
-      'VNEXPRESS MARATHON HUE 06/04/2025 - 47/548',
-      'Top 2 - FM - Nữ - MEKONG DELTA MARATHON 08/11/2020',
-      'Top 3 - FM - Nữ - MEKONG DELTA MARATHON HAU GIANG 17/07/2022',
-      'Top 3 - FM - Nữ - DAT MUI MARATHON CAMAU 09/10/2022',
-      'Top 3 - FM - Nữ - DAK LAK MARATHON 28/04/2024',
-      'Top 3 - FM - Nữ - DAK NONG MARATHON 01/06/2025',
-      'Top 2 - HM - Nữ - NONG THON VIET HALF MARATHON 05/01/2025',
-      'Top 2 - HM - Nữ - RANG HAM MAT RUN ♡ BUOC CHAY YEU THUONG 22/06/2025'
-    ],
-    bio: 'Elite runner with FPTR / PMHR team. Age group: F (Female). Multiple podium finishes in major Vietnamese marathons. Exceptional performer in both half and full marathon distances.',
-    joinDate: '2025-04-06',
-  },
-  {
-    id: '37',
-    name: 'NGUYỄN THỊ THÚY LOAN',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20THUY%20LOAN.jpg',
-    halfMarathonPR: '1:39:17',
-    fullMarathonPR: '3:35:37',
-    achievements: [
-      'HCMC MARATHON 14/01/2024 - 178/548',
-      'HCMCM2024 - 104/274',
-      'VMHCMCM2023 - 82/137',
-      'BDNCHM27.4.25 - 99/386',
-      'TRMN19.1.25 - 221/352',
-      'DLMNR1.6.24 - 199/229'
-    ],
-    bio: 'Member of PMHR team. Age group: F<=19. Strong performer in both half and full marathon distances with consistent top finishes.',
-    joinDate: '2024-01-14',
-  },
-  {
-    id: '38',
-    name: 'ĐOÀN THÁI NHƯ',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DOAN%20THAI%20NHU.jpg',
-    halfMarathonPR: '1:44:16',
-    fullMarathonPR: '3:39:31',
-    achievements: [
-      'VNEXPRESS MARATHON HO CHI MINH CITY MIDNIGHT 12/02/2023 - 205/548',
-      'VMHCMCM2023 - 64/137',
-      'VMMNT2022 - 53/54'
-    ],
-    bio: 'Member of PMHR team. Age group: F (Female). Bib number: 91081. Strong performer in both half and full marathon distances.',
-    joinDate: '2023-02-12',
-  },
-  {
-    id: '39',
-    name: 'TRANG THI NGỌC LAN',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRANG%20THI%20NGOC%20LAN.jpg',
-    halfMarathonPR: 'undefined',
-    fullMarathonPR: '3:46:24',
-    achievements: [
-      'VPBANK VNEXPRESS MARATHON HO CHI MINH CITY MIDNIGHT 23/02/2025 - 278/548',
-      'VMHCMCM23.2.25 - 248/484',
-      'HCMCM2024 - 184/274',
-      'LBM291023 - 186/209'
-    ],
-    bio: 'Member of PMHR team. Age group: F50-59. Bib number: 91336. Full marathon specialist showing strong performance in masters category.',
-    joinDate: '2025-02-23',
-  },
-  {
-    id: '40',
-    name: 'THÁI THỊ PHƯƠNG',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/THAI%20THI%20PHUONG.jpg',
-    halfMarathonPR: '1:41:26',
-    fullMarathonPR: '3:50:41',
-    achievements: [
-      'DẠT SEN HỒNG MARATHON 15/10/2023 - 334/548',
-      'DSHM2023 - 134/193',
-      'VMHM261123 - 107/144'
-    ],
-    bio: 'Member of FPTR / PMHR team. Age group: F (Female). Bib number: 40324. Strong performer in both half and full marathon distances.',
-    joinDate: '2023-10-15',
-  },
-  {
-    id: '41',
-    name: 'ĐỖ THU THỦY',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DO%20THU%20THUY.jpg',
-    halfMarathonPR: 'undefined',
-    fullMarathonPR: '3:57:07',
-    achievements: [
-      'VNEXPRESS MARATHON IMPERIAL HUE 16/04/2023 - 472/548',
-      'VMIH2023 - 137/153'
-    ],
-    bio: 'Member of PMHR team. Age group: F (Female). Bib number: 90680. Full marathon specialist.',
-    joinDate: '2023-04-16',
-  },
-  {
-    id: '42',
-    name: 'NGUYỄN THỊ NGỌC NI',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20NGOC%20NI.jpg',
-    halfMarathonPR: 'undefined',
-    fullMarathonPR: '3:58:47',
-    achievements: [
-      'VIETNAM GOLD MARATHON - HO CHI MINH 20/07/2025 - 519/548',
-      'VGMHCM20.7.25 - 519/548'
-    ],
-    bio: 'Age group: F (Female). Bib number: 92159. Full marathon specialist.',
-    joinDate: '2025-07-20',
-  },
+
+  // Runners without Full Marathon records (sorted by Half Marathon time, fastest first)
   {
     id: '43',
     name: 'LÊ HUỲNH NGỌC TRUNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HUYNH%20NGOC%20TRUNG.jpg',
-    halfMarathonPR: '1:42:12',
+    halfMarathonPR: '1:42:12', // Fastest HM among those without FM
     fullMarathonPR: 'undefined',
     achievements: [
       'VIETNAM GOLD MARATHON - HO CHI MINH 20/07/2025 - 4300/5601',
