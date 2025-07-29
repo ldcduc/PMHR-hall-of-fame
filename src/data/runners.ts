@@ -622,6 +622,20 @@ export const runners: Runner[] = [
     bio: 'Age group: F (Female). Bib number: 92159. Full marathon specialist.',
     joinDate: '2025-07-20',
   },
+  {
+    id: '43',
+    name: 'LÊ HUỲNH NGỌC TRUNG',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HUYNH%20NGOC%20TRUNG.jpg',
+    halfMarathonPR: '1:42:12',
+    fullMarathonPR: 'undefined',
+    achievements: [
+      'VIETNAM GOLD MARATHON - HO CHI MINH 20/07/2025 - 4300/5601',
+      'VGMHCM20.7.25 - 4299/5601',
+      'RTL9.3.25 - 3996/4611'
+    ],
+    bio: 'Member of PHÚ MỸ HƯNG RUNNERS team. Age group: M30-39. Bib number: 21016. Half marathon specialist with strong performance.',
+    joinDate: '2025-07-20',
+  },
 ];
 
 // Helper functions to determine if times are competitive

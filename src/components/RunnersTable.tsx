@@ -11,7 +11,8 @@ interface RunnersTableProps {
 }
 
 export default function RunnersTable({ runners, onEdit, onDelete }: RunnersTableProps) {
-  const [sortField, setSortField] = useState<keyof Runner>('name');
+  // Changed default sort field from 'name' to 'fullMarathonPR'
+  const [sortField, setSortField] = useState<keyof Runner>('fullMarathonPR');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
   const handleSort = (field: keyof Runner) => {
