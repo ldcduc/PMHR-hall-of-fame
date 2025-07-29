@@ -451,6 +451,21 @@ export const runners: Runner[] = [
     joinDate: '2022-12-03',
   },
   {
+    id: '46', // Next sequential ID after existing runners
+    name: 'LÊ HỮU THUẬN',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HUU%20THUAN.jpg',
+    halfMarathonPR: '01:44:30',
+    fullMarathonPR: '03:51:11',
+    achievements: [
+      'HCMC MARATHON 12/01/2025 - 40896/5804', // From "CHI TIẾT THÀNH TÍCH" section
+      // Additional achievements from the detailed records section:
+      'FULL MARATHON - 03:51:11 - 40896 - HCMCM11.1.25 - 4117/5804',
+      'HALF MARATHON - 01:44:30 - 21101 - PVGAS5.1.25 - 4043/4237'
+    ],
+    bio: 'Age group: M40-49. Team: Phú Mỹ Hưng Runners. Bib number: 40896. Multi-distance runner with records in Full Marathon, Half Marathon, Ultra Trail, Ironman 70.3, and Ultra Road events.',
+    joinDate: '2025-01-12', // Based on recent race date
+  },
+  {
     id: '25',
     name: 'HOÀNG KHẮC TÙNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/HOANG%20KHAC%20TUNG.jpg',
