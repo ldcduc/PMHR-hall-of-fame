@@ -247,6 +247,21 @@ export const runners: Runner[] = [
     joinDate: '2023-02-12',
   },
   {
+    id: '48',
+    name: 'BÙI CÔNG LƯƠNG',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/BUI%20CONG%20LUONG.jpg',
+    halfMarathonPR: '01:41:50',
+    fullMarathonPR: '03:40:49',
+    achievements: [
+      'LONGBIEN MARATHON 27/10/2024 - 94066',
+      'FULL MARATHON - 03:40:49 - 94066 - LBM27.10.24 - 2342/4771',
+      'FULL MARATHON - 03:58:58 - 64198 - TCBHCMCIM23 - 3111/3228',
+      'HALF MARATHON - 01:41:50 - 20285 - RFE6.10.24 - 2322/3037'
+    ],
+    bio: 'Age group: M. Team: PHÚ MỸ HƯNG RUNNERS. Bib number: 94066. Multi-distance runner with records in Full Marathon and Half Marathon events.',
+    joinDate: '2024-10-27',
+  },
+  {
     id: '13',
     name: 'ĐÀO NGUYỄN BẢO KHÁNH',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DAO%20NGUYEN%20BAO%20KHANH.jpg',
@@ -393,6 +408,19 @@ export const runners: Runner[] = [
     joinDate: '2024-12-08',
   },
   {
+    id: '50',
+    name: 'ĐẶNG VIỆT KHANG',
+    profileImage: '/dvkhang.png',
+    halfMarathonPR: 'N/A',
+    fullMarathonPR: '03:49:31',
+    achievements: [
+      'LONGBIEN MARATHON 2024 27/10/2024 - 95146',
+      'FULL MARATHON - 03:49:31 - 95146 - LBM27.10.24 - 889/5640'
+    ],
+    bio: 'Age group: Male 18-34. Bib number: 95146. Marathon finisher with strong age group performance ranking 236/1494 in his category.',
+    joinDate: '2024-10-27',
+  },
+  {
     id: '21',
     name: 'TRẦN HOÀI VŨ',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20HOAI%20VU.jpg',
@@ -437,7 +465,7 @@ export const runners: Runner[] = [
   },
   {
     id: '23',
-    name: 'QUÁCH ĐĂNG GIANG',
+    name: 'QUÁCH ĐẰNG GIANG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20DANG%20GIANG.jpg',
     halfMarathonPR: '1:33:01',
     fullMarathonPR: '3:50:59',
@@ -560,6 +588,21 @@ export const runners: Runner[] = [
     ],
     bio: 'Age group: M40-49. Bib number: 40932. Full marathon specialist with consistent performance.',
     joinDate: '2025-01-12',
+  },
+  {
+    id: '49',
+    name: 'VÕ VĂN PHƯỚC',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20VAN%20PHUOC.jpg',
+    halfMarathonPR: '01:32:23',
+    fullMarathonPR: '03:56:20',
+    achievements: [
+      'VNEXPRESS MARATHON NHA TRANG 11/08/2024 - 90036',
+      'FULL MARATHON - 03:56:20 - 90036 - VMNT11.8.24 - 3492/4134',
+      'HALF MARATHON - 01:32:23 - 2182 - PMO30.6.24 - 887/2760',
+      'HALF MARATHON - 01:35:12 - 8716 - QNM2.6.24 - 1137/2713'
+    ],
+    bio: 'Age group: M. Team: Phú Mỹ Hưng Runners. Bib number: 90036. Multi-distance runner with strong half marathon performance.',
+    joinDate: '2024-08-11',
   },
   {
     id: '29',
