@@ -355,7 +355,7 @@ export const runners: Runner[] = [
   {
     id: '19',
     name: 'BÙI TRUNG KIÊN',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/BUI%20TRUNG%20KIEN.jpg',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/BUI%20TRUNG%20KIEN%202.jpg',
     halfMarathonPR: 'undefined',
     fullMarathonPR: '3:47:40',
     achievements: [
@@ -638,6 +638,20 @@ export const runners: Runner[] = [
     ],
     bio: 'Member of PHÚ MỸ HƯNG RUNNERS team. Age group: M30-39. Bib number: 21016. Half marathon specialist with strong performance.',
     joinDate: '2025-07-20',
+  },
+  {
+    id: '44',
+    name: 'NGÔ MINH DUY',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGO%20MINH%20DUY.jpg',
+    halfMarathonPR: '1:38:26',
+    fullMarathonPR: '3:56:33',
+    achievements: [
+      'TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP LAN THU 65 31/03/2024 - 5564/6491',
+      'TPMNC31.3.24 - 3270/3816',
+      'VIHM1.1.24 - 1057/1807'
+    ],
+    bio: 'Member of Phu My Hung Runners team. Age group: M (Male). Bib number: 90374. Strong performer in both half and full marathon distances.',
+    joinDate: '2024-03-31',
   },
 ];
 
