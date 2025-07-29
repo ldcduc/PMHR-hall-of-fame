@@ -29,8 +29,14 @@ const nextConfig: NextConfig = {
         hostname: 'bestmarathon.vn',
         pathname: '/**',
       },
+            {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+        pathname: '/**',
+      },
     ],
   },
+  unoptimized: true,
 };
 
 export default nextConfig;

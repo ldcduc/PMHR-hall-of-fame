@@ -4,7 +4,7 @@ import { Runner } from '../types/runner';
 export const runners: Runner[] = [
   {
     id: '1',
-    name: 'TRAN THANH CUONG',
+    name: 'TRẦN THANH CƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20THANH%20CUONG.jpg',
     halfMarathonPR: '1:20:32',
     fullMarathonPR: '3:07:10',
@@ -20,7 +20,7 @@ export const runners: Runner[] = [
   },
   {
     id: '2',
-    name: 'VO TAN DUC',
+    name: 'VÕ TẤN ĐỨC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20TAN%20DUC.jpg',
     halfMarathonPR: '1:29:01',
     fullMarathonPR: '3:12:31',
@@ -103,7 +103,7 @@ export const runners: Runner[] = [
   },
   {
     id: '7',
-    name: 'VŨ VĂN HÀO',
+    name: 'VŨ VĂN HẢO',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VU%20VAN%20HAO.jpg',
     halfMarathonPR: '1:28:53',
     fullMarathonPR: '3:29:16',
