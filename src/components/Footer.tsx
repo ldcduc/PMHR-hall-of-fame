@@ -1,5 +1,7 @@
+'use client';
+
+import Link from 'next/link';
 import Logo from './Logo';
-import Link from 'next/Link';
 
 export default function Footer() {
   return (

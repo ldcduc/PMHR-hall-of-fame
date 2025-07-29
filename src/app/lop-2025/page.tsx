@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export default function LOP2025() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
