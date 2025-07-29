@@ -379,6 +379,20 @@ export const runners: Runner[] = [
     joinDate: '2023-10-08',
   },
   {
+    id: '47',
+    name: 'TRẦN BÁ PHƯỚC',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20BA%20PHUOC.jpg',
+    halfMarathonPR: '01:44:13',
+    fullMarathonPR: '03:48:21',
+    achievements: [
+      'TECHCOMBANK HCMC INTERNATIONAL MARATHON 8/12/2024 - 324046',
+      'FULL MARATHON - 03:48:21 - 324046 - TCBHCMIM8.12.24 - 3626/5557',
+      'HALF MARATHON - 01:44:13 - 71288 - RTL10.3.24 - 2058/2195'
+    ],
+    bio: 'Age group: M. Bib number: 324046. Multi-distance runner with records in Full Marathon, Half Marathon, Ultra Trail, Ironman 70.3, and Ultra Road events.',
+    joinDate: '2024-12-08',
+  },
+  {
     id: '21',
     name: 'TRẦN HOÀI VŨ',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20HOAI%20VU.jpg',
