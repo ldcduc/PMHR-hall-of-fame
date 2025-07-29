@@ -479,6 +479,20 @@ export const runners: Runner[] = [
     joinDate: '2024-01-14',
   },
   {
+    id: '45',
+    name: 'QUÁCH AN NHI',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20AN%20NHI.jpg',
+    halfMarathonPR: '1:44:08',
+    fullMarathonPR: '3:53:22',
+    achievements: [
+      'TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP LAN THU 65 31/03/2024 - 383/548',
+      'TPMNC31.3.24 - 217/296',
+      'LBM291023 - 121/127'
+    ],
+    bio: 'Age group: F (Female). Bib number: 92465. Strong performer in both half and full marathon distances with excellent female rankings.',
+    joinDate: '2024-03-31',
+  },
+  {
     id: '27',
     name: 'ĐOÀN THẾ PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DOAN%20THE%20PHUONG.jpg',
