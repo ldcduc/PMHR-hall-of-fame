@@ -38,6 +38,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/lop-2025" className="text-gray-300 hover:text-white transition-colors duration-150">
+                  LOP 2025
+                </Link>
+              </li>
+              <li>
                 <a href="/achievements" className="text-gray-300 hover:text-white transition-colors duration-150">
                   Achievements
                 </a>
