@@ -726,10 +726,24 @@ export const runners: Runner[] = [
 
   // Runners without Full Marathon records (sorted by Half Marathon time, fastest first)
   {
+    id: '51',
+    name: 'NGUYỄN LÊ THÁI DƯƠNG',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20LE%20THAI%20DUONG.jpg',
+    halfMarathonPR: '01:40:25', // Fastest HM among those without FM
+    fullMarathonPR: 'undefined',
+    achievements: [
+      'RẰNG HÀM MẶT RUN ♡ BƯỚC CHẠY YÊU THƯƠNG 22/06/2025 - V23359',
+      'HALF MARATHON - 01:40:25 - V23359 - RHM22.6.25 - 3614/5408',
+      'HALF MARATHON - 01:44:34 - 322067 - TCBHCMIM8.12.24 - 3864/4012'
+    ],
+    bio: 'Age group: M20-29. Team: PMHR. Bib number: V23359. Specialized half marathon runner with consistent performance.',
+    joinDate: '2025-06-22',
+  }
+  {
     id: '43',
     name: 'LÊ HUỲNH NGỌC TRUNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HUYNH%20NGOC%20TRUNG.jpg',
-    halfMarathonPR: '1:42:12', // Fastest HM among those without FM
+    halfMarathonPR: '1:42:12', 
     fullMarathonPR: 'undefined',
     achievements: [
       'VIETNAM GOLD MARATHON - HO CHI MINH 20/07/2025 - 4300/5601',
