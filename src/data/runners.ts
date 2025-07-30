@@ -738,7 +738,7 @@ export const runners: Runner[] = [
     ],
     bio: 'Age group: M20-29. Team: PMHR. Bib number: V23359. Specialized half marathon runner with consistent performance.',
     joinDate: '2025-06-22',
-  }
+  },
   {
     id: '43',
     name: 'LÊ HUỲNH NGỌC TRUNG',
