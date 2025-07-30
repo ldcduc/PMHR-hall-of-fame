@@ -1,6 +1,5 @@
 // src/app/lop-2025/page.tsx
 
-import Image from 'next/image';
 import { 
   lop2025Runners, 
   getTotalRunners, 
