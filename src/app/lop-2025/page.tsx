@@ -15,6 +15,7 @@ export default function LOP2025() {
   const [isHighestModalOpen, setIsHighestModalOpen] = useState(false);
   const [isLowestModalOpen, setIsLowestModalOpen] = useState(false);
   const [isTotalModalOpen, setIsTotalModalOpen] = useState(false);
+  const [isGenderModalOpen, setIsGenderModalOpen] = useState(false);
   
   const totalRunners = getTotalRunners();
   const highestDistance = getHighestDistance();
@@ -24,6 +25,17 @@ export default function LOP2025() {
   const lowestRunner = lop2025Runners[lop2025Runners.length - 1];
   const top10Runners = lop2025Runners.slice(0, 10);
   const bottom10Runners = lop2025Runners.slice(-10).reverse();
+
+  // Gender statistics
+  const femaleRunners = lop2025Runners.filter(r => r.gender === "Nữ");
+  const maleRunners = lop2025Runners.filter(r => r.gender === "Nam");
+  const femaleCount = femaleRunners.length;
+  const maleCount = maleRunners.length;
+  const femalePercentage = ((femaleCount / totalRunners) * 100).toFixed(1);
+  const malePercentage = ((maleCount / totalRunners) * 100).toFixed(1);
+
+  // Top female runner
+  const topFemaleRunner = femaleRunners[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-blue-50">
@@ -61,6 +73,7 @@ export default function LOP2025() {
                     <th className="px-4 py-3 text-left text-sm font-semibold">STT</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">Tên Strava</th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">Tổng KM</th>
+                    <th className="px-4 py-3 text-center text-sm font-semibold">Giới tính</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -75,6 +88,15 @@ export default function LOP2025() {
                       <td className="px-4 py-3 text-sm text-center font-mono text-blue-600 font-semibold">
                         {runner.distance}
                       </td>
+                      <td className="px-4 py-3 text-center">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          runner.gender === "Nữ" 
+                            ? "bg-pink-100 text-pink-800" 
+                            : "bg-blue-100 text-blue-800"
+                        }`}>
+                          {runner.gender}
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -83,7 +105,7 @@ export default function LOP2025() {
           </div>
           
           {/* Table Statistics */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
             <div 
               className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
               onClick={() => setIsTotalModalOpen(true)}
@@ -107,6 +129,14 @@ export default function LOP2025() {
               <div className="text-3xl font-bold text-orange-500 mb-2">{lowestDistance}</div>
               <div className="text-gray-600">Minimum LOP Distance (KM)</div>
               <div className="text-xs text-orange-500 mt-1">Click to view details</div>
+            </div>
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsGenderModalOpen(true)}
+            >
+              <div className="text-3xl font-bold text-purple-600 mb-2">{femaleCount}</div>
+              <div className="text-gray-600">Female Runners</div>
+              <div className="text-xs text-purple-500 mt-1">Click to view stats</div>
             </div>
           </div>
         </div>
@@ -146,12 +176,12 @@ export default function LOP2025() {
               
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-blue-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold">🏆</span>
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">👩‍🏃‍♂️</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800">Progress</h3>
-                    <p className="text-gray-600">{totalRunners} Runners Qualified</p>
+                    <h3 className="font-semibold text-gray-800">Gender Distribution</h3>
+                    <p className="text-gray-600">{femaleCount} Female, {maleCount} Male</p>
                   </div>
                 </div>
                 
@@ -187,6 +217,70 @@ export default function LOP2025() {
           </a>
         </div>
       </section>
+
+      {/* Gender Statistics Modal */}
+      {isGenderModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative max-h-[80vh] overflow-y-auto">
+            <button
+              onClick={() => setIsGenderModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+            >
+              ×
+            </button>
+            
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-2xl font-bold">⚥</span>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">Gender Distribution</h3>
+              <div className="w-12 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-4"></div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">{maleCount}</div>
+                  <div className="text-gray-600">Nam ({malePercentage}%)</div>
+                </div>
+                <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-4 text-center">
+                  <div className="text-3xl font-bold text-pink-600 mb-2">{femaleCount}</div>
+                  <div className="text-gray-600">Nữ ({femalePercentage}%)</div>
+                </div>
+              </div>
+
+              {topFemaleRunner && (
+                <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-4">
+                  <h4 className="font-semibold text-gray-800 mb-2">Top Female Runner</h4>
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium">{topFemaleRunner.name}</span>
+                    <span className="text-pink-600 font-bold">{topFemaleRunner.distance} KM</span>
+                  </div>
+                  <div className="text-sm text-gray-500">Position #{topFemaleRunner.stt}</div>
+                </div>
+              )}
+
+              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-800 mb-3">Top 5 Female Runners</h4>
+                <div className="space-y-2">
+                  {femaleRunners.slice(0, 5).map((runner, index) => (
+                    <div key={runner.stt} className="flex justify-between items-center text-sm">
+                      <span className="flex items-center">
+                        <span className="w-6 h-6 rounded-full bg-pink-500 text-white text-xs flex items-center justify-center mr-2">
+                          {index + 1}
+                        </span>
+                        {runner.name}
+                      </span>
+                      <span className="text-pink-600 font-bold">{runner.distance} KM</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Total Runners Modal */}
       {isTotalModalOpen && (
@@ -268,7 +362,16 @@ export default function LOP2025() {
               <div className="bg-gradient-to-br from-yellow-50 to-blue-50 rounded-lg p-6 mb-4">
                 <h4 className="text-xl font-semibold text-gray-800 mb-2">{leadingRunner.name}</h4>
                 <div className="text-4xl font-bold text-yellow-500 mb-2">{leadingRunner.distance} KM</div>
-                <div className="text-sm text-gray-500">Position #{leadingRunner.stt}</div>
+                <div className="flex justify-center items-center gap-2">
+                  <span className="text-sm text-gray-500">Position #{leadingRunner.stt}</span>
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                    leadingRunner.gender === "Nữ" 
+                      ? "bg-pink-100 text-pink-800" 
+                      : "bg-blue-100 text-blue-800"
+                  }`}>
+                    {leadingRunner.gender}
+                  </span>
+                </div>
               </div>
               
               <p className="text-gray-600 text-sm">
@@ -311,7 +414,16 @@ export default function LOP2025() {
                   <span className="font-medium">{lowestRunner.name}</span>
                   <span className="text-orange-600 font-bold">{lowestRunner.distance} KM</span>
                 </div>
-                <div className="text-sm text-gray-500">Position #{lowestRunner.stt}</div>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-sm text-gray-500">Position #{lowestRunner.stt}</span>
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                    lowestRunner.gender === "Nữ" 
+                      ? "bg-pink-100 text-pink-800" 
+                      : "bg-blue-100 text-blue-800"
+                  }`}>
+                    {lowestRunner.gender}
+                  </span>
+                </div>
               </div>
 
               <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4">
@@ -323,7 +435,16 @@ export default function LOP2025() {
                         <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center mr-2">
                           {totalRunners - index}
                         </span>
-                        {runner.name}
+                        <span className="flex items-center gap-1">
+                          {runner.name}
+                          <span className={`inline-flex items-center px-1 py-0.5 rounded text-xs font-medium ${
+                            runner.gender === "Nữ" 
+                              ? "bg-pink-100 text-pink-700" 
+                              : "bg-blue-100 text-blue-700"
+                          }`}>
+                            {runner.gender}
+                          </span>
+                        </span>
                       </span>
                       <span className="text-orange-600 font-bold">{runner.distance} KM</span>
                     </div>
