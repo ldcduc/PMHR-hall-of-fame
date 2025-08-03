@@ -1,5 +1,8 @@
 // src/app/lop-2025/page.tsx
 
+'use client';
+
+import { useState } from 'react';
 import { 
   lop2025Runners, 
   getTotalRunners, 
@@ -9,10 +12,18 @@ import {
 } from '../../data/lop2025Runners';
 
 export default function LOP2025() {
+  const [isHighestModalOpen, setIsHighestModalOpen] = useState(false);
+  const [isLowestModalOpen, setIsLowestModalOpen] = useState(false);
+  const [isTotalModalOpen, setIsTotalModalOpen] = useState(false);
+  
   const totalRunners = getTotalRunners();
   const highestDistance = getHighestDistance();
   const lowestDistance = getLowestDistance();
   const leadingRunner = getLeadingRunner();
+  
+  const lowestRunner = lop2025Runners[lop2025Runners.length - 1];
+  const top10Runners = lop2025Runners.slice(0, 10);
+  const bottom10Runners = lop2025Runners.slice(-10).reverse();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-blue-50">
@@ -73,17 +84,29 @@ export default function LOP2025() {
           
           {/* Table Statistics */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsTotalModalOpen(true)}
+            >
               <div className="text-3xl font-bold text-blue-600 mb-2">{totalRunners}</div>
               <div className="text-gray-600">Total Legend Runners</div>
+              <div className="text-xs text-blue-500 mt-1">Click to view details</div>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsHighestModalOpen(true)}
+            >
               <div className="text-3xl font-bold text-yellow-500 mb-2">{highestDistance}</div>
               <div className="text-gray-600">Highest Distance (KM)</div>
+              <div className="text-xs text-yellow-500 mt-1">Click to view leader</div>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">{lowestDistance}</div>
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsLowestModalOpen(true)}
+            >
+              <div className="text-3xl font-bold text-orange-500 mb-2">{lowestDistance}</div>
               <div className="text-gray-600">Minimum LOP Distance (KM)</div>
+              <div className="text-xs text-orange-500 mt-1">Click to view details</div>
             </div>
           </div>
         </div>
@@ -164,6 +187,157 @@ export default function LOP2025() {
           </a>
         </div>
       </section>
+
+      {/* Total Runners Modal */}
+      {isTotalModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative max-h-[80vh] overflow-y-auto">
+            <button
+              onClick={() => setIsTotalModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+            >
+              ×
+            </button>
+            
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-2xl font-bold">👥</span>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">LOP 2025 Community</h3>
+              <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-yellow-500 mx-auto rounded-full mb-4"></div>
+              
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 mb-6">
+                <div className="text-4xl font-bold text-blue-600 mb-2">{totalRunners}</div>
+                <div className="text-gray-600">Total Legend Runners</div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-800 mb-3">Top 10 Performers</h4>
+                <div className="space-y-2">
+                  {top10Runners.map((runner, index) => (
+                    <div key={runner.stt} className="flex justify-between items-center text-sm">
+                      <span className="flex items-center">
+                        <span className="w-6 h-6 rounded-full bg-yellow-500 text-white text-xs flex items-center justify-center mr-2">
+                          {index + 1}
+                        </span>
+                        {runner.name}
+                      </span>
+                      <span className="text-blue-600 font-bold">{runner.distance} KM</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div className="bg-blue-50 rounded-lg p-3">
+                  <div className="text-lg font-bold text-blue-600">{lop2025Runners.filter(r => parseFloat(r.distance) > 300).length}</div>
+                  <div className="text-xs text-gray-600">Above 300 KM</div>
+                </div>
+                <div className="bg-blue-50 rounded-lg p-3">
+                  <div className="text-lg font-bold text-blue-600">{lop2025Runners.filter(r => parseFloat(r.distance) > 200).length}</div>
+                  <div className="text-xs text-gray-600">Above 200 KM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Highest Distance Modal */}
+      {isHighestModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
+            <button
+              onClick={() => setIsHighestModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+            >
+              ×
+            </button>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-2xl font-bold">🏆</span>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">Current Leader</h3>
+              <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-yellow-500 mx-auto rounded-full mb-6"></div>
+              
+              <div className="bg-gradient-to-br from-yellow-50 to-blue-50 rounded-lg p-6 mb-4">
+                <h4 className="text-xl font-semibold text-gray-800 mb-2">{leadingRunner.name}</h4>
+                <div className="text-4xl font-bold text-yellow-500 mb-2">{leadingRunner.distance} KM</div>
+                <div className="text-sm text-gray-500">Position #{leadingRunner.stt}</div>
+              </div>
+              
+              <p className="text-gray-600 text-sm">
+                🎉 Leading the pack in LOP 2025! Competition is still ongoing.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Lowest Distance Modal */}
+      {isLowestModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative max-h-[80vh] overflow-y-auto">
+            <button
+              onClick={() => setIsLowestModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+            >
+              ×
+            </button>
+            
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-2xl font-bold">🎯</span>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">Qualification Threshold</h3>
+              <div className="w-12 h-1 bg-gradient-to-r from-orange-500 to-yellow-500 mx-auto rounded-full mb-4"></div>
+              
+              <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg p-4 mb-6">
+                <div className="text-4xl font-bold text-orange-500 mb-2">{lowestDistance} KM</div>
+                <div className="text-gray-600">Minimum Distance to Qualify</div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-800 mb-2">Qualifying Runner</h4>
+                <div className="flex justify-between items-center">
+                  <span className="font-medium">{lowestRunner.name}</span>
+                  <span className="text-orange-600 font-bold">{lowestRunner.distance} KM</span>
+                </div>
+                <div className="text-sm text-gray-500">Position #{lowestRunner.stt}</div>
+              </div>
+
+              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-800 mb-3">Bottom 10 Qualifiers</h4>
+                <div className="space-y-2 max-h-48 overflow-y-auto">
+                  {bottom10Runners.map((runner, index) => (
+                    <div key={runner.stt} className="flex justify-between items-center text-sm">
+                      <span className="flex items-center">
+                        <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center mr-2">
+                          {totalRunners - index}
+                        </span>
+                        {runner.name}
+                      </span>
+                      <span className="text-orange-600 font-bold">{runner.distance} KM</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <p className="text-gray-600 text-sm text-center">
+                🌟 The minimum distance required to achieve Legend status in LOP 2025.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
