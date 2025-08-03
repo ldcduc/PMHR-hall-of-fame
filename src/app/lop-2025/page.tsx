@@ -36,6 +36,7 @@ export default function LOP2025() {
 
   // Top female runner
   const topFemaleRunner = femaleRunners[0];
+  const topMaleRunner = maleRunners[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-blue-50">
@@ -49,7 +50,7 @@ export default function LOP2025() {
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-2">2025</h2>
           <p className="text-lg text-gray-600 mb-4">Kết quả LOP 2025</p>
-          <p className="text-base text-gray-500 mb-8">(Tính đến hết ngày 27/07)</p>
+          <p className="text-base text-gray-500 mb-8">(Tính đến hết ngày 03/08)</p>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-yellow-500 mx-auto rounded-full"></div>
         </div>
       </section>
@@ -60,10 +61,48 @@ export default function LOP2025() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Legend Runners 2025</h2>
             <p className="text-lg text-gray-600">
-              Current standings - {totalRunners} runners as of July 27, 2025
+              Current standings - {totalRunners} runners as of August 03, 2025
             </p>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-yellow-500 mx-auto rounded-full mt-4"></div>
           </div>
+
+          {/* Table Statistics */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsTotalModalOpen(true)}
+            >
+              <div className="text-3xl font-bold text-blue-600 mb-2">{totalRunners}</div>
+              <div className="text-gray-600">Total Legend Runners</div>
+              <div className="text-xs text-blue-500 mt-1">Click to view details</div>
+            </div>
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsHighestModalOpen(true)}
+            >
+              <div className="text-3xl font-bold text-yellow-500 mb-2">{highestDistance}</div>
+              <div className="text-gray-600">Highest Distance (KM)</div>
+              <div className="text-xs text-yellow-500 mt-1">Click to view leader</div>
+            </div>
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsLowestModalOpen(true)}
+            >
+              <div className="text-3xl font-bold text-orange-500 mb-2">{lowestDistance}</div>
+              <div className="text-gray-600">Minimum LOP Distance (KM)</div>
+              <div className="text-xs text-orange-500 mt-1">Click to view details</div>
+            </div>
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsGenderModalOpen(true)}
+            >
+              <div className="text-3xl font-bold text-purple-600 mb-2">{femaleCount}</div>
+              <div className="text-gray-600">Female Runners</div>
+              <div className="text-xs text-purple-500 mt-1">Click to view stats</div>
+            </div>
+          </div>
+
+          <br></br>
           
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div className="overflow-x-auto">
@@ -101,42 +140,6 @@ export default function LOP2025() {
                   ))}
                 </tbody>
               </table>
-            </div>
-          </div>
-          
-          {/* Table Statistics */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div 
-              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => setIsTotalModalOpen(true)}
-            >
-              <div className="text-3xl font-bold text-blue-600 mb-2">{totalRunners}</div>
-              <div className="text-gray-600">Total Legend Runners</div>
-              <div className="text-xs text-blue-500 mt-1">Click to view details</div>
-            </div>
-            <div 
-              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => setIsHighestModalOpen(true)}
-            >
-              <div className="text-3xl font-bold text-yellow-500 mb-2">{highestDistance}</div>
-              <div className="text-gray-600">Highest Distance (KM)</div>
-              <div className="text-xs text-yellow-500 mt-1">Click to view leader</div>
-            </div>
-            <div 
-              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => setIsLowestModalOpen(true)}
-            >
-              <div className="text-3xl font-bold text-orange-500 mb-2">{lowestDistance}</div>
-              <div className="text-gray-600">Minimum LOP Distance (KM)</div>
-              <div className="text-xs text-orange-500 mt-1">Click to view details</div>
-            </div>
-            <div 
-              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => setIsGenderModalOpen(true)}
-            >
-              <div className="text-3xl font-bold text-purple-600 mb-2">{femaleCount}</div>
-              <div className="text-gray-600">Female Runners</div>
-              <div className="text-xs text-purple-500 mt-1">Click to view stats</div>
             </div>
           </div>
         </div>
@@ -251,20 +254,31 @@ export default function LOP2025() {
               </div>
 
               {topFemaleRunner && (
-                <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-800 mb-2">Top Female Runner</h4>
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium">{topFemaleRunner.name}</span>
-                    <span className="text-pink-600 font-bold">{topFemaleRunner.distance} KM</span>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2">Top Male Runner</h4>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">{topMaleRunner.name}</span>
+                      <span className="text-blue-600 font-bold">{topMaleRunner.distance} KM</span>
+                    </div>
+                    <div className="text-sm text-gray-500">Position #{topMaleRunner.stt}</div>
                   </div>
-                  <div className="text-sm text-gray-500">Position #{topFemaleRunner.stt}</div>
+
+                  <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2">Top Female Runner</h4>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">{topFemaleRunner.name}</span>
+                      <span className="text-pink-600 font-bold">{topFemaleRunner.distance} KM</span>
+                    </div>
+                    <div className="text-sm text-gray-500">Position #{topFemaleRunner.stt}</div>
+                  </div>
                 </div>
               )}
 
               <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4">
-                <h4 className="font-semibold text-gray-800 mb-3">Top 5 Female Runners</h4>
+                <h4 className="font-semibold text-gray-800 mb-3">Top 10 Female Runners</h4>
                 <div className="space-y-2">
-                  {femaleRunners.slice(0, 5).map((runner, index) => (
+                  {femaleRunners.slice(0, 10).map((runner, index) => (
                     <div key={runner.stt} className="flex justify-between items-center text-sm">
                       <span className="flex items-center">
                         <span className="w-6 h-6 rounded-full bg-pink-500 text-white text-xs flex items-center justify-center mr-2">
@@ -273,6 +287,22 @@ export default function LOP2025() {
                         {runner.name}
                       </span>
                       <span className="text-pink-600 font-bold">{runner.distance} KM</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-800 mb-3">Top 10 Male Runners</h4>
+                <div className="space-y-2">
+                  {maleRunners.slice(0, 10).map((runner, index) => (
+                    <div key={runner.stt} className="flex justify-between items-center text-sm">
+                      <span className="flex items-center">
+                        <span className="w-6 h-6 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center mr-2">
+                          {index + 1}
+                        </span>
+                        {runner.name}
+                      </span>
+                      <span className="text-blue-600 font-bold">{runner.distance} KM</span>
                     </div>
                   ))}
                 </div>
