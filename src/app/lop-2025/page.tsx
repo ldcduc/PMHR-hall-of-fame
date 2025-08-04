@@ -174,7 +174,7 @@ export default function LOP2025() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Tình Trạng Hiện Tại</h3>
-                    <p className="text-gray-600">Tính đến ngày 03 tháng 8, 2025</p>
+                    <p className="text-gray-600">Tính đến ngày 04 tháng 8, 2025</p>
                   </div>
                 </div>
                 
@@ -206,7 +206,7 @@ export default function LOP2025() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Cuộc Thi</h3>
-                    <p className="text-gray-600">Vẫn Đang Diễn Ra!</p>
+                    <p className="text-gray-600">Vẫn Đang Diễn Ra! (Đến Hết Ngày 14/08/2025)</p>
                   </div>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export default function LOP2025() {
             Tham Gia Huyền Thoại 2025
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Cuộc thi vẫn đang diễn ra! Tham gia Câu Lạc Bộ Chạy Bộ PHÚ MỸ HƯNG và cạnh tranh để trở thành Huyền Thoại.
+            Cuộc thi vẫn đang diễn ra! Tham gia Câu Lạc Bộ Chạy Bộ PHÚ MỸ HƯNG RUNNERS và cạnh tranh để trở thành Huyền Thoại.
           </p>
           <a
             href="/join"
