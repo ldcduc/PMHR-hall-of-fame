@@ -8,8 +8,8 @@ export default function About() {
       <section className="py-12 text-center bg-gradient-to-br from-yellow-50 to-amber-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4 flex justify-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center shadow-md">
-              <Image src="/favicon.ico" alt="PMH Runners Club Logo" className="w-full h-full object-contain" width={64} height={64} />
+            <div className="w-16 h-16 from-yellow-400 to-amber-600 rounded-full flex items-center justify-center shadow-md">
+              <Image src="/logo.png" alt="PMH Runners Club Logo" className="w-full h-full object-contain" width={64} height={64} />
             </div>
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-yellow-600 via-yellow-500 to-amber-500 bg-clip-text text-transparent">
@@ -23,6 +23,54 @@ export default function About() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Achievements & Activities */}
+        <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
+          {/* <h2 className="text-2xl font-bold text-gray-800 mb-6">Hoạt Động & Thành Tựu</h2> */}
+          <div className="prose prose-gray max-w-none">
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Trong thời gian qua PMH Runners Club đã tổ chức thành công rất nhiều hoạt động liên quan 
+              chạy bộ và các sự kiện xã hội khác hết sức ý nghĩa.
+            </p>
+            
+            {/* First Image Space */}
+                        <div className="my-8 rounded-lg overflow-hidden shadow-sm">
+              <div className="relative">
+                <Image 
+                  src="/cover.jpg" 
+                  alt="PMH Runners Club cover image" 
+                  width={800} 
+                  height={400} 
+                  className="w-full h-auto rounded-lg"
+                />
+              </div>
+              <div className="bg-gray-50 px-4 py-2 text-center">
+                <p className="text-gray-600 text-sm italic"> Các buổi tập luyện chung hàng tuần vào sáng các ngày thứ 4, 7 và chủ nhật cũng là dịp giao lưu, rèn luyện thu hút rất nhiều thành viên tham gia.  </p>
+              </div>
+            </div>
+            
+            {/* Second Image Space */}
+            <div className="my-8 rounded-lg overflow-hidden shadow-sm">
+              <div className="relative">
+                <Image 
+                  src="/amigorun.jpg" 
+                  alt="Amigo Run Sunday morning activity" 
+                  width={800} 
+                  height={400} 
+                  className="w-full h-auto rounded-t-lg"
+                />
+              </div>
+              <div className="bg-gray-50 px-4 py-2 text-center">
+                <p className="text-gray-600 text-sm italic">Hoạt động Amigo Run sáng Chủ Nhật hằng tuần</p>
+              </div>
+            </div>
+
+            <p className="text-gray-700 leading-relaxed">
+              Ban Điều Hành dự kiến sẽ tổ chức rất nhiều sự kiện tuyệt vời, phục vụ tốt nhất lợi ích 
+              của các thành viên trong năm 2025 và các năm tiếp theo.
+            </p>
+          </div>
+        </div>
+
         
         {/* Welcome Message */}
         <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
@@ -100,7 +148,7 @@ export default function About() {
               <div className="space-y-3">
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Thứ 4, 7, Chủ nhật hàng tuần</span>
+                  <span className="text-gray-700">Thứ 3, 5, 7, Chủ nhật hàng tuần</span>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
@@ -169,25 +217,6 @@ export default function About() {
                 <p className="text-gray-600 text-sm">Được tự do bày tỏ quan điểm để xây dựng, phát triển câu lạc bộ</p>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Achievements & Activities */}
-        <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Hoạt Động & Thành Tựu</h2>
-          <div className="prose prose-gray max-w-none">
-            <p className="text-gray-700 leading-relaxed mb-4">
-              Trong thời gian qua PMH Runners Club đã tổ chức thành công rất nhiều hoạt động liên quan 
-              chạy bộ và các sự kiện xã hội khác hết sức ý nghĩa.
-            </p>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              Các buổi tập luyện chung hàng tuần vào sáng các ngày thứ 3, 5, 7 và chủ nhật cũng là dịp 
-              giao lưu, rèn luyện thu hút rất nhiều thành viên tham gia.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              Ban Điều Hành dự kiến sẽ tổ chức rất nhiều sự kiện tuyệt vời, phục vụ tốt nhất lợi ích 
-              của các thành viên trong năm 2021 và các năm tiếp theo.
-            </p>
           </div>
         </div>
 
