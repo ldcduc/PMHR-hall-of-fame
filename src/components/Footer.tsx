@@ -44,16 +44,6 @@ export default function Footer() {
                   LOP 2025
                 </Link>
               </li>
-              <li>
-                <a href="/achievements" className="text-gray-300 hover:text-white transition-colors duration-150">
-                  Achievements
-                </a>
-              </li>
-              <li>
-                <a href="/stats" className="text-gray-300 hover:text-white transition-colors duration-150">
-                  Statistics
-                </a>
-              </li>
             </ul>
           </div>
 
