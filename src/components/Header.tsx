@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,10 +13,12 @@ const Header = () => {
         <nav className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-                <span className="text-xs font-bold text-white">PMH</span>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200">
+                <Image src="/favicon.ico" alt="PMH Runners Club Logo" className="w-full h-full object-contain" width={0} height={0} />
               </div>
-              <span className="text-lg font-semibold gradient-text">PHU MY HUNG RUNNERS CLUB</span>
+              <span className="text-lg font-semibold bg-gradient-to-r from-yellow-600 via-yellow-500 to-amber-500 bg-clip-text text-transparent">
+                PHU MY HUNG RUNNERS CLUB
+              </span>
             </Link>
           </div>
 
