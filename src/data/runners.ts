@@ -20,7 +20,7 @@ export const runners: Runner[] = [
     joinDate: '2020-01-01',
   },
   {
-    id: '36',
+    id: '2',
     name: 'QUÁCH THỊ BÍCH THÙY', 
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THI%20BICH%20THUY.jpg',
     halfMarathonPR: '1:32:40',
@@ -40,7 +40,7 @@ export const runners: Runner[] = [
     joinDate: '2025-04-06',
   },
   {
-    id: '2',
+    id: '3',
     name: 'VÕ TẤN ĐỨC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20TAN%20DUC.jpg',
     halfMarathonPR: '1:29:01',
@@ -59,7 +59,7 @@ export const runners: Runner[] = [
     joinDate: '2020-01-01',
   },
   {
-    id: '3',
+    id: '4',
     name: 'QUÁCH THẾ KỶ',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20THE%20KY.jpg',
     halfMarathonPR: '1:33:37',
@@ -79,7 +79,7 @@ export const runners: Runner[] = [
     joinDate: '2017-01-01',
   },
   {
-    id: '8',
+    id: '5',
     name: 'NGUYỄN QUANG THẮNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20QUANG%20THANG%202.jpg',
     halfMarathonPR: 'undefined',
@@ -91,7 +91,7 @@ export const runners: Runner[] = [
     joinDate: '2019-03-24',
   },
   {
-    id: '4',
+    id: '6',
     name: 'TRẦN MẠNH CƯỜNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20MANH%20CUONG.jpg',
     halfMarathonPR: '1:41:13',
@@ -107,7 +107,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '5',
+    id: '7',
     name: 'NGUYỄN SỸ TOÀN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20SY%20TOAN.jpg',
     halfMarathonPR: 'undefined',
@@ -121,7 +121,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '6',
+    id: '8',
     name: 'ĐẬU DANH',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DAU%20DANH.jpg',
     halfMarathonPR: '1:37:11',
@@ -136,7 +136,7 @@ export const runners: Runner[] = [
     joinDate: '2025-07-20',
   },
   {
-    id: '7',
+    id: '9',
     name: 'VŨ VĂN HẢO',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VU%20VAN%20HAO.jpg',
     halfMarathonPR: '1:28:53',
@@ -157,7 +157,7 @@ export const runners: Runner[] = [
     joinDate: '2024-12-08',
   },
   {
-    id: '9',
+    id: '10',
     name: 'LÊ HOÀI PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HOAI%20PHUONG.jpg',
     halfMarathonPR: '1:41:21',
@@ -172,7 +172,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '10',
+    id: '11',
     name: 'TRẦN KHÁNH CHÂN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20KHANH%20CHAN.jpg',
     halfMarathonPR: 'undefined',
@@ -186,7 +186,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '11',
+    id: '12',
     name: 'TRẦN THÁI TÂM',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20THAI%20TAM.jpg',
     halfMarathonPR: '1:37:54',
@@ -202,7 +202,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '12',
+    id: '13',
     name: 'TRẦN ĐẠI CHIẾN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20DAI%20CHIEN.jpg',
     halfMarathonPR: 'undefined',
@@ -216,7 +216,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '37',
+    id: '14',
     name: 'NGUYỄN THỊ THÚY LOAN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20THUY%20LOAN.jpg',
     halfMarathonPR: '1:39:17',
@@ -233,7 +233,7 @@ export const runners: Runner[] = [
     joinDate: '2024-01-14',
   },
   {
-    id: '38',
+    id: '15',
     name: 'ĐOÀN THÁI NHƯ',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DOAN%20THAI%20NHU.jpg',
     halfMarathonPR: '1:44:16',
@@ -247,7 +247,7 @@ export const runners: Runner[] = [
     joinDate: '2023-02-12',
   },
   {
-    id: '48',
+    id: '16',
     name: 'BÙI CÔNG LƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/BUI%20CONG%20LUONG.jpg',
     halfMarathonPR: '01:41:50',
@@ -262,7 +262,7 @@ export const runners: Runner[] = [
     joinDate: '2024-10-27',
   },
   {
-    id: '13',
+    id: '17',
     name: 'ĐÀO NGUYỄN BẢO KHÁNH',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DAO%20NGUYEN%20BAO%20KHANH.jpg',
     halfMarathonPR: '1:38:06',
@@ -277,7 +277,7 @@ export const runners: Runner[] = [
     joinDate: '2023-12-10',
   },
   {
-    id: '14',
+    id: '18',
     name: 'NGUYỄN VĂN HÙNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20VAN%20HUNG.jpg',
     halfMarathonPR: '1:43:11',
@@ -294,7 +294,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '15',
+    id: '19',
     name: 'LÊ QUANG ĐỨC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20QUANG%20DUC.jpg',
     halfMarathonPR: 'undefined',
@@ -310,7 +310,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '16',
+    id: '20',
     name: 'VÕ VĂN DÂN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20VAN%20DAN.jpg',
     halfMarathonPR: '1:39:09',
@@ -324,7 +324,7 @@ export const runners: Runner[] = [
     joinDate: '2023-12-10',
   },
   {
-    id: '39',
+    id: '21',
     name: 'TRANG THI NGỌC LAN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRANG%20THI%20NGOC%20LAN.jpg',
     halfMarathonPR: 'undefined',
@@ -339,7 +339,7 @@ export const runners: Runner[] = [
     joinDate: '2025-02-23',
   },
   {
-    id: '17',
+    id: '22',
     name: 'BÙI VĂN CHIẾN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/BUI%20VAN%20CHIEN.jpg',
     halfMarathonPR: '1:42:55',
@@ -354,7 +354,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '18',
+    id: '23',
     name: 'DƯƠNG PHÁT QUYỀN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DUONG%20PHAT%20QUYEN.jpg',
     halfMarathonPR: '1:42:01',
@@ -368,7 +368,7 @@ export const runners: Runner[] = [
     joinDate: '2023-01-08',
   },
   {
-    id: '19',
+    id: '24',
     name: 'BÙI TRUNG KIÊN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/BUI%20TRUNG%20KIEN%202.jpg',
     halfMarathonPR: 'undefined',
@@ -381,7 +381,7 @@ export const runners: Runner[] = [
     joinDate: '2025-07-20',
   },
   {
-    id: '20',
+    id: '25',
     name: 'BÙI THÀNH TÙNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/BUI%20THANH%20TUNG.jpg',
     halfMarathonPR: 'undefined',
@@ -394,7 +394,7 @@ export const runners: Runner[] = [
     joinDate: '2023-10-08',
   },
   {
-    id: '47',
+    id: '26',
     name: 'TRẦN BÁ PHƯỚC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20BA%20PHUOC.jpg',
     halfMarathonPR: '01:44:13',
@@ -408,7 +408,7 @@ export const runners: Runner[] = [
     joinDate: '2024-12-08',
   },
   {
-    id: '50',
+    id: '27',
     name: 'ĐẶNG VIỆT KHANG',
     profileImage: '/dvkhang.png',
     halfMarathonPR: 'N/A',
@@ -421,7 +421,7 @@ export const runners: Runner[] = [
     joinDate: '2024-10-27',
   },
   {
-    id: '21',
+    id: '28',
     name: 'TRẦN HOÀI VŨ',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20HOAI%20VU.jpg',
     halfMarathonPR: 'undefined',
@@ -436,7 +436,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '40',
+    id: '29',
     name: 'THÁI THỊ PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/THAI%20THI%20PHUONG.jpg',
     halfMarathonPR: '1:41:26',
@@ -450,7 +450,7 @@ export const runners: Runner[] = [
     joinDate: '2023-10-15',
   },
   {
-    id: '22',
+    id: '30',
     name: 'NGÔ NGỌC HIỆP',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGO%20NGOC%20HIEP.jpg',
     halfMarathonPR: '1:41:44',
@@ -464,7 +464,7 @@ export const runners: Runner[] = [
     joinDate: '2022-06-26',
   },
   {
-    id: '23',
+    id: '31',
     name: 'QUÁCH ĐẰNG GIANG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20DANG%20GIANG.jpg',
     halfMarathonPR: '1:33:01',
@@ -480,7 +480,7 @@ export const runners: Runner[] = [
     joinDate: '2024-12-08',
   },
   {
-    id: '24',
+    id: '32',
     name: 'PHẠM HỒNG PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/PHAM%20HONG%20PHUONG.jpg',
     halfMarathonPR: 'undefined',
@@ -493,22 +493,21 @@ export const runners: Runner[] = [
     joinDate: '2022-12-03',
   },
   {
-    id: '46', // Next sequential ID after existing runners
+    id: '33',
     name: 'LÊ HỮU THUẬN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HUU%20THUAN.jpg',
     halfMarathonPR: '01:44:30',
     fullMarathonPR: '03:51:11',
     achievements: [
-      'HCMC MARATHON 12/01/2025 - 40896/5804', // From "CHI TIẾT THÀNH TÍCH" section
-      // Additional achievements from the detailed records section:
+      'HCMC MARATHON 12/01/2025 - 40896/5804',
       'FULL MARATHON - 03:51:11 - 40896 - HCMCM11.1.25 - 4117/5804',
       'HALF MARATHON - 01:44:30 - 21101 - PVGAS5.1.25 - 4043/4237'
     ],
     bio: 'Age group: M40-49. Team: Phú Mỹ Hưng Runners. Bib number: 40896. Multi-distance runner with records in Full Marathon, Half Marathon, Ultra Trail, Ironman 70.3, and Ultra Road events.',
-    joinDate: '2025-01-12', // Based on recent race date
+    joinDate: '2025-01-12',
   },
   {
-    id: '25',
+    id: '34',
     name: 'HOÀNG KHẮC TÙNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/HOANG%20KHAC%20TUNG.jpg',
     halfMarathonPR: 'undefined',
@@ -521,7 +520,7 @@ export const runners: Runner[] = [
     joinDate: '2024-03-03',
   },
   {
-    id: '26',
+    id: '35',
     name: 'PHẠM MINH TÂN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/PHAM%20MINH%20TAN.jpg',
     halfMarathonPR: '1:44:55',
@@ -536,7 +535,7 @@ export const runners: Runner[] = [
     joinDate: '2024-01-14',
   },
   {
-    id: '45',
+    id: '36',
     name: 'QUÁCH AN NHI',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/QUACH%20AN%20NHI.jpg',
     halfMarathonPR: '1:44:08',
@@ -550,7 +549,7 @@ export const runners: Runner[] = [
     joinDate: '2024-03-31',
   },
   {
-    id: '27',
+    id: '37',
     name: 'ĐOÀN THẾ PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DOAN%20THE%20PHUONG.jpg',
     halfMarathonPR: 'undefined',
@@ -563,7 +562,7 @@ export const runners: Runner[] = [
     joinDate: '2023-10-29',
   },
   {
-    id: '35',
+    id: '38',
     name: 'LÊ BÁ HOÀNH',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20BA%20HOANH.jpg',
     halfMarathonPR: 'undefined',
@@ -577,7 +576,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '33',
+    id: '39',
     name: 'ĐỖ TRUNG ÁI',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DO%20TRUNG%20AI.jpg',
     halfMarathonPR: 'undefined',
@@ -590,22 +589,36 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '49',
+    id: '40',
     name: 'VÕ VĂN PHƯỚC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20VAN%20PHUOC.jpg',
-    halfMarathonPR: '01:32:23',
-    fullMarathonPR: '03:56:20',
+    halfMarathonPR: '1:32:23',
+    fullMarathonPR: '3:56:20',
     achievements: [
       'VNEXPRESS MARATHON NHA TRANG 11/08/2024 - 90036',
-      'FULL MARATHON - 03:56:20 - 90036 - VMNT11.8.24 - 3492/4134',
-      'HALF MARATHON - 01:32:23 - 2182 - PMO30.6.24 - 887/2760',
-      'HALF MARATHON - 01:35:12 - 8716 - QNM2.6.24 - 1137/2713'
+      'FULL MARATHON - 3:56:20 - 90036 - VMNT11.8.24 - 3492/4134',
+      'HALF MARATHON - 1:32:23 - 2182 - PMO30.6.24 - 887/2760',
+      'HALF MARATHON - 1:35:12 - 8716 - QNM2.6.24 - 1137/2713'
     ],
     bio: 'Age group: M. Team: Phú Mỹ Hưng Runners. Bib number: 90036. Multi-distance runner with strong half marathon performance.',
     joinDate: '2024-08-11',
   },
   {
-    id: '29',
+    id: '41',
+    name: 'NGÔ MINH DUY',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGO%20MINH%20DUY.jpg',
+    halfMarathonPR: '1:38:26',
+    fullMarathonPR: '3:56:33',
+    achievements: [
+      'TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP LAN THU 65 31/03/2024 - 5564/6491',
+      'TPMNC31.3.24 - 3270/3816',
+      'VIHM1.1.24 - 1057/1807'
+    ],
+    bio: 'Member of Phu My Hung Runners team. Age group: M (Male). Bib number: 90374. Strong performer in both half and full marathon distances.',
+    joinDate: '2024-03-31',
+  },
+  {
+    id: '42',
     name: 'LÂM THANH DŨNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LAM%20THANH%20DUNG.jpg',
     halfMarathonPR: '1:44:03',
@@ -619,7 +632,7 @@ export const runners: Runner[] = [
     joinDate: '2024-12-08',
   },
   {
-    id: '34',
+    id: '43',
     name: 'TÔN DUY NGHĨA',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TON%20DUY%20NGHIA.jpg',
     halfMarathonPR: 'undefined',
@@ -632,7 +645,7 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
-    id: '28',
+    id: '44',
     name: 'VÕ THÁI VŨ',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20THAI%20VU.jpg',
     halfMarathonPR: 'undefined',
@@ -645,7 +658,19 @@ export const runners: Runner[] = [
     joinDate: '2023-10-29',
   },
   {
-    id: '41',
+    id: '45',
+    name: 'TRẦN PHÚ QUỐC',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20PHU%20QUOC%202.jpg',
+    halfMarathonPR: 'undefined',
+    fullMarathonPR: '3:57:00',
+    achievements: [
+      'LONGBIEN MARATHON 27/10/2024 - 4148/4771'
+    ],
+    bio: 'Member of PMHR team. Age group: M. Sub-4 hour marathoner - achieved 3:57:00 at Longbien Marathon 2024. Exceptional endurance athlete qualifying for elite status.',
+    joinDate: '2024-10-27',
+  },
+  {
+    id: '46',
     name: 'ĐỖ THU THỦY',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DO%20THU%20THUY.jpg',
     halfMarathonPR: 'undefined',
@@ -658,7 +683,7 @@ export const runners: Runner[] = [
     joinDate: '2023-04-16',
   },
   {
-    id: '30',
+    id: '47',
     name: 'NGUYỄN HỮU TIẾNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20HUU%20TIENG.jpg',
     halfMarathonPR: 'undefined',
@@ -671,7 +696,7 @@ export const runners: Runner[] = [
     joinDate: '2024-12-08',
   },
   {
-    id: '42',
+    id: '48',
     name: 'NGUYỄN THỊ NGỌC NI',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20NGOC%20NI.jpg',
     halfMarathonPR: 'undefined',
@@ -684,7 +709,7 @@ export const runners: Runner[] = [
     joinDate: '2025-07-20',
   },
   {
-    id: '31',
+    id: '49',
     name: 'NGUYỄN XUÂN KHOA',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20XUAN%20KHOA.jpg',
     halfMarathonPR: 'undefined',
@@ -697,7 +722,7 @@ export const runners: Runner[] = [
     joinDate: '2024-01-14',
   },
   {
-    id: '32',
+    id: '50',
     name: 'NGUYỄN TRƯỜNG LÂM',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20TRUONG%20LAM.jpg',
     halfMarathonPR: 'undefined',
@@ -708,20 +733,6 @@ export const runners: Runner[] = [
     ],
     bio: 'Member of PMHR team. Age group: M (Male). Bib number: 40700. Full marathon specialist.',
     joinDate: '2024-01-14',
-  },
-  {
-    id: '44',
-    name: 'NGÔ MINH DUY',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGO%20MINH%20DUY.jpg',
-    halfMarathonPR: '1:38:26',
-    fullMarathonPR: '3:56:33',
-    achievements: [
-      'TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP LAN THU 65 31/03/2024 - 5564/6491',
-      'TPMNC31.3.24 - 3270/3816',
-      'VIHM1.1.24 - 1057/1807'
-    ],
-    bio: 'Member of Phu My Hung Runners team. Age group: M (Male). Bib number: 90374. Strong performer in both half and full marathon distances.',
-    joinDate: '2024-03-31',
   },
 
   // Runners without Full Marathon records (sorted by Half Marathon time, fastest first)
@@ -740,7 +751,7 @@ export const runners: Runner[] = [
     joinDate: '2025-06-22',
   },
   {
-    id: '43',
+    id: '52',
     name: 'LÊ HUỲNH NGỌC TRUNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HUYNH%20NGOC%20TRUNG.jpg',
     halfMarathonPR: '1:42:12', 
