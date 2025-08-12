@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useEffect, useState } from 'react';
 import { lop2025Runners } from '../../../../data/lop2025Runners';
+import { toPng, toJpeg } from 'html-to-image';
 
 interface PageProps {
   params: Promise<{
@@ -17,7 +18,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
   const [id, setId] = useState<string>('');
   // eslint-disable-next-line
   const [runner, setRunner] = useState<any>(null);
-  const [showMethodComparison, setShowMethodComparison] = useState<boolean>(false);
+  const [isExporting, setIsExporting] = useState<boolean>(false);
 
   useEffect(() => {
     const getParams = async () => {
@@ -29,389 +30,119 @@ export default function LOP2025Certificate({ params }: PageProps) {
     getParams();
   }, [params]);
 
-  // Method 1: HTML2Canvas - Best for precise element capture
-  const downloadCertificateHTML2Canvas = async () => {
+  // Method 1: html-to-image - Better for modern browsers and CSS handling
+  const downloadCertificateHtmlToImage = async () => {
     if (!certificateRef.current || !runner) return;
 
+    setIsExporting(true);
     try {
-      alert('Đang chuẩn bị tải chứng chỉ...');
+      console.log('Starting html-to-image export...');
       
-      // Dynamically import html2canvas
-      const html2canvas = await import('html2canvas');
-      
-      // Scroll to certificate and wait
+      // Scroll to certificate and wait for render
       certificateRef.current.scrollIntoView({ 
         behavior: 'smooth', 
         block: 'center' 
       });
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Capture only the certificate element with correct options
-      const canvas = await html2canvas.default(certificateRef.current, {
-        allowTaint: true,
-        background: '#ffffff', // Fixed: was backgroundColor
-        useCORS: true,
-        logging: false,
+      // Ensure all fonts are loaded
+      await document.fonts.ready;
+      
+      // Wait for any pending images
+      const images = certificateRef.current.querySelectorAll('img');
+      await Promise.all(Array.from(images).map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => {
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(true);
+        });
+      }));
+
+      console.log('All resources loaded, capturing...');
+
+      // Primary attempt with high quality settings
+      const dataUrl = await toPng(certificateRef.current, {
+        quality: 1.0,
+        pixelRatio: 2,
+        backgroundColor: '#ffffff',
         width: certificateRef.current.offsetWidth,
         height: certificateRef.current.offsetHeight,
-      });
-
-      // Convert to blob and download
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `LOP2025-Certificate-${runner.name.replace(/\s+/g, '-')}.png`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(url);
-          
-          alert('✅ Chứng chỉ đã được tải xuống thành công!\n\nFile chỉ chứa phần chứng chỉ, không có nền trang web. 🎉');
-        }
-      }, 'image/png', 1.0);
-
-    } catch (error) {
-      console.error('Error with HTML2Canvas:', error);
-      alert('❌ Có lỗi xảy ra với chức năng tự động.\n\nVui lòng thử:\n1. Tải lại trang\n2. Sử dụng chức năng "Chụp Có Hướng Dẫn"\n3. Hoặc chụp thủ công');
-    }
-  };
-
-  // Method 2: Screen Capture with highlighting
-  const downloadCertificateScreenshot = async () => {
-    if (!certificateRef.current || !runner) return;
-
-    try {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
-        alert('❌ Trình duyệt không hỗ trợ chụp màn hình tự động.\n\nVui lòng sử dụng:\n• Chức năng "Tải Tự Động" (HTML2Canvas)\n• Hoặc "Hướng Dẫn Chụp"');
-        return;
-      }
-
-      // Scroll and highlight
-      certificateRef.current.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
-      });
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Add highlight border
-      const originalBorder = certificateRef.current.style.border;
-      const originalShadow = certificateRef.current.style.boxShadow;
-      
-      certificateRef.current.style.border = '6px solid #ff4444';
-      certificateRef.current.style.boxShadow = '0 0 30px rgba(255, 68, 68, 0.6), inset 0 0 20px rgba(255, 68, 68, 0.2)';
-
-      const confirmed = confirm(`🖥️ CHỤP MÀN HÌNH CÓ HƯỚNG DẪN
-
-Các bước thực hiện:
-
-1️⃣ Nhấn "OK" để bắt đầu
-2️⃣ Chọn tab hiện tại khi được hỏi chia sẻ màn hình  
-3️⃣ Chứng chỉ được đánh dấu bằng VIỀN ĐỎ
-4️⃣ Sau khi chụp xong, crop ảnh theo viền đỏ
-
-⚠️ Lưu ý: Bạn sẽ cần tự crop ảnh sau khi tải xuống
-
-Tiếp tục?`);
-      
-      if (!confirmed) {
-        certificateRef.current.style.border = originalBorder;
-        certificateRef.current.style.boxShadow = originalShadow;
-        return;
-      }
-
-      // Screen capture process
-      const stream = await navigator.mediaDevices.getDisplayMedia({
-        video: {
-          width: { ideal: 1920 },
-          height: { ideal: 1080 }
+        canvasWidth: certificateRef.current.offsetWidth * 2,
+        canvasHeight: certificateRef.current.offsetHeight * 2,
+        style: {
+          transform: 'scale(1)',
+          transformOrigin: 'top left',
         },
-        audio: false
-      });
-
-      const video = document.createElement('video');
-      video.srcObject = stream;
-      video.muted = true;
-      
-      await new Promise<void>((resolve) => { // Fixed: added void type
-        video.onloadedmetadata = () => {
-          video.play();
-          resolve();
-        };
-      });
-
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
-      
-      stream.getTracks().forEach(track => track.stop());
-      
-      // Restore styles
-      certificateRef.current.style.border = originalBorder;
-      certificateRef.current.style.boxShadow = originalShadow;
-      
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `LOP2025-Certificate-${runner.name.replace(/\s+/g, '-')}-crop-needed.png`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(url);
-          
-          alert(`✅ Ảnh đã tải xuống thành công!
-
-📝 BƯỚC TIẾP THEO:
-• Mở ảnh vừa tải xuống
-• Crop/cắt ảnh để chỉ giữ phần chứng chỉ (có viền đỏ)
-• Lưu file mới
-
-💡 TIP: Dùng Paint, Photoshop, hoặc ứng dụng chỉnh ảnh để crop`);
+        filter: (node) => {
+          // Skip comment nodes and hidden elements
+          if (node.nodeType === Node.COMMENT_NODE) return false;
+          if (node instanceof HTMLElement) {
+            const style = window.getComputedStyle(node);
+            if (style.display === 'none' || style.visibility === 'hidden') {
+              return false;
+            }
+          }
+          return true;
+        },
+        onCloneNode: (clonedNode) => {
+          if (clonedNode instanceof HTMLElement) {
+            // Ensure all gradients and styles are preserved
+            const originalNode = clonedNode;
+            
+            // Force background gradients to be visible
+            if (originalNode.style.backgroundImage) {
+              clonedNode.style.backgroundImage = originalNode.style.backgroundImage;
+            }
+            
+            // Ensure text gradients work
+            if (originalNode.classList.contains('bg-gradient-to-r')) {
+              clonedNode.style.background = window.getComputedStyle(originalNode).background;
+            }
+          }
+          return clonedNode;
         }
-      }, 'image/png', 1.0);
+      });
+
+      // Download the image
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = `LOP2025-Certificate-${runner.name.replace(/\s+/g, '-')}-HtmlToImage.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      console.log('html-to-image export successful');
+      alert('✅ Chứng chỉ đã được tải xuống thành công bằng html-to-image!\n\nChất lượng cao với gradients được bảo toàn. 🎉');
 
     } catch (error) {
-      console.error('Error with screenshot:', error);
+      console.error('html-to-image failed:', error);
       
-      if (certificateRef.current) {
-        certificateRef.current.style.border = '';
-        certificateRef.current.style.boxShadow = '';
+      // Fallback to JPEG with lower quality
+      try {
+        console.log('Trying JPEG fallback...');
+        const jpegDataUrl = await toJpeg(certificateRef.current!, {
+          quality: 0.9,
+          pixelRatio: 1.5,
+          backgroundColor: '#ffffff',
+        });
+
+        const link = document.createElement('a');
+        link.href = jpegDataUrl;
+        link.download = `LOP2025-Certificate-${runner.name.replace(/\s+/g, '-')}-JPEG-Fallback.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        console.log('JPEG fallback successful');
+        alert('✅ Chứng chỉ đã được tải xuống (JPEG fallback)!\n\nĐã sử dụng format JPEG để đảm bảo tương thích. 📸');
+
+      } catch (fallbackError) {
+        console.error('JPEG fallback also failed:', fallbackError);
+        alert('❌ html-to-image không thành công.\n\nLỗi: ' + (error as Error).message + '\n\nVui lòng thử phương pháp HTML2Canvas.');
       }
-      
-      if ((error as Error).name === 'NotAllowedError') { // Fixed: proper error typing
-        alert('❌ Bạn đã từ chối chia sẻ màn hình.\n\nVui lòng thử:\n• Chức năng "Tải Tự Động"\n• Hoặc "Hướng Dẫn Thủ Công"');
-      } else {
-        alert('❌ Có lỗi xảy ra với chụp màn hình.\n\nVui lòng thử chức năng khác.');
-      }
+    } finally {
+      setIsExporting(false);
     }
-  };
-
-  // Method 3: Visual guide for manual screenshot
-  const downloadCertificateAuto = async () => {
-    if (!certificateRef.current || !runner) return;
-
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    try {
-      // Scroll to certificate
-      certificateRef.current.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
-      });
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Get bounds for visual guide
-      const rect = certificateRef.current.getBoundingClientRect();
-      
-      // Create overlay with precise crop guide
-      const overlay = document.createElement('div');
-      overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.85);
-        z-index: 9999;
-        font-family: Arial, sans-serif;
-      `;
-
-      // Crop guide box
-      const cropGuide = document.createElement('div');
-      cropGuide.style.cssText = `
-        position: absolute;
-        top: ${Math.max(0, rect.top - 10)}px;
-        left: ${Math.max(0, rect.left - 10)}px;
-        width: ${Math.min(window.innerWidth - rect.left + 10, rect.width + 20)}px;
-        height: ${Math.min(window.innerHeight - rect.top + 10, rect.height + 20)}px;
-        border: 4px dashed #00ff00;
-        background: rgba(0, 255, 0, 0.1);
-        pointer-events: none;
-        box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-      `;
-
-      // Instruction panel
-      const instructions = document.createElement('div');
-      instructions.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: white;
-        color: black;
-        padding: 20px;
-        border-radius: 15px;
-        text-align: center;
-        max-width: ${isMobile ? '320px' : '420px'};
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        border: 3px solid #00ff00;
-      `;
-
-      let countdown = 12;
-      instructions.innerHTML = `
-        <h3 style="margin: 0 0 15px 0; color: #00aa00; font-size: ${isMobile ? '18px' : '20px'};">
-          📱 HƯỚNG DẪN CHỤP CHÍNH XÁC
-        </h3>
-        <p style="margin: 0 0 15px 0; font-size: ${isMobile ? '14px' : '16px'}; line-height: 1.4;">
-          Chụp màn hình và crop theo <strong style="color: #00aa00;">VÙNG XANH</strong> bên dưới:
-        </p>
-        <div style="background: #f8f8f8; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: ${isMobile ? '13px' : '14px'}; text-align: left; border-left: 4px solid #00aa00;">
-          ${isMobile ? `
-            <div style="margin-bottom: 8px;"><strong>📱 ANDROID:</strong></div>
-            <div style="margin-bottom: 12px; padding-left: 10px;">• Power + Volume Down cùng lúc</div>
-            
-            <div style="margin-bottom: 8px;"><strong>📱 iPHONE:</strong></div>
-            <div style="margin-bottom: 12px; padding-left: 10px;">• Side Button + Volume Up</div>
-            
-            <div style="margin-bottom: 8px;"><strong>💡 QUAN TRỌNG:</strong></div>
-            <div style="padding-left: 10px;">• Crop ảnh theo vùng xanh sau khi chụp</div>
-          ` : `
-            <div style="margin-bottom: 8px;"><strong>💻 WINDOWS:</strong></div>
-            <div style="margin-bottom: 12px; padding-left: 10px;">• Windows + Shift + S (Snipping Tool)</div>
-            
-            <div style="margin-bottom: 8px;"><strong>💻 MAC:</strong></div>
-            <div style="margin-bottom: 12px; padding-left: 10px;">• Cmd + Shift + 4 (kéo chọn vùng)</div>
-            
-            <div style="margin-bottom: 8px;"><strong>🔧 CÁCH KHÁC:</strong></div>
-            <div style="padding-left: 10px;">• Dùng Snipping Tool hoặc Screenshot app</div>
-          `}
-        </div>
-        <div style="background: #e8f5e8; padding: 10px; border-radius: 5px; margin: 15px 0; font-size: ${isMobile ? '12px' : '13px'};">
-          <strong style="color: #00aa00;">🎯 MỤC TIÊU:</strong> Chụp chỉ phần trong khung xanh = Chứng chỉ hoàn hảo!
-        </div>
-        <p style="color: #00aa00; font-size: ${isMobile ? '16px' : '18px'}; margin: 15px 0; font-weight: bold;">
-          Tự động đóng: <span id="countdown">${countdown}</span>s
-        </p>
-        <button id="closeOverlay" style="
-          background: #00aa00; 
-          color: white; 
-          border: none; 
-          padding: 12px 24px; 
-          border-radius: 8px; 
-          cursor: pointer;
-          font-size: 16px;
-          font-weight: bold;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        ">✅ Đã hiểu, đóng ngay</button>
-      `;
-
-      overlay.appendChild(cropGuide);
-      overlay.appendChild(instructions);
-      document.body.appendChild(overlay);
-
-      // Countdown and events
-      const countdownEl = instructions.querySelector('#countdown');
-      const closeBtn = instructions.querySelector('#closeOverlay');
-      
-      const timer = setInterval(() => {
-        countdown--;
-        if (countdownEl) countdownEl.textContent = countdown.toString();
-        
-        if (countdown <= 0) {
-          clearInterval(timer);
-          cleanup();
-        }
-      }, 1000);
-
-      closeBtn?.addEventListener('click', () => {
-        clearInterval(timer);
-        cleanup();
-      });
-
-      const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          clearInterval(timer);
-          cleanup();
-        }
-      };
-      document.addEventListener('keydown', handleEscape);
-
-      const cleanup = () => {
-        if (document.body.contains(overlay)) {
-          document.body.removeChild(overlay);
-        }
-        document.removeEventListener('keydown', handleEscape);
-      };
-
-    } catch (error) {
-      console.error('Error:', error);
-      alert('❌ Có lỗi xảy ra. Vui lòng thử lại hoặc chụp thủ công.');
-    }
-  };
-
-  const showDownloadInstructions = () => {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    const instructions = isMobile ? `📱 HƯỚNG DẪN CHỤP CHỨNG CHỈ - MOBILE
-
-🤖 ANDROID:
-• Bước 1: Nhấn giữ nút Power + Volume Down cùng lúc
-• Bước 2: Hoặc vuốt xuống từ trên màn hình → chọn "Screenshot"  
-• Bước 3: Mở ảnh vừa chụp trong Gallery
-• Bước 4: Nhấn "Edit" → "Crop" → Cắt chỉ giữ phần chứng chỉ
-• Bước 5: Lưu ảnh đã cắt
-
-📱 iPHONE/iPAD:
-• Bước 1: iPhone X+: Nhấn Side Button + Volume Up
-• Bước 2: iPhone 8-: Nhấn Home + Power Button  
-• Bước 3: iPad: Nhấn Top Button + Home/Volume Up
-• Bước 4: Nhấn vào ảnh thumbnail ở góc màn hình
-• Bước 5: Nhấn "Crop" → Cắt theo khung chứng chỉ
-• Bước 6: Nhấn "Done" để lưu
-
-💡 MẸO HAY:
-- Xoay ngang điện thoại để chứng chỉ hiển thị lớn hơn
-- Zoom out (thu nhỏ) để thấy toàn bộ chứng chỉ
-- Dùng 2 ngón tay để pinch-to-zoom trước khi chụp
-- Chụp ở nơi có ánh sáng tốt để ảnh rõ nét
-    ` : `💻 HƯỚNG DẪN CHỤP CHỨNG CHỈ - DESKTOP
-
-🖥️ WINDOWS:
-• Cách 1 (Khuyên dùng): 
-  - Nhấn Windows + Shift + S
-  - Kéo chuột chọn vùng chứng chỉ
-  - Ảnh tự động copy vào clipboard
-  - Mở Paint → Ctrl+V → Save
-
-• Cách 2: Snipping Tool
-  - Mở Start Menu → tìm "Snipping Tool"
-  - Chọn "New" → kéo chọn vùng chứng chỉ
-  - File → Save As
-
-• Cách 3: Print Screen
-  - Nhấn PrtSc (toàn màn hình)
-  - Mở Paint → Ctrl+V → Crop → Save
-
-💻 MAC:
-• Cách 1 (Khuyên dùng):
-  - Nhấn Cmd + Shift + 4
-  - Kéo chuột chọn vùng chứng chỉ
-  - File tự động lưu trên Desktop
-
-• Cách 2: Screenshot toàn màn hình
-  - Cmd + Shift + 3 (toàn màn hình)
-  - Mở ảnh → dùng Preview để crop
-
-🔧 CÁCH KHÁC (Tất cả hệ điều hành):
-• Nhấn F12 → Developer Tools
-• Nhấn chuột phải vào chứng chỉ → "Inspect"
-• Tìm div chứa chứng chỉ → chuột phải
-• Chọn "Capture node screenshot"
-
-⚡ CHROME EXTENSION:
-• Cài "Awesome Screenshot" hoặc "FireShot"
-• Chụp vùng được chọn trực tiếp
-    `;
-    
-    alert(instructions);
   };
 
   if (!runner) {
@@ -645,6 +376,34 @@ Tiếp tục?`);
           <div className="h-1 md:h-3 bg-gradient-to-r from-yellow-300 via-amber-300 to-blue-300"></div>
         </div>
 
+        <div className="mt-8 text-center space-x-4">
+          <button 
+            onClick={downloadCertificateHtmlToImage}
+            disabled={isExporting}
+            className="inline-flex items-center px-6 py-3 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-200 shadow-lg"
+          >
+            {isExporting ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                Đang tải...
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                  Tải Chứng Chỉ
+              </>
+            )}
+          </button>
+          <button className="inline-flex items-center px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-lg">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+            </svg>
+            Chia Sẻ Chứng Chỉ
+          </button>
+        </div>
+
         {/* Achievement Summary */}
         <div className="mt-3 md:mt-6 bg-white/80 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-lg border border-yellow-100">
           <h3 className="text-base md:text-lg font-bold text-center text-gray-800 mb-2 md:mb-3">
@@ -672,120 +431,6 @@ Tiếp tục?`);
           </div>
         </div>
 
-        {/* Method Comparison Guide - Toggleable */}
-        <div className="mt-3 md:mt-6 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-blue-100">
-          {/* Toggle Header */}
-          <button
-            onClick={() => setShowMethodComparison(!showMethodComparison)}
-            className="w-full p-3 md:p-4 text-left hover:bg-blue-50 transition-colors duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-base md:text-lg font-bold text-gray-800">
-                🔧 Chia sẻ
-              </h3>
-              <div className="flex items-center space-x-2">
-                <span className="text-xs md:text-sm text-gray-600">
-                  {showMethodComparison ? 'Ẩn' : 'Hiện'}
-                </span>
-                <svg 
-                  className={`w-5 h-5 text-gray-600 transition-transform duration-200 ${showMethodComparison ? 'rotate-180' : ''}`}
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-          </button>
-
-          {/* Collapsible Content */}
-          {showMethodComparison && (
-            <div>
-              {/* Action Buttons */}
-              <div className="mt-3 md:mt-6 text-center space-y-2 md:space-y-0 md:space-x-3 flex flex-col md:flex-row justify-center">
-                <button 
-                  onClick={downloadCertificateHTML2Canvas}
-                  className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
-                >
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  🎯 Tải Tự Động (Khuyên dùng)
-                </button>
-                <button 
-                  onClick={downloadCertificateScreenshot}
-                  className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
-                >
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                  📱 Chụp Có Hướng Dẫn
-                </button>
-                <button 
-                  onClick={downloadCertificateAuto}
-                  className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-200 shadow-lg text-xs md:text-sm"
-                >
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2" />
-                  </svg>
-                  🎯 Hướng Dẫn Chính Xác
-                </button>
-                <button 
-                  onClick={showDownloadInstructions}
-                  className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
-                >
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  📋 Hướng Dẫn Chi Tiết
-                </button>
-              </div>
-
-              <div className="px-3 md:px-4 pb-3 md:pb-4 border-t border-gray-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 text-sm mt-3">
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-2">
-                    <div className="font-bold text-green-600 mb-1 text-xs md:text-sm">🎯 Tải Tự Động</div>
-                    <div className="text-green-700 text-xs">
-                      ✅ Chỉ chứng chỉ, không có nền<br/>
-                      ✅ Chất lượng cao<br/>
-                      ✅ Không cần crop<br/>
-                      ⚠️ Cần cài thư viện
-                    </div>
-                  </div>
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
-                    <div className="font-bold text-blue-600 mb-1 text-xs md:text-sm">📱 Chụp Có Hướng Dẫn</div>
-                    <div className="text-blue-700 text-xs">
-                      ✅ Hoạt động mọi trình duyệt<br/>
-                      ✅ Có viền đỏ định hướng<br/>
-                      ⚠️ Cần crop sau khi chụp<br/>
-                      ⚠️ Chất lượng tùy màn hình
-                    </div>
-                  </div>
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2">
-                    <div className="font-bold text-yellow-600 mb-1 text-xs md:text-sm">🎯 Hướng Dẫn Chính Xác</div>
-                    <div className="text-yellow-700 text-xs">
-                      ✅ Khung xanh chính xác<br/>
-                      ✅ Hướng dẫn từng bước<br/>
-                      ✅ Phù hợp mọi thiết bị<br/>
-                      ⚠️ Cần chụp thủ công
-                    </div>
-                  </div>
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-2">
-                    <div className="font-bold text-gray-600 mb-1 text-xs md:text-sm">📋 Hướng Dẫn Chi Tiết</div>
-                    <div className="text-gray-700 text-xs">
-                      ✅ Hướng dẫn đầy đủ<br/>
-                      ✅ Nhiều cách thực hiện<br/>
-                      ✅ Phù hợp người mới<br/>
-                      ⚠️ Cần đọc kỹ hướng dẫn
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
         {/* Motivational Message */}
         <div className="mt-3 md:mt-6 text-center bg-gradient-to-r from-yellow-100 to-amber-100 rounded-lg p-3 md:p-4 border border-yellow-300">
           <h4 className="text-sm md:text-base font-bold text-gray-800 mb-1 md:mb-2">
@@ -797,21 +442,6 @@ Tiếp tục?`);
           </p>
         </div>
 
-        {/* Installation Instructions */}
-        <div className="mt-3 md:mt-6 bg-blue-50 border border-blue-200 rounded-lg p-3 md:p-4">
-          <h4 className="text-sm md:text-base font-bold text-blue-800 mb-1 md:mb-2">
-            ⚙️ Lưu ý cho Developers
-          </h4>
-          <p className="text-xs md:text-sm text-blue-700 mb-2">
-            Để sử dụng chức năng &quot;Tải Tự Động&quot;, cần cài đặt thư viện html2canvas:
-          </p>
-          <div className="bg-blue-100 p-2 rounded-lg font-mono text-xs md:text-sm">
-            npm install html2canvas@^1.4.1
-          </div>
-          <p className="text-xs text-blue-600 mt-2">
-            Chức năng này sẽ tự động crop chỉ phần chứng chỉ với chất lượng cao nhất.
-          </p>
-        </div>
       </div>
     </div>
   );
