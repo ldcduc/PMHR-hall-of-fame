@@ -84,23 +84,6 @@ export default function LOP2025Certificate({ params }: PageProps) {
           }
           return true;
         },
-        onCloneNode: (clonedNode) => {
-          if (clonedNode instanceof HTMLElement) {
-            // Ensure all gradients and styles are preserved
-            const originalNode = clonedNode;
-            
-            // Force background gradients to be visible
-            if (originalNode.style.backgroundImage) {
-              clonedNode.style.backgroundImage = originalNode.style.backgroundImage;
-            }
-            
-            // Ensure text gradients work
-            if (originalNode.classList.contains('bg-gradient-to-r')) {
-              clonedNode.style.background = window.getComputedStyle(originalNode).background;
-            }
-          }
-          return clonedNode;
-        }
       });
 
       // Download the image
