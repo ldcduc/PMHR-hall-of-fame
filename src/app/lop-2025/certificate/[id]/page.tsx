@@ -139,6 +139,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
     );
   }
 
+  // eslint-disable-next-line
   const currentDate = new Date().toLocaleDateString('vi-VN', { 
     year: 'numeric', 
     month: 'long', 
@@ -208,7 +209,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
           </div>
 
           {/* Certificate Body */}
-          <div className="p-3 md:p-6 lg:p-8 relative">
+          <div className="p-3 md:p-6 lg:p-8 relative bg-gray-100">
             {/* Logo in top left of body */}
             <div className="absolute top-2 left-2 md:top-3 md:left-3">
               <Image 
@@ -245,15 +246,19 @@ export default function LOP2025Certificate({ params }: PageProps) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6 mb-3 md:mb-6">
               {/* Left Column - Rank and Stats */}
               <div className="text-center">
-                <div className={`relative w-24 h-24 md:w-36 md:h-36 mx-auto mb-2 md:mb-4 rounded-full flex items-center justify-center border-3 md:border-6 bg-gradient-to-r ${getRankColor(rank)} shadow-xl text-white`}>
+                <div
+                  className={`relative w-20 h-20 md:w-28 md:h-28 mx-auto mb-2 md:mb-4 rounded-full flex items-center justify-center border-3 md:border-6 bg-gradient-to-r ${getRankColor(rank)} shadow-xl text-white`}
+                >
                   <div className="text-center">
-                    <div className="text-xl md:text-3xl mb-1">{getMedalEmoji(rank)}</div>
-                    <div className="text-sm md:text-xl font-bold">#{rank}</div>
-                    <div className="text-xs md:text-sm opacity-90">Xếp hạng</div>
+                    <div className="text-lg md:text-2xl mb-1">{getMedalEmoji(rank)}</div>
+                    <div className="text-xs md:text-lg font-bold">#{rank}</div>
+                    <div className="text-[10px] md:text-sm opacity-90">Xếp hạng</div>
                   </div>
                 </div>
-                <div className="bg-yellow-50 rounded-lg p-2 md:p-3 border border-yellow-200">
-                  <h3 className="font-semibold text-gray-800 mb-1 md:mb-2 text-sm md:text-base">Thông Tin Vận Động Viên</h3>
+                {/* <div className="bg-yellow-50 rounded-lg p-2 md:p-3 border border-yellow-200">
+                  <h3 className="font-semibold text-gray-800 mb-1 md:mb-2 text-sm md:text-base">
+                    Thông Tin Vận Động Viên
+                  </h3>
                   <div className="space-y-1 text-xs md:text-sm">
                     <div>
                       <span className="text-gray-600">Xếp hạng:</span>
@@ -261,25 +266,38 @@ export default function LOP2025Certificate({ params }: PageProps) {
                     </div>
                     <div>
                       <span className="text-gray-600">Giới tính:</span>
-                      <span className={`ml-2 font-semibold ${runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}`}>
+                      <span
+                        className={`ml-2 font-semibold ${
+                          runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"
+                        }`}
+                      >
                         {runner.gender}
                       </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               {/* Right Column - Achievement Records */}
               <div>
-                <h3 className="text-base md:text-lg font-bold text-gray-800 mb-2 md:mb-4 text-center">
-                  Thành Tích LOP 2025
-                </h3>
-                <div className="space-y-2 md:space-y-3">
+                <div className="grid grid-cols-3 md:grid-cols-1 gap-2 md:gap-3">
                   {/* Total Distance Achievement */}
-                  <div className={`bg-gradient-to-r ${runner.gender === "Nữ" ? "from-yellow-100 to-pink-100 border-l-4 border-yellow-500" : "from-yellow-100 to-blue-100 border-l-4 border-yellow-500"} rounded-lg p-2 md:p-4`}>
+                  <div
+                    className={`bg-gradient-to-r ${
+                      runner.gender === "Nữ"
+                        ? "from-yellow-100 to-pink-100 border-l-4 border-yellow-500"
+                        : "from-yellow-100 to-blue-100 border-l-4 border-yellow-500"
+                    } rounded-lg p-2 md:p-4`}
+                  >
                     <div className="text-center">
-                      <div className="text-xs md:text-sm text-gray-600 mb-1">Tổng Quãng Đường Tích Lũy</div>
-                      <div className={`text-xl md:text-3xl font-bold font-mono ${runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}`}>
+                      <div className="text-xs md:text-sm text-gray-600 mb-1">
+                        Tổng Quãng Đường Tích Lũy
+                      </div>
+                      <div
+                        className={`text-xl md:text-3xl font-bold font-mono ${
+                          runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"
+                        }`}
+                      >
                         {runner.distance} KM
                       </div>
                     </div>
@@ -288,7 +306,9 @@ export default function LOP2025Certificate({ params }: PageProps) {
                   {/* Rank Achievement */}
                   <div className="bg-gradient-to-r from-yellow-50 to-blue-50 rounded-lg p-2 md:p-3 border-l-4 border-yellow-400">
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-gray-700 text-xs md:text-sm">Xếp hạng cuối cùng</span>
+                      <span className="font-medium text-gray-700 text-xs md:text-sm">
+                        Xếp hạng cuối cùng
+                      </span>
                       <span className="text-base md:text-xl font-bold text-yellow-500">
                         #{rank}/{lop2025Runners.length}
                       </span>
@@ -296,11 +316,26 @@ export default function LOP2025Certificate({ params }: PageProps) {
                   </div>
 
                   {/* Gender Rank */}
-                  <div className={`bg-gradient-to-r ${runner.gender === "Nữ" ? "from-yellow-50 to-pink-50 border-l-4 border-yellow-400" : "from-yellow-50 to-blue-50 border-l-4 border-blue-400"} rounded-lg p-2 md:p-3`}>
+                  <div
+                    className={`bg-gradient-to-r ${
+                      runner.gender === "Nữ"
+                        ? "from-yellow-50 to-pink-50 border-l-4 border-yellow-400"
+                        : "from-yellow-50 to-blue-50 border-l-4 border-blue-400"
+                    } rounded-lg p-2 md:p-3`}
+                  >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-gray-700 text-xs md:text-sm">Xếp hạng {runner.gender.toLowerCase()}</span>
-                      <span className={`text-base md:text-xl font-bold ${runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}`}>
-                        #{lop2025Runners.filter(r => r.gender === runner.gender).findIndex(r => r.stt === runner.stt) + 1}
+                      <span className="font-medium text-gray-700 text-xs md:text-sm">
+                        Xếp hạng {runner.gender.toLowerCase()}
+                      </span>
+                      <span
+                        className={`text-base md:text-xl font-bold ${
+                          runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"
+                        }`}
+                      >
+                        #
+                        {lop2025Runners
+                          .filter((r) => r.gender === runner.gender)
+                          .findIndex((r) => r.stt === runner.stt) + 1}
                       </span>
                     </div>
                   </div>
@@ -331,7 +366,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
 
             {/* Signatures and Date */}
             <div className="border-t border-gray-200 pt-3 md:pt-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
+              <div className="grid grid-cols-2 gap-3 md:gap-6">
                 <div className="text-center">
                   <div className="border-b-2 border-gray-300 pb-1 mb-1 mx-3 md:mx-6">
                     <span className="text-xs md:text-sm font-elegant">PHÚ MỸ HƯNG RUNNERS</span>
@@ -340,7 +375,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
                 </div>
                 <div className="text-center">
                   <div className="border-b-2 border-gray-300 pb-1 mb-1 mx-3 md:mx-6">
-                    <span className="text-xs md:text-sm font-elegant">{currentDate}</span>
+                    <span className="text-xs md:text-sm font-elegant">12 tháng 8, 2025</span>
                   </div>
                   <p className="text-xs text-gray-600">Ngày Cấp Chứng Chỉ</p>
                 </div>
