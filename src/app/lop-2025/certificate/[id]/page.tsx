@@ -164,6 +164,13 @@ export default function LOP2025Certificate({ params }: PageProps) {
     return 'from-blue-400 to-blue-500';
   };
 
+  const shareToFacebook = () => {
+    const url = window.location.href;
+    const text = `Tôi ${runner.name} đã hoàn thành Legend of PMHR 2025! 🏆 Xếp hạng #${rank}`;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+    window.open(facebookUrl, '_blank', 'width=600,height=400');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-blue-50 py-4 md:py-8">
       <div className="max-w-2xl md:max-w-3xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
@@ -394,7 +401,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
           <div className="h-1 md:h-3 bg-gradient-to-r from-yellow-300 via-amber-300 to-blue-300"></div>
         </div>
 
-        <div className="mt-8 text-center space-x-4">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <button 
             onClick={downloadCertificateHtmlToImage}
             disabled={isExporting}
@@ -414,7 +421,10 @@ export default function LOP2025Certificate({ params }: PageProps) {
               </>
             )}
           </button>
-          <button className="inline-flex items-center px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-lg">
+          <button 
+            onClick={shareToFacebook}
+            className="inline-flex items-center px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-lg"
+          >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
             </svg>
