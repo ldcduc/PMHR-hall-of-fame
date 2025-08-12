@@ -49,15 +49,10 @@ export default function LOP2025Certificate({ params }: PageProps) {
       const canvas = await html2canvas.default(certificateRef.current, {
         allowTaint: true,
         background: '#ffffff', // Fixed: was backgroundColor
-        // scale: 2, // Higher quality
         useCORS: true,
         logging: false,
         width: certificateRef.current.offsetWidth,
         height: certificateRef.current.offsetHeight,
-        // scrollX: 0,
-        // scrollY: 0,
-        // x: 0,
-        // y: 0
       });
 
       // Convert to blob and download
@@ -128,7 +123,6 @@ Tiếp tục?`);
       // Screen capture process
       const stream = await navigator.mediaDevices.getDisplayMedia({
         video: {
-          // mediaSource: 'screen',
           width: { ideal: 1920 },
           height: { ideal: 1080 }
         },
@@ -456,9 +450,9 @@ Tiếp tục?`);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-blue-50 py-4 md:py-8">
-      <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      <div className="max-w-2xl md:max-w-3xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         {/* Back Button */}
-        <div className="mb-6">
+        <div className="mb-4">
           <Link 
             href="/lop-2025"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
@@ -473,58 +467,58 @@ Tiếp tục?`);
         {/* Certificate */}
         <div 
           ref={certificateRef} 
-          className="bg-white rounded-xl md:rounded-2xl shadow-2xl overflow-hidden border-4 md:border-8 border-yellow-300"
+          className="bg-white rounded-lg md:rounded-xl shadow-2xl overflow-hidden border-3 md:border-6 border-yellow-300"
           style={{ 
             position: 'relative',
             isolation: 'isolate'
           }}
         >
           {/* Certificate Header */}
-          <div className="bg-gradient-to-r from-yellow-200 via-amber-300 to-blue-400 text-white py-4 md:py-8 px-4 md:px-8 text-center relative overflow-hidden">
+          <div className="bg-gradient-to-r from-yellow-200 via-amber-300 to-blue-400 text-white py-3 md:py-6 px-3 md:px-6 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="absolute top-0 left-0 w-full h-1 md:h-2 bg-gradient-to-r from-yellow-300 via-amber-300 to-blue-300"></div>
             
             <div className="relative">
-              <div className="flex justify-center mb-2 md:mb-4">
-                <div className="w-12 h-12 md:w-20 md:h-20 bg-blue-600/20 rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-yellow-200">
-                  <span className="text-xl md:text-3xl">{getMedalEmoji(rank)}</span>
+              <div className="flex justify-center mb-2 md:mb-3">
+                <div className="w-10 h-10 md:w-16 md:h-16 bg-blue-600/20 rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-yellow-200">
+                  <span className="text-lg md:text-2xl">{getMedalEmoji(rank)}</span>
                 </div>
               </div>
-              <h1 className="text-xl md:text-3xl font-bold mb-1 md:mb-2 text-blue-900">CHỨNG CHỈ HOÀN THÀNH</h1>
-              <p className="text-sm md:text-xl opacity-90 text-blue-800">Legend of PMHR 2025</p>
-              <div className="mt-2 md:mt-4 inline-block bg-blue-600/20 backdrop-blur-sm rounded-full px-3 md:px-6 py-1 md:py-2 border border-yellow-200">
-                <span className="font-semibold text-blue-900 text-xs md:text-base">PHÚ MỸ HƯNG RUNNERS</span>
+              <h1 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-blue-900">CHỨNG CHỈ HOÀN THÀNH</h1>
+              <p className="text-sm md:text-lg opacity-90 text-blue-800">Legend of PMHR 2025</p>
+              <div className="mt-2 md:mt-3 inline-block bg-blue-600/20 backdrop-blur-sm rounded-full px-2 md:px-4 py-1 border border-yellow-200">
+                <span className="font-semibold text-blue-900 text-xs md:text-sm">PHÚ MỸ HƯNG RUNNERS</span>
               </div>
             </div>
           </div>
 
           {/* Certificate Body */}
-          <div className="p-4 md:p-8 lg:p-12 relative">
+          <div className="p-3 md:p-6 lg:p-8 relative">
             {/* Logo in top left of body */}
-            <div className="absolute top-2 left-2 md:top-4 md:left-4">
+            <div className="absolute top-2 left-2 md:top-3 md:left-3">
               <Image 
                 src="/logo.png" 
                 alt="PMH Runners Logo" 
-                className="w-12 h-12 md:w-20 md:h-20 opacity-70"
-                width={80}
-                height={80}
+                className="w-8 h-8 md:w-12 md:h-12 opacity-70"
+                width={48}
+                height={48}
               />
             </div>
 
             {/* Achievement Statement */}
-            <div className="text-center mb-4 md:mb-8">
-              <p className="text-lg md:text-2xl text-gray-700 mb-3 md:mb-6 leading-relaxed">
+            <div className="text-center mb-3 md:mb-6">
+              <p className="text-base md:text-xl text-gray-700 mb-2 md:mb-4 leading-relaxed">
                 Chứng nhận rằng
               </p>
               
               {/* Runner Name */}
-              <div className="mb-3 md:mb-6">
-                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-blue-500 bg-clip-text text-transparent mb-2 md:mb-4 break-words">
+              <div className="mb-2 md:mb-4">
+                <h2 className="text-xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-blue-500 bg-clip-text text-transparent mb-2 md:mb-3 break-words">
                   {runner.name}
                 </h2>
               </div>
 
-              <p className="text-lg md:text-2xl text-gray-700 mb-4 md:mb-8 leading-relaxed">
+              <p className="text-base md:text-xl text-gray-700 mb-3 md:mb-6 leading-relaxed">
                 đã hoàn thành xuất sắc<br />
                 <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-400">
                   Legend of PMHR 2025
@@ -533,19 +527,19 @@ Tiếp tục?`);
             </div>
 
             {/* Achievement Details Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 mb-4 md:mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6 mb-3 md:mb-6">
               {/* Left Column - Rank and Stats */}
               <div className="text-center">
-                <div className={`relative w-32 h-32 md:w-48 md:h-48 mx-auto mb-3 md:mb-6 rounded-full flex items-center justify-center border-4 md:border-8 bg-gradient-to-r ${getRankColor(rank)} shadow-xl text-white`}>
+                <div className={`relative w-24 h-24 md:w-36 md:h-36 mx-auto mb-2 md:mb-4 rounded-full flex items-center justify-center border-3 md:border-6 bg-gradient-to-r ${getRankColor(rank)} shadow-xl text-white`}>
                   <div className="text-center">
-                    <div className="text-2xl md:text-4xl mb-1 md:mb-2">{getMedalEmoji(rank)}</div>
-                    <div className="text-lg md:text-2xl font-bold">#{rank}</div>
+                    <div className="text-xl md:text-3xl mb-1">{getMedalEmoji(rank)}</div>
+                    <div className="text-sm md:text-xl font-bold">#{rank}</div>
                     <div className="text-xs md:text-sm opacity-90">Xếp hạng</div>
                   </div>
                 </div>
-                <div className="bg-yellow-50 rounded-lg p-3 md:p-4 border border-yellow-200">
-                  <h3 className="font-semibold text-gray-800 mb-2 md:mb-3 text-sm md:text-base">Thông Tin Vận Động Viên</h3>
-                  <div className="space-y-1 md:space-y-2 text-xs md:text-sm">
+                <div className="bg-yellow-50 rounded-lg p-2 md:p-3 border border-yellow-200">
+                  <h3 className="font-semibold text-gray-800 mb-1 md:mb-2 text-sm md:text-base">Thông Tin Vận Động Viên</h3>
+                  <div className="space-y-1 text-xs md:text-sm">
                     <div>
                       <span className="text-gray-600">STT:</span>
                       <span className="ml-2 font-semibold text-yellow-600">#{runner.stt}</span>
@@ -562,35 +556,35 @@ Tiếp tục?`);
 
               {/* Right Column - Achievement Records */}
               <div>
-                <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-6 text-center">
+                <h3 className="text-base md:text-lg font-bold text-gray-800 mb-2 md:mb-4 text-center">
                   Thành Tích LOP 2025
                 </h3>
-                <div className="space-y-3 md:space-y-4">
+                <div className="space-y-2 md:space-y-3">
                   {/* Total Distance Achievement */}
-                  <div className={`bg-gradient-to-r ${runner.gender === "Nữ" ? "from-yellow-100 to-pink-100 border-l-4 border-yellow-500" : "from-yellow-100 to-blue-100 border-l-4 border-yellow-500"} rounded-lg p-3 md:p-6`}>
+                  <div className={`bg-gradient-to-r ${runner.gender === "Nữ" ? "from-yellow-100 to-pink-100 border-l-4 border-yellow-500" : "from-yellow-100 to-blue-100 border-l-4 border-yellow-500"} rounded-lg p-2 md:p-4`}>
                     <div className="text-center">
-                      <div className="text-xs md:text-sm text-gray-600 mb-1 md:mb-2">Tổng Quãng Đường Tích Lũy</div>
-                      <div className={`text-2xl md:text-4xl font-bold font-mono ${runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}`}>
+                      <div className="text-xs md:text-sm text-gray-600 mb-1">Tổng Quãng Đường Tích Lũy</div>
+                      <div className={`text-xl md:text-3xl font-bold font-mono ${runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}`}>
                         {runner.distance} KM
                       </div>
                     </div>
                   </div>
 
                   {/* Rank Achievement */}
-                  <div className="bg-gradient-to-r from-yellow-50 to-blue-50 rounded-lg p-3 md:p-4 border-l-4 border-yellow-400">
+                  <div className="bg-gradient-to-r from-yellow-50 to-blue-50 rounded-lg p-2 md:p-3 border-l-4 border-yellow-400">
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-gray-700 text-xs md:text-sm">Xếp hạng cuối cùng</span>
-                      <span className="text-lg md:text-2xl font-bold text-yellow-500">
+                      <span className="text-base md:text-xl font-bold text-yellow-500">
                         #{rank}/{lop2025Runners.length}
                       </span>
                     </div>
                   </div>
 
                   {/* Gender Rank */}
-                  <div className={`bg-gradient-to-r ${runner.gender === "Nữ" ? "from-yellow-50 to-pink-50 border-l-4 border-yellow-400" : "from-yellow-50 to-blue-50 border-l-4 border-blue-400"} rounded-lg p-3 md:p-4`}>
+                  <div className={`bg-gradient-to-r ${runner.gender === "Nữ" ? "from-yellow-50 to-pink-50 border-l-4 border-yellow-400" : "from-yellow-50 to-blue-50 border-l-4 border-blue-400"} rounded-lg p-2 md:p-3`}>
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-gray-700 text-xs md:text-sm">Xếp hạng {runner.gender.toLowerCase()}</span>
-                      <span className={`text-lg md:text-2xl font-bold ${runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}`}>
+                      <span className={`text-base md:text-xl font-bold ${runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}`}>
                         #{lop2025Runners.filter(r => r.gender === runner.gender).findIndex(r => r.stt === runner.stt) + 1}
                       </span>
                     </div>
@@ -600,55 +594,46 @@ Tiếp tục?`);
             </div>
 
             {/* Achievement Highlights */}
-            <div className="bg-gradient-to-r from-yellow-50 via-amber-50 to-yellow-50 rounded-lg p-4 md:p-6 mb-4 md:mb-8 border border-yellow-200">
-              <h3 className="text-base md:text-lg font-bold text-center text-gray-800 mb-3 md:mb-4">
+            <div className="bg-gradient-to-r from-yellow-50 via-amber-50 to-yellow-50 rounded-lg p-3 md:p-4 mb-3 md:mb-6 border border-yellow-200">
+              <h3 className="text-sm md:text-base font-bold text-center text-gray-800 mb-2 md:mb-3">
                 🌟 Danh Hiệu Đạt Được 🌟
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 text-center">
-                <div className="bg-white rounded-lg p-2 md:p-3 shadow-sm border border-yellow-100">
-                  <div className="text-sm md:text-lg font-bold text-yellow-500">HUYỀN THOẠI</div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 text-center">
+                <div className="bg-white rounded-lg p-2 shadow-sm border border-yellow-100">
+                  <div className="text-xs md:text-sm font-bold text-yellow-500">HUYỀN THOẠI</div>
                   <p className="text-xs text-gray-600">Legend of PMHR</p>
                 </div>
-                <div className="bg-white rounded-lg p-2 md:p-3 shadow-sm border border-amber-100">
-                  <div className="text-sm md:text-lg font-bold text-amber-500">BỀN BỈ</div>
+                <div className="bg-white rounded-lg p-2 shadow-sm border border-amber-100">
+                  <div className="text-xs md:text-sm font-bold text-amber-500">BỀN BỈ</div>
                   <p className="text-xs text-gray-600">Kiên trì luyện tập</p>
                 </div>
-                <div className="bg-white rounded-lg p-2 md:p-3 shadow-sm border border-blue-100">
-                  <div className="text-sm md:text-lg font-bold text-blue-500">XUẤT SẮC</div>
+                <div className="bg-white rounded-lg p-2 shadow-sm border border-blue-100">
+                  <div className="text-xs md:text-sm font-bold text-blue-500">XUẤT SẮC</div>
                   <p className="text-xs text-gray-600">Thành tích ấn tượng</p>
                 </div>
               </div>
             </div>
 
-            {/* Competition Period */}
-            <div className="bg-yellow-50 rounded-lg p-3 md:p-4 mb-4 md:mb-8 border border-yellow-300">
-              <div className="text-center">
-                <h4 className="font-semibold text-yellow-800 mb-1 md:mb-2 text-sm md:text-base">Thời Gian Thi Đấu</h4>
-                <p className="text-yellow-700 text-xs md:text-base">Tính đến hết ngày 04 tháng 8, 2025</p>
-                <p className="text-xs md:text-sm text-yellow-600 mt-1">Cuộc thi vẫn đang diễn ra đến ngày 12/08/2025</p>
-              </div>
-            </div>
-
             {/* Signatures and Date */}
-            <div className="border-t border-gray-200 pt-4 md:pt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div className="border-t border-gray-200 pt-3 md:pt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
                 <div className="text-center">
-                  <div className="border-b-2 border-gray-300 pb-1 md:pb-2 mb-1 md:mb-2 mx-4 md:mx-8">
-                    <span className="text-sm md:text-lg font-elegant">PHÚ MỸ HƯNG RUNNERS</span>
+                  <div className="border-b-2 border-gray-300 pb-1 mb-1 mx-3 md:mx-6">
+                    <span className="text-xs md:text-sm font-elegant">PHÚ MỸ HƯNG RUNNERS</span>
                   </div>
-                  <p className="text-xs md:text-sm text-gray-600">Ban Tổ Chức</p>
+                  <p className="text-xs text-gray-600">Ban Tổ Chức</p>
                 </div>
                 <div className="text-center">
-                  <div className="border-b-2 border-gray-300 pb-1 md:pb-2 mb-1 md:mb-2 mx-4 md:mx-8">
-                    <span className="text-sm md:text-lg font-elegant">{currentDate}</span>
+                  <div className="border-b-2 border-gray-300 pb-1 mb-1 mx-3 md:mx-6">
+                    <span className="text-xs md:text-sm font-elegant">{currentDate}</span>
                   </div>
-                  <p className="text-xs md:text-sm text-gray-600">Ngày Cấp Chứng Chỉ</p>
+                  <p className="text-xs text-gray-600">Ngày Cấp Chứng Chỉ</p>
                 </div>
               </div>
             </div>
 
             {/* Certificate ID */}
-            <div className="text-center mt-4 md:mt-8">
+            <div className="text-center mt-3 md:mt-6">
               <p className="text-xs text-gray-500">
                 Mã Chứng Chỉ: LOP2025-{runner.stt.toString().padStart(4, '0')}
               </p>
@@ -656,43 +641,43 @@ Tiếp tục?`);
           </div>
 
           {/* Decorative Border */}
-          <div className="h-2 md:h-4 bg-gradient-to-r from-yellow-300 via-amber-300 to-blue-300"></div>
+          <div className="h-1 md:h-3 bg-gradient-to-r from-yellow-300 via-amber-300 to-blue-300"></div>
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-4 md:mt-8 text-center space-y-3 md:space-y-0 md:space-x-4 flex flex-col md:flex-row justify-center">
+        <div className="mt-3 md:mt-6 text-center space-y-2 md:space-y-0 md:space-x-3 flex flex-col md:flex-row justify-center">
           <button 
             onClick={downloadCertificateHTML2Canvas}
-            className="inline-flex items-center justify-center px-4 md:px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-200 shadow-lg text-sm md:text-base"
+            className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
           >
-            <svg className="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             🎯 Tải Tự Động (Khuyên dùng)
           </button>
           <button 
             onClick={downloadCertificateScreenshot}
-            className="inline-flex items-center justify-center px-4 md:px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-lg text-sm md:text-base"
+            className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
           >
-            <svg className="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
             📱 Chụp Có Hướng Dẫn
           </button>
           <button 
             onClick={downloadCertificateAuto}
-            className="inline-flex items-center justify-center px-4 md:px-6 py-3 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-200 shadow-lg text-sm md:text-base"
+            className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-200 shadow-lg text-xs md:text-sm"
           >
-            <svg className="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2" />
             </svg>
             🎯 Hướng Dẫn Chính Xác
           </button>
           <button 
             onClick={showDownloadInstructions}
-            className="inline-flex items-center justify-center px-4 md:px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors duration-200 shadow-lg text-sm md:text-base"
+            className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
           >
-            <svg className="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             📋 Hướng Dẫn Chi Tiết
@@ -700,13 +685,13 @@ Tiếp tục?`);
         </div>
 
         {/* Method Comparison Guide */}
-        <div className="mt-4 md:mt-8 bg-white/90 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg border border-blue-100">
-          <h3 className="text-lg md:text-xl font-bold text-center text-gray-800 mb-3 md:mb-4">
+        <div className="mt-3 md:mt-6 bg-white/90 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-lg border border-blue-100">
+          <h3 className="text-base md:text-lg font-bold text-center text-gray-800 mb-2 md:mb-3">
             🔧 So Sánh Các Phương Pháp
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 text-sm">
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <div className="font-bold text-green-600 mb-2">🎯 Tải Tự Động</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 text-sm">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-2">
+              <div className="font-bold text-green-600 mb-1 text-xs md:text-sm">🎯 Tải Tự Động</div>
               <div className="text-green-700 text-xs">
                 ✅ Chỉ chứng chỉ, không có nền<br/>
                 ✅ Chất lượng cao<br/>
@@ -714,8 +699,8 @@ Tiếp tục?`);
                 ⚠️ Cần cài thư viện
               </div>
             </div>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <div className="font-bold text-blue-600 mb-2">📱 Chụp Có Hướng Dẫn</div>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
+              <div className="font-bold text-blue-600 mb-1 text-xs md:text-sm">📱 Chụp Có Hướng Dẫn</div>
               <div className="text-blue-700 text-xs">
                 ✅ Hoạt động mọi trình duyệt<br/>
                 ✅ Có viền đỏ định hướng<br/>
@@ -723,8 +708,8 @@ Tiếp tục?`);
                 ⚠️ Chất lượng tùy màn hình
               </div>
             </div>
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-              <div className="font-bold text-yellow-600 mb-2">🎯 Hướng Dẫn Chính Xác</div>
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2">
+              <div className="font-bold text-yellow-600 mb-1 text-xs md:text-sm">🎯 Hướng Dẫn Chính Xác</div>
               <div className="text-yellow-700 text-xs">
                 ✅ Khung xanh chính xác<br/>
                 ✅ Hướng dẫn từng bước<br/>
@@ -732,8 +717,8 @@ Tiếp tục?`);
                 ⚠️ Cần chụp thủ công
               </div>
             </div>
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-              <div className="font-bold text-gray-600 mb-2">📋 Hướng Dẫn Chi Tiết</div>
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-2">
+              <div className="font-bold text-gray-600 mb-1 text-xs md:text-sm">📋 Hướng Dẫn Chi Tiết</div>
               <div className="text-gray-700 text-xs">
                 ✅ Hướng dẫn đầy đủ<br/>
                 ✅ Nhiều cách thực hiện<br/>
@@ -745,52 +730,52 @@ Tiếp tục?`);
         </div>
 
         {/* Achievement Summary */}
-        <div className="mt-4 md:mt-8 bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg border border-yellow-100">
-          <h3 className="text-lg md:text-xl font-bold text-center text-gray-800 mb-3 md:mb-4">
+        <div className="mt-3 md:mt-6 bg-white/80 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-lg border border-yellow-100">
+          <h3 className="text-base md:text-lg font-bold text-center text-gray-800 mb-2 md:mb-3">
             📊 Thống Kê Cá Nhân
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 text-center">
-            <div className="bg-gradient-to-br from-yellow-400 to-amber-500 text-white rounded-lg p-3 md:p-4">
-              <div className="text-lg md:text-2xl font-bold">{runner.distance}</div>
-              <div className="text-xs md:text-sm opacity-90">KM Tích Lũy</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 text-center">
+            <div className="bg-gradient-to-br from-yellow-400 to-amber-500 text-white rounded-lg p-2 md:p-3">
+              <div className="text-sm md:text-xl font-bold">{runner.distance}</div>
+              <div className="text-xs opacity-90">KM Tích Lũy</div>
             </div>
-            <div className="bg-gradient-to-br from-amber-400 to-yellow-500 text-white rounded-lg p-3 md:p-4">
-              <div className="text-lg md:text-2xl font-bold">#{rank}</div>
-              <div className="text-xs md:text-sm opacity-90">Xếp Hạng Chung</div>
+            <div className="bg-gradient-to-br from-amber-400 to-yellow-500 text-white rounded-lg p-2 md:p-3">
+              <div className="text-sm md:text-xl font-bold">#{rank}</div>
+              <div className="text-xs opacity-90">Xếp Hạng Chung</div>
             </div>
-            <div className={`bg-gradient-to-br ${runner.gender === "Nữ" ? "from-pink-400 to-pink-500" : "from-blue-400 to-blue-500"} text-white rounded-lg p-3 md:p-4`}>
-              <div className="text-lg md:text-2xl font-bold">
+            <div className={`bg-gradient-to-br ${runner.gender === "Nữ" ? "from-pink-400 to-pink-500" : "from-blue-400 to-blue-500"} text-white rounded-lg p-2 md:p-3`}>
+              <div className="text-sm md:text-xl font-bold">
                 #{lop2025Runners.filter(r => r.gender === runner.gender).findIndex(r => r.stt === runner.stt) + 1}
               </div>
-              <div className="text-xs md:text-sm opacity-90">Xếp Hạng {runner.gender}</div>
+              <div className="text-xs opacity-90">Xếp Hạng {runner.gender}</div>
             </div>
-            <div className="bg-gradient-to-br from-blue-400 to-indigo-500 text-white rounded-lg p-3 md:p-4">
-              <div className="text-lg md:text-2xl font-bold">2025</div>
-              <div className="text-xs md:text-sm opacity-90">Năm Thi Đấu</div>
+            <div className="bg-gradient-to-br from-blue-400 to-indigo-500 text-white rounded-lg p-2 md:p-3">
+              <div className="text-sm md:text-xl font-bold">2025</div>
+              <div className="text-xs opacity-90">Năm Thi Đấu</div>
             </div>
           </div>
         </div>
 
         {/* Motivational Message */}
-        <div className="mt-4 md:mt-8 text-center bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-4 md:p-6 border border-yellow-300">
-          <h4 className="text-base md:text-lg font-bold text-gray-800 mb-2">
+        <div className="mt-3 md:mt-6 text-center bg-gradient-to-r from-yellow-100 to-amber-100 rounded-lg p-3 md:p-4 border border-yellow-300">
+          <h4 className="text-sm md:text-base font-bold text-gray-800 mb-1 md:mb-2">
             🎉 Chúc Mừng Vận Động Viên Huyền Thoại! 🎉
           </h4>
-          <p className="text-sm md:text-base text-gray-600">
+          <p className="text-xs md:text-sm text-gray-600">
             Thành tích của bạn trong LOP 2025 là minh chứng cho sự kiên trì, nỗ lực và tinh thần thể thao cao cả. 
             Hãy tiếp tục duy trì phong độ và chinh phục những thử thách mới!
           </p>
         </div>
 
         {/* Installation Instructions */}
-        <div className="mt-4 md:mt-8 bg-blue-50 border border-blue-200 rounded-xl p-4 md:p-6">
-          <h4 className="text-base md:text-lg font-bold text-blue-800 mb-2">
+        <div className="mt-3 md:mt-6 bg-blue-50 border border-blue-200 rounded-lg p-3 md:p-4">
+          <h4 className="text-sm md:text-base font-bold text-blue-800 mb-1 md:mb-2">
             ⚙️ Lưu ý cho Developers
           </h4>
-          <p className="text-sm text-blue-700 mb-2">
+          <p className="text-xs md:text-sm text-blue-700 mb-2">
             Để sử dụng chức năng &quot;Tải Tự Động&quot;, cần cài đặt thư viện html2canvas:
           </p>
-          <div className="bg-blue-100 p-3 rounded-lg font-mono text-sm">
+          <div className="bg-blue-100 p-2 rounded-lg font-mono text-xs md:text-sm">
             npm install html2canvas@^1.4.1
           </div>
           <p className="text-xs text-blue-600 mt-2">
