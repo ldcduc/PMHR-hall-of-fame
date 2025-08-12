@@ -17,6 +17,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
   const [id, setId] = useState<string>('');
   // eslint-disable-next-line
   const [runner, setRunner] = useState<any>(null);
+  const [showMethodComparison, setShowMethodComparison] = useState<boolean>(false);
 
   useEffect(() => {
     const getParams = async () => {
@@ -541,7 +542,7 @@ Tiếp tục?`);
                   <h3 className="font-semibold text-gray-800 mb-1 md:mb-2 text-sm md:text-base">Thông Tin Vận Động Viên</h3>
                   <div className="space-y-1 text-xs md:text-sm">
                     <div>
-                      <span className="text-gray-600">STT:</span>
+                      <span className="text-gray-600">Xếp hạng:</span>
                       <span className="ml-2 font-semibold text-yellow-600">#{runner.stt}</span>
                     </div>
                     <div>
@@ -603,11 +604,11 @@ Tiếp tục?`);
                   <div className="text-xs md:text-sm font-bold text-yellow-500">HUYỀN THOẠI</div>
                   <p className="text-xs text-gray-600">Legend of PMHR</p>
                 </div>
-                <div className="bg-white rounded-lg p-2 shadow-sm border border-amber-100">
+                <div className="hidden md:block bg-white rounded-lg p-2 shadow-sm border border-amber-100">
                   <div className="text-xs md:text-sm font-bold text-amber-500">BỀN BỈ</div>
                   <p className="text-xs text-gray-600">Kiên trì luyện tập</p>
                 </div>
-                <div className="bg-white rounded-lg p-2 shadow-sm border border-blue-100">
+                <div className="hidden md:block bg-white rounded-lg p-2 shadow-sm border border-amber-100">
                   <div className="text-xs md:text-sm font-bold text-blue-500">XUẤT SẮC</div>
                   <p className="text-xs text-gray-600">Thành tích ấn tượng</p>
                 </div>
@@ -644,91 +645,6 @@ Tiếp tục?`);
           <div className="h-1 md:h-3 bg-gradient-to-r from-yellow-300 via-amber-300 to-blue-300"></div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="mt-3 md:mt-6 text-center space-y-2 md:space-y-0 md:space-x-3 flex flex-col md:flex-row justify-center">
-          <button 
-            onClick={downloadCertificateHTML2Canvas}
-            className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
-          >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            🎯 Tải Tự Động (Khuyên dùng)
-          </button>
-          <button 
-            onClick={downloadCertificateScreenshot}
-            className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
-          >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-            📱 Chụp Có Hướng Dẫn
-          </button>
-          <button 
-            onClick={downloadCertificateAuto}
-            className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-200 shadow-lg text-xs md:text-sm"
-          >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2" />
-            </svg>
-            🎯 Hướng Dẫn Chính Xác
-          </button>
-          <button 
-            onClick={showDownloadInstructions}
-            className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
-          >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            📋 Hướng Dẫn Chi Tiết
-          </button>
-        </div>
-
-        {/* Method Comparison Guide */}
-        <div className="mt-3 md:mt-6 bg-white/90 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-lg border border-blue-100">
-          <h3 className="text-base md:text-lg font-bold text-center text-gray-800 mb-2 md:mb-3">
-            🔧 So Sánh Các Phương Pháp
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 text-sm">
-            <div className="bg-green-50 border border-green-200 rounded-lg p-2">
-              <div className="font-bold text-green-600 mb-1 text-xs md:text-sm">🎯 Tải Tự Động</div>
-              <div className="text-green-700 text-xs">
-                ✅ Chỉ chứng chỉ, không có nền<br/>
-                ✅ Chất lượng cao<br/>
-                ✅ Không cần crop<br/>
-                ⚠️ Cần cài thư viện
-              </div>
-            </div>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
-              <div className="font-bold text-blue-600 mb-1 text-xs md:text-sm">📱 Chụp Có Hướng Dẫn</div>
-              <div className="text-blue-700 text-xs">
-                ✅ Hoạt động mọi trình duyệt<br/>
-                ✅ Có viền đỏ định hướng<br/>
-                ⚠️ Cần crop sau khi chụp<br/>
-                ⚠️ Chất lượng tùy màn hình
-              </div>
-            </div>
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2">
-              <div className="font-bold text-yellow-600 mb-1 text-xs md:text-sm">🎯 Hướng Dẫn Chính Xác</div>
-              <div className="text-yellow-700 text-xs">
-                ✅ Khung xanh chính xác<br/>
-                ✅ Hướng dẫn từng bước<br/>
-                ✅ Phù hợp mọi thiết bị<br/>
-                ⚠️ Cần chụp thủ công
-              </div>
-            </div>
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-2">
-              <div className="font-bold text-gray-600 mb-1 text-xs md:text-sm">📋 Hướng Dẫn Chi Tiết</div>
-              <div className="text-gray-700 text-xs">
-                ✅ Hướng dẫn đầy đủ<br/>
-                ✅ Nhiều cách thực hiện<br/>
-                ✅ Phù hợp người mới<br/>
-                ⚠️ Cần đọc kỹ hướng dẫn
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Achievement Summary */}
         <div className="mt-3 md:mt-6 bg-white/80 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-lg border border-yellow-100">
           <h3 className="text-base md:text-lg font-bold text-center text-gray-800 mb-2 md:mb-3">
@@ -754,6 +670,120 @@ Tiếp tục?`);
               <div className="text-xs opacity-90">Năm Thi Đấu</div>
             </div>
           </div>
+        </div>
+
+        {/* Method Comparison Guide - Toggleable */}
+        <div className="mt-3 md:mt-6 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-blue-100">
+          {/* Toggle Header */}
+          <button
+            onClick={() => setShowMethodComparison(!showMethodComparison)}
+            className="w-full p-3 md:p-4 text-left hover:bg-blue-50 transition-colors duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="text-base md:text-lg font-bold text-gray-800">
+                🔧 Chia sẻ
+              </h3>
+              <div className="flex items-center space-x-2">
+                <span className="text-xs md:text-sm text-gray-600">
+                  {showMethodComparison ? 'Ẩn' : 'Hiện'}
+                </span>
+                <svg 
+                  className={`w-5 h-5 text-gray-600 transition-transform duration-200 ${showMethodComparison ? 'rotate-180' : ''}`}
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </button>
+
+          {/* Collapsible Content */}
+          {showMethodComparison && (
+            <div>
+              {/* Action Buttons */}
+              <div className="mt-3 md:mt-6 text-center space-y-2 md:space-y-0 md:space-x-3 flex flex-col md:flex-row justify-center">
+                <button 
+                  onClick={downloadCertificateHTML2Canvas}
+                  className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  🎯 Tải Tự Động (Khuyên dùng)
+                </button>
+                <button 
+                  onClick={downloadCertificateScreenshot}
+                  className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  📱 Chụp Có Hướng Dẫn
+                </button>
+                <button 
+                  onClick={downloadCertificateAuto}
+                  className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-200 shadow-lg text-xs md:text-sm"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2" />
+                  </svg>
+                  🎯 Hướng Dẫn Chính Xác
+                </button>
+                <button 
+                  onClick={showDownloadInstructions}
+                  className="inline-flex items-center justify-center px-3 md:px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors duration-200 shadow-lg text-xs md:text-sm"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  📋 Hướng Dẫn Chi Tiết
+                </button>
+              </div>
+
+              <div className="px-3 md:px-4 pb-3 md:pb-4 border-t border-gray-100">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 text-sm mt-3">
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-2">
+                    <div className="font-bold text-green-600 mb-1 text-xs md:text-sm">🎯 Tải Tự Động</div>
+                    <div className="text-green-700 text-xs">
+                      ✅ Chỉ chứng chỉ, không có nền<br/>
+                      ✅ Chất lượng cao<br/>
+                      ✅ Không cần crop<br/>
+                      ⚠️ Cần cài thư viện
+                    </div>
+                  </div>
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
+                    <div className="font-bold text-blue-600 mb-1 text-xs md:text-sm">📱 Chụp Có Hướng Dẫn</div>
+                    <div className="text-blue-700 text-xs">
+                      ✅ Hoạt động mọi trình duyệt<br/>
+                      ✅ Có viền đỏ định hướng<br/>
+                      ⚠️ Cần crop sau khi chụp<br/>
+                      ⚠️ Chất lượng tùy màn hình
+                    </div>
+                  </div>
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2">
+                    <div className="font-bold text-yellow-600 mb-1 text-xs md:text-sm">🎯 Hướng Dẫn Chính Xác</div>
+                    <div className="text-yellow-700 text-xs">
+                      ✅ Khung xanh chính xác<br/>
+                      ✅ Hướng dẫn từng bước<br/>
+                      ✅ Phù hợp mọi thiết bị<br/>
+                      ⚠️ Cần chụp thủ công
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-2">
+                    <div className="font-bold text-gray-600 mb-1 text-xs md:text-sm">📋 Hướng Dẫn Chi Tiết</div>
+                    <div className="text-gray-700 text-xs">
+                      ✅ Hướng dẫn đầy đủ<br/>
+                      ✅ Nhiều cách thực hiện<br/>
+                      ✅ Phù hợp người mới<br/>
+                      ⚠️ Cần đọc kỹ hướng dẫn
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Motivational Message */}
