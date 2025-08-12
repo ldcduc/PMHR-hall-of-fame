@@ -3,6 +3,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { 
   lop2025Runners, 
   getTotalRunners, 
@@ -109,6 +110,12 @@ export default function LOP2025() {
           <br></br>
           
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            {/* Table Header with Click Instruction */}
+            <div className="bg-gradient-to-r from-blue-600 to-yellow-500 px-6 py-4">
+              <h3 className="text-white font-semibold text-lg">Bảng Xếp Hạng</h3>
+              <p className="text-blue-100 text-sm mt-1">💡 Nhấp vào tên vận động viên để xem chứng chỉ hoàn thành</p>
+            </div>
+            
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-blue-600 to-yellow-500 text-white">
@@ -121,34 +128,45 @@ export default function LOP2025() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {lop2025Runners.map((runner, index) => (
-                    <tr key={runner.stt} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
+                    <Link 
+                      key={runner.stt} 
+                      href={`/lop-2025/certificate/${runner.stt}`}
+                      className="table-row hover:bg-blue-50 transition-colors duration-200 cursor-pointer group"
+                    >
                       <td className="px-4 py-3 text-sm font-medium text-gray-900">
                         {index < 3 ? (
-                          <span className="text-2xl">
+                          <span className="text-2xl group-hover:scale-110 transition-transform duration-200 inline-block">
                             {index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}
                           </span>
                         ) : (
-                          runner.stt
+                          <span className="group-hover:text-blue-600 transition-colors duration-200">
+                            {runner.stt}
+                          </span>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-900 font-medium">
-                        {runner.name}
+                      <td className="px-4 py-3 text-sm text-gray-900 font-medium group-hover:text-blue-600 transition-colors duration-200">
+                        <div className="flex items-center">
+                          <span>{runner.name}</span>
+                          <svg className="w-4 h-4 ml-2 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                          </svg>
+                        </div>
                       </td>
                       <td className="px-4 py-3 text-sm text-center font-mono font-semibold">
-                        <span className={runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}>
+                        <span className={`group-hover:scale-105 transition-transform duration-200 inline-block ${runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"}`}>
                           {runner.distance}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-center">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-all duration-200 ${
                           runner.gender === "Nữ" 
-                            ? "bg-pink-100 text-pink-800" 
-                            : "bg-blue-100 text-blue-800"
+                            ? "bg-pink-100 text-pink-800 group-hover:bg-pink-200" 
+                            : "bg-blue-100 text-blue-800 group-hover:bg-blue-200"
                         }`}>
                           {runner.gender}
                         </span>
                       </td>
-                    </tr>
+                    </Link>
                   ))}
                 </tbody>
               </table>
@@ -206,7 +224,7 @@ export default function LOP2025() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Cuộc Thi</h3>
-                    <p className="text-gray-600">Vẫn Đang Diễn Ra! (Đến Hết Ngày 14/08/2025)</p>
+                    <p className="text-gray-600">Vẫn Đang Diễn Ra! (Đến Hết Ngày 12/08/2025)</p>
                   </div>
                 </div>
               </div>
