@@ -30,6 +30,24 @@ export default function LOP2025Certificate({ params }: PageProps) {
     getParams();
   }, [params]);
 
+  // Password check function
+  const checkPasswordAndExport = () => {
+    const password = prompt('Chức năng chưa được công khai, nhập password để tiếp tục:');
+    
+    if (password === null) {
+      // User cancelled the prompt
+      return;
+    }
+    
+    if (password === '312645') {
+      // Correct password, proceed with export
+      downloadCertificateHtmlToImage();
+    } else {
+      // Wrong password
+      alert('❌ Password không đúng. Vui lòng thử lại.');
+    }
+  };
+
   // Method 1: html-to-image - Better for modern browsers and CSS handling
   const downloadCertificateHtmlToImage = async () => {
     if (!certificateRef.current || !runner) return;
@@ -262,27 +280,6 @@ export default function LOP2025Certificate({ params }: PageProps) {
                     <div className="text-[10px] md:text-sm opacity-90">Xếp hạng</div>
                   </div>
                 </div>
-                {/* <div className="bg-yellow-50 rounded-lg p-2 md:p-3 border border-yellow-200">
-                  <h3 className="font-semibold text-gray-800 mb-1 md:mb-2 text-sm md:text-base">
-                    Thông Tin Vận Động Viên
-                  </h3>
-                  <div className="space-y-1 text-xs md:text-sm">
-                    <div>
-                      <span className="text-gray-600">Xếp hạng:</span>
-                      <span className="ml-2 font-semibold text-yellow-600">#{runner.stt}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Giới tính:</span>
-                      <span
-                        className={`ml-2 font-semibold ${
-                          runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"
-                        }`}
-                      >
-                        {runner.gender}
-                      </span>
-                    </div>
-                  </div>
-                </div> */}
               </div>
 
               {/* Right Column - Achievement Records */}
@@ -403,9 +400,9 @@ export default function LOP2025Certificate({ params }: PageProps) {
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <button 
-            onClick={downloadCertificateHtmlToImage}
+            onClick={checkPasswordAndExport}
             disabled={isExporting}
-            className="inline-flex items-center px-6 py-3 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-200 shadow-lg"
+            className="inline-flex items-center px-6 py-3 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-lg"
           >
             {isExporting ? (
               <>
@@ -417,7 +414,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                  Tải Chứng Chỉ
+                Tải Chứng Chỉ
               </>
             )}
           </button>
