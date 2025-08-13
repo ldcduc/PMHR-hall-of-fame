@@ -376,13 +376,13 @@ export default function LOP2025Certificate({ params }: PageProps) {
               <div className="grid grid-cols-2 gap-3 md:gap-6">
                 <div className="text-center">
                   <div className="border-b-2 border-gray-300 pb-1 mb-1 mx-3 md:mx-6">
-                    <span className="text-xs md:text-sm font-elegant">PHÚ MỸ HƯNG RUNNERS</span>
+                    <span className="text-xs md:text-sm font-elegant text-gray-800">PHÚ MỸ HƯNG RUNNERS</span>
                   </div>
                   <p className="text-xs text-gray-600">Ban Tổ Chức</p>
                 </div>
                 <div className="text-center">
                   <div className="border-b-2 border-gray-300 pb-1 mb-1 mx-3 md:mx-6">
-                    <span className="text-xs md:text-sm font-elegant">12 tháng 8, 2025</span>
+                    <span className="text-xs md:text-sm font-elegant text-gray-800">12 tháng 8, 2025</span>
                   </div>
                   <p className="text-xs text-gray-600">Ngày Cấp Chứng Chỉ</p>
                 </div>
