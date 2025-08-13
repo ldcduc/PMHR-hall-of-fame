@@ -95,7 +95,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
       document.body.removeChild(link);
 
       console.log('html-to-image export successful');
-      alert('✅ Chứng chỉ đã được tải xuống thành công bằng html-to-image!\n\nChất lượng cao với gradients được bảo toàn. 🎉');
+      alert('✅ Chứng chỉ đã được tải xuống thành công, chúc mừng bạn đã hoàn th. 🎉');
 
     } catch (error) {
       console.error('html-to-image failed:', error);
