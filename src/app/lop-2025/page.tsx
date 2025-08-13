@@ -58,7 +58,7 @@ export default function LOP2025() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Vận Động Viên Huyền Thoại 2025</h2>
             <p className="text-lg text-gray-600">
-              Bảng xếp hạng hiện tại - {totalRunners} vận động viên tính đến ngày 04 tháng 8, 2025
+              Bảng xếp hạng hiện tại - {totalRunners} vận động viên tính đến ngày 12 tháng 8, 2025
             </p>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-yellow-500 mx-auto rounded-full mt-4"></div>
           </div>
@@ -224,7 +224,7 @@ export default function LOP2025() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Cuộc Thi</h3>
-                    <p className="text-gray-600">Vẫn Đang Diễn Ra! (Đến Hết Ngày 12/08/2025)</p>
+                    <p className="text-gray-600">Đã kết thúc</p>
                   </div>
                 </div>
               </div>
@@ -240,10 +240,10 @@ export default function LOP2025() {
             Tham Gia Huyền Thoại 2025
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Cuộc thi vẫn đang diễn ra! Tham gia Câu Lạc Bộ Chạy Bộ PHÚ MỸ HƯNG RUNNERS và cạnh tranh để trở thành Huyền Thoại.
+            Cuộc thi đã kết thúc! Tham gia Câu Lạc Bộ Chạy Bộ PHÚ MỸ HƯNG RUNNERS và cạnh tranh để trở thành Huyền Thoại mùa tiếp theo!.
           </p>
           <a
-            href="/join"
+            href="https://www.facebook.com/groups/phumyhungrunnersclub"
             className="inline-flex items-center justify-center px-8 py-4 rounded-full text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-yellow-500 hover:from-blue-600 hover:to-yellow-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             Tham Gia Câu Lạc Bộ
