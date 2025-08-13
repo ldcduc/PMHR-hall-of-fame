@@ -3,13 +3,14 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { 
   lop2025Runners, 
   getTotalRunners, 
   getHighestDistance, 
   getLowestDistance, 
-  getLeadingRunner 
+  getLeadingRunner,
+  getPersistentRunnersCount // Add this import
 } from '../../data/lop2025Runners';
 import TotalRunnersModal from './TotalRunnersModal';
 import HighestDistanceModal from './HighestDistanceModal';
@@ -17,15 +18,18 @@ import LowestDistanceModal from './LowestDistanceModal';
 import FemaleStatsModal from './FemaleStatsModal';
 import MaleStatsModal from './MaleStatsModal';
 import TotalDistanceModal from './TotalDistanceModal';
+import PersistentRunnerModal from './PersistentRunnerModal';
 
 
 export default function LOP2025() {
+  const router = useRouter();
   const [isHighestModalOpen, setIsHighestModalOpen] = useState(false);
   const [isLowestModalOpen, setIsLowestModalOpen] = useState(false);
   const [isTotalModalOpen, setIsTotalModalOpen] = useState(false);
   const [isFemaleModalOpen, setIsFemaleModalOpen] = useState(false);
   const [isMaleModalOpen, setIsMaleModalOpen] = useState(false);
   const [isTotalDistanceModalOpen, setIsTotalDistanceModalOpen] = useState(false);
+  const [isPersistentRunnerModalOpen, setIsPersistentRunnerModalOpen] = useState(false);
   
   const totalRunners = getTotalRunners();
   const highestDistance = getHighestDistance();
@@ -42,6 +46,10 @@ export default function LOP2025() {
   const totalDistance = lop2025Runners.reduce((sum, runner) => {
     return sum + parseFloat(runner.distance);
   }, 0).toFixed(2);
+
+  const handleRowClick = (stt: number) => {
+    router.push(`/lop-2025/certificate/${stt}`);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-blue-50">
@@ -124,9 +132,19 @@ export default function LOP2025() {
               <div className="text-gray-600">Tích Lũy LOP Tối Thiểu (KM)</div>
               <div className="text-xs text-orange-500 mt-1">Nhấp để xem chi tiết</div>
             </div>
+
+            {/* Row 3 */}
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsPersistentRunnerModalOpen(true)}
+            >
+              <div className="text-3xl font-bold text-red-600 mb-2">{getPersistentRunnersCount()} VĐV</div>
+              <div className="text-gray-600">45 ngày miệt mài</div>
+              <div className="text-xs text-red-500 mt-1">Nhấp để xem VĐV</div>
+            </div>
           </div>
 
-          <br></br>
+          <br />
           
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Table Header with Click Instruction */}
@@ -147,10 +165,17 @@ export default function LOP2025() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {lop2025Runners.map((runner, index) => (
-                    <Link 
-                      key={runner.stt} 
-                      href={`/lop-2025/certificate/${runner.stt}`}
-                      className="table-row hover:bg-blue-50 transition-colors duration-200 cursor-pointer group"
+                    <tr 
+                      key={runner.stt}
+                      className="hover:bg-blue-50 transition-colors duration-200 cursor-pointer group"
+                      onClick={() => handleRowClick(runner.stt)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleRowClick(runner.stt);
+                        }
+                      }}
                     >
                       <td className="px-4 py-3 text-sm font-medium text-gray-900">
                         {index < 3 ? (
@@ -185,7 +210,7 @@ export default function LOP2025() {
                           {runner.gender}
                         </span>
                       </td>
-                    </Link>
+                    </tr>
                   ))}
                 </tbody>
               </table>
@@ -270,7 +295,7 @@ export default function LOP2025() {
         </div>
       </section>
 
-      {/* Modal Components - All 6 modals */}
+      {/* Modal Components - All 7 modals */}
       <TotalRunnersModal 
         isOpen={isTotalModalOpen} 
         onClose={() => setIsTotalModalOpen(false)}
@@ -309,6 +334,11 @@ export default function LOP2025() {
         onClose={() => setIsLowestModalOpen(false)}
         lowestDistance={lowestDistance}
         totalRunners={totalRunners}
+      />
+
+      <PersistentRunnerModal 
+        isOpen={isPersistentRunnerModalOpen} 
+        onClose={() => setIsPersistentRunnerModalOpen(false)} 
       />
     </div>
   );

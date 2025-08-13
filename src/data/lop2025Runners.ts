@@ -1,20 +1,19 @@
 // src/data/lop2025Runners.ts
 
-// src/data/lop2025Runners.ts
-
 export interface LOP2025Runner {
   stt: number;
   name: string;
   distance: string;
   gender: "Nam" | "Nữ";
   stravaUrl?: string;
+  persistent?: boolean; // New field for 45-day challenge completers
 }
 
 export const lop2025Runners: LOP2025Runner[] = [
-  { stt: 1, name: "Hanh Nguyen", distance: "1030.95", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/76132131" },
-  { stt: 2, name: "Tran Thanh Cuong", distance: "1023.46", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/37960101" },
-  { stt: 3, name: "Vu Tien Dung", distance: "909.00", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/66808305" },
-  { stt: 4, name: "Thanh Dũng Lâm", distance: "733.21", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/119092717" },
+  { stt: 1, name: "Hanh Nguyen", distance: "1030.95", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/76132131", persistent: true },
+  { stt: 2, name: "Tran Thanh Cuong", distance: "1023.46", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/37960101", persistent: true },
+  { stt: 3, name: "Vu Tien Dung", distance: "909.00", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/66808305", persistent: true },
+  { stt: 4, name: "Thanh Dũng Lâm", distance: "733.21", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/119092717", persistent: true },
   { stt: 5, name: "Như Đoàn Thái", distance: "712.64", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/110940248" },
   { stt: 6, name: "Đậu Danh", distance: "670.93", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/50444350" },
   { stt: 7, name: "Khanh Dao 🇻🇳", distance: "620.94", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/52668774" },
@@ -23,7 +22,7 @@ export const lop2025Runners: LOP2025Runner[] = [
   { stt: 10, name: "Kenny Buj", distance: "508.69", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/133584617" },
   { stt: 11, name: "Nguyễn Đình Lãm", distance: "462.53", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/44950261" },
   { stt: 12, name: "Ngân Nông", distance: "455.37", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/114337287" },
-  { stt: 13, name: "Phan Thi Ngoc Sanh", distance: "446.53", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/102302473" },
+  { stt: 13, name: "Phan Thi Ngoc Sanh", distance: "446.53", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/102302473", persistent: true },
   { stt: 14, name: "Đạt Lê", distance: "438.15", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/103031084" },
   { stt: 15, name: "Quang-Chau Nguyen", distance: "437.77", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/20235578" },
   { stt: 16, name: "Dương Nguyễn (Nhuận Quang)", distance: "424.21", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/133453642" },
@@ -31,7 +30,7 @@ export const lop2025Runners: LOP2025Runner[] = [
   { stt: 18, name: "Hung Do Nguyen", distance: "421.30", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/58339561" },
   { stt: 19, name: "Duc Le", distance: "416.37", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/105551690" },
   { stt: 20, name: "Trung Lê Huỳnh Ngọc", distance: "410.30", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/147527369" },
-  { stt: 21, name: "wei harn choo", distance: "404.27", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/151888371" },
+  { stt: 21, name: "wei harn choo", distance: "404.27", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/151888371", persistent: true },
   { stt: 22, name: "Trường Lâm", distance: "395.62", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/107895133" },
   { stt: 23, name: "Bich Nguyen Doan", distance: "387.06", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/86474722" },
   { stt: 24, name: "PETER PAN", distance: "370.06", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/120171466" },
@@ -44,7 +43,7 @@ export const lop2025Runners: LOP2025Runner[] = [
   { stt: 31, name: "Tran Van Tuoi", distance: "341.82", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/65135475" },
   { stt: 32, name: "Tú Lê Minh", distance: "338.72", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/118111657" },
   { stt: 33, name: "Phong Vũ Steel", distance: "336.55", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/96420301" },
-  { stt: 34, name: "Hoa Phạm", distance: "336.09", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/143951399" },
+  { stt: 34, name: "Hoa Phạm", distance: "336.09", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/143951399", persistent: true },
   { stt: 35, name: "To Lucie Khanh", distance: "334.92", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/141338762" },
   { stt: 36, name: "Nguyễn Đức", distance: "332.18", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/137028444" },
   { stt: 37, name: "Nhi Mỹ Phan", distance: "331.71", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/60283006" },
@@ -58,26 +57,26 @@ export const lop2025Runners: LOP2025Runner[] = [
   { stt: 45, name: "Thai Nguyen", distance: "306.43", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/34875792" },
   { stt: 46, name: "Ân Võ Thiện", distance: "300.33", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/65474333" },
   { stt: 47, name: "Cuong [UPS Italy]", distance: "297.25", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/78612508" },
-  { stt: 48, name: "Nguyen Ngu", distance: "296.71", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/113571450" },
+  { stt: 48, name: "Nguyen Ngu", distance: "296.71", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/113571450", persistent: true },
   { stt: 49, name: "Hoàng Văn Vũ", distance: "296.24", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/152141632" },
-  { stt: 50, name: "CAO LAN", distance: "292.46", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/152066739" },
+  { stt: 50, name: "CAO LAN", distance: "292.46", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/152066739", persistent: true },
   { stt: 51, name: "Tien Tran", distance: "292.40", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/117473335" },
   { stt: 52, name: "Robert Nguyễn", distance: "291.72", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/39222022" },
   { stt: 53, name: "Chau Nguyen", distance: "291.40", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/83553025" },
-  { stt: 54, name: "Khánh Nguyễn Sơn Kim", distance: "291.03", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/145234017" },
+  { stt: 54, name: "Khánh Nguyễn Sơn Kim", distance: "291.03", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/145234017", persistent: true },
   { stt: 55, name: "Minh Sunrise", distance: "285.60", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/71482379" },
-  { stt: 56, name: "Le Tuan Duong", distance: "285.11", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/114677553" },
+  { stt: 56, name: "Le Tuan Duong", distance: "285.11", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/114677553", persistent: true },
   { stt: 57, name: "Hằng Trần Thị", distance: "284.67", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/110755759" },
-  { stt: 58, name: "Trung .nc_00003", distance: "284.42", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/66492671" },
+  { stt: 58, name: "Trung .nc_00003", distance: "284.42", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/66492671", persistent: true },
   { stt: 59, name: "Thuan Than", distance: "283.90", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/115094912" },
   { stt: 60, name: "TH. Hương_g", distance: "281.57", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/153357702" },
   { stt: 61, name: "Chú Pé Bán Khô", distance: "280.61", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/23496542" },
-  { stt: 62, name: "Mattsyan Nguyen", distance: "280.24", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/74325676" },
-  { stt: 63, name: "Sarah Ho", distance: "280.12", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/69659705" },
+  { stt: 62, name: "Mattsyan Nguyen", distance: "280.24", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/74325676", persistent: true },
+  { stt: 63, name: "Sarah Ho", distance: "280.12", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/69659705", persistent: true },
   { stt: 64, name: "Tu Do", distance: "276.99", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/174228115" },
   { stt: 65, name: "Nga Hà", distance: "276.58", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/146452677" },
   { stt: 66, name: "Thư Thư", distance: "276.40", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/139884534" },
-  { stt: 67, name: "Ngọc Đoàn", distance: "276.17", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/121864496" },
+  { stt: 67, name: "Ngọc Đoàn", distance: "276.17", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/121864496", persistent: true },
   { stt: 68, name: "Ashutosh Mohapatra", distance: "275.94", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/101257128" },
   { stt: 69, name: "Mai nhật Hoà", distance: "275.57", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/73680619" },
   { stt: 70, name: "Nhon Le", distance: "272.37", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/14531569" },
@@ -112,7 +111,7 @@ export const lop2025Runners: LOP2025Runner[] = [
   { stt: 99, name: "Cat Nguyen", distance: "230.66", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/52200049" },
 ];
 
-// Helper functions for statistics
+// Helper functions for statistics (KEEPING ALL ORIGINAL FUNCTIONS)
 export const getTotalRunners = () => lop2025Runners.length;
 
 export const getHighestDistance = () => {
@@ -131,7 +130,7 @@ export const getLowestDistance = () => {
 
 export const getLeadingRunner = () => lop2025Runners[0];
 
-// Additional helper functions for Strava integration
+// Additional helper functions for Strava integration (KEEPING ALL ORIGINAL FUNCTIONS)
 export const getRunnersWithStrava = () => 
   lop2025Runners.filter(runner => runner.stravaUrl);
 
@@ -145,3 +144,13 @@ export const getTopRunners = (count: number = 10) =>
 
 export const getRunnersByGender = (gender: "Nam" | "Nữ") => 
   lop2025Runners.filter(runner => runner.gender === gender);
+
+// NEW FUNCTIONS for persistent runners only
+export const getPersistentRunners = () => 
+  lop2025Runners.filter(runner => runner.persistent === true);
+
+export const getNonPersistentRunners = () => 
+  lop2025Runners.filter(runner => !runner.persistent);
+
+export const getPersistentRunnersCount = () => 
+  lop2025Runners.filter(runner => runner.persistent === true).length;
