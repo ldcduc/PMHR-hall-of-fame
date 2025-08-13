@@ -89,13 +89,13 @@ export default function LOP2025Certificate({ params }: PageProps) {
       // Download the image
       const link = document.createElement('a');
       link.href = dataUrl;
-      link.download = `LOP2025-Certificate-${runner.name.replace(/\s+/g, '-')}-HtmlToImage.png`;
+      link.download = `PMHR-LOP2025-Certificate-${runner.name.replace(/\s+/g, '-')}.png`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
 
       console.log('html-to-image export successful');
-      alert('✅ Chứng chỉ đã được tải xuống thành công, chúc mừng bạn đã hoàn th. 🎉');
+      alert('✅ Chứng chỉ đã được tải xuống thành công, chúc mừng bạn đã hoàn thành LOP2025. 🎉');
 
     } catch (error) {
       console.error('html-to-image failed:', error);
@@ -111,7 +111,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
 
         const link = document.createElement('a');
         link.href = jpegDataUrl;
-        link.download = `LOP2025-Certificate-${runner.name.replace(/\s+/g, '-')}-JPEG-Fallback.jpg`;
+        link.download = `PMHR-LOP2025-Certificate-${runner.name.replace(/\s+/g, '-')}-JPEG.jpg`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
