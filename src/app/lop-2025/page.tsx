@@ -16,6 +16,8 @@ import HighestDistanceModal from './HighestDistanceModal';
 import LowestDistanceModal from './LowestDistanceModal';
 import FemaleStatsModal from './FemaleStatsModal';
 import MaleStatsModal from './MaleStatsModal';
+import TotalDistanceModal from './TotalDistanceModal';
+
 
 export default function LOP2025() {
   const [isHighestModalOpen, setIsHighestModalOpen] = useState(false);
@@ -23,6 +25,7 @@ export default function LOP2025() {
   const [isTotalModalOpen, setIsTotalModalOpen] = useState(false);
   const [isFemaleModalOpen, setIsFemaleModalOpen] = useState(false);
   const [isMaleModalOpen, setIsMaleModalOpen] = useState(false);
+  const [isTotalDistanceModalOpen, setIsTotalDistanceModalOpen] = useState(false);
   
   const totalRunners = getTotalRunners();
   const highestDistance = getHighestDistance();
@@ -34,6 +37,11 @@ export default function LOP2025() {
   const maleRunners = lop2025Runners.filter(r => r.gender === "Nam");
   const femaleCount = femaleRunners.length;
   const maleCount = maleRunners.length;
+
+  // Tính tổng khoảng cách
+  const totalDistance = lop2025Runners.reduce((sum, runner) => {
+    return sum + parseFloat(runner.distance);
+  }, 0).toFixed(2);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-blue-50">
@@ -47,7 +55,7 @@ export default function LOP2025() {
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-2">2025</h2>
           <p className="text-lg text-gray-600 mb-4">Kết quả LOP 2025</p>
-          <p className="text-base text-gray-500 mb-8">(Tính đến hết ngày 04/08/2025)</p>
+          <p className="text-base text-gray-500 mb-8">(Thời gian sự kiện: Từ ngày 29/06/2025 đến hết ngày 12/08/2025)</p>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-yellow-500 mx-auto rounded-full"></div>
         </div>
       </section>
@@ -58,13 +66,14 @@ export default function LOP2025() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Vận Động Viên Huyền Thoại 2025</h2>
             <p className="text-lg text-gray-600">
-              Bảng xếp hạng hiện tại - {totalRunners} vận động viên tính đến ngày 12 tháng 8, 2025
+              Bảng xếp hạng - {totalRunners} vận động viên tính đến ngày 12 tháng 8, 2025
             </p>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-yellow-500 mx-auto rounded-full mt-4"></div>
           </div>
 
-          {/* Thống kê bảng xếp hạng - Updated with 5 cards */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-5 gap-6">
+          {/* Thống kê bảng xếp hạng - 6 cards in 3 columns and 2 rows */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Row 1 */}
             <div 
               className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
               onClick={() => setIsTotalModalOpen(true)}
@@ -83,12 +92,14 @@ export default function LOP2025() {
             </div>
             <div 
               className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => setIsLowestModalOpen(true)}
+              onClick={() => setIsTotalDistanceModalOpen(true)}
             >
-              <div className="text-3xl font-bold text-orange-500 mb-2">{lowestDistance}</div>
-              <div className="text-gray-600">Tích Lũy LOP Tối Thiểu (KM)</div>
-              <div className="text-xs text-orange-500 mt-1">Nhấp để xem chi tiết</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">{totalDistance}</div>
+              <div className="text-gray-600">Tổng Khoảng Cách (KM)</div>
+              <div className="text-xs text-green-500 mt-1">Nhấp để xem chi tiết</div>
             </div>
+            
+            {/* Row 2 */}
             <div 
               className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
               onClick={() => setIsFemaleModalOpen(true)}
@@ -104,6 +115,14 @@ export default function LOP2025() {
               <div className="text-3xl font-bold text-blue-600 mb-2">{maleCount}</div>
               <div className="text-gray-600">VĐV Nam</div>
               <div className="text-xs text-blue-500 mt-1">Nhấp để xem thống kê</div>
+            </div>
+            <div 
+              className="bg-white rounded-lg shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setIsLowestModalOpen(true)}
+            >
+              <div className="text-3xl font-bold text-orange-500 mb-2">{lowestDistance}</div>
+              <div className="text-gray-600">Tích Lũy LOP Tối Thiểu (KM)</div>
+              <div className="text-xs text-orange-500 mt-1">Nhấp để xem chi tiết</div>
             </div>
           </div>
 
@@ -192,7 +211,7 @@ export default function LOP2025() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Tình Trạng Hiện Tại</h3>
-                    <p className="text-gray-600">Tính đến ngày 04 tháng 8, 2025</p>
+                    <p className="text-gray-600">Kết thúc tính đến ngày 12 tháng 8, 2025</p>
                   </div>
                 </div>
                 
@@ -251,7 +270,7 @@ export default function LOP2025() {
         </div>
       </section>
 
-      {/* Modal Components */}
+      {/* Modal Components - All 6 modals */}
       <TotalRunnersModal 
         isOpen={isTotalModalOpen} 
         onClose={() => setIsTotalModalOpen(false)}
@@ -264,11 +283,13 @@ export default function LOP2025() {
         leadingRunner={leadingRunner}
       />
       
-      <LowestDistanceModal 
-        isOpen={isLowestModalOpen} 
-        onClose={() => setIsLowestModalOpen(false)}
-        lowestDistance={lowestDistance}
+      <TotalDistanceModal 
+        isOpen={isTotalDistanceModalOpen} 
+        onClose={() => setIsTotalDistanceModalOpen(false)}
+        totalDistance={totalDistance}
         totalRunners={totalRunners}
+        femaleCount={femaleCount}
+        maleCount={maleCount}
       />
       
       <FemaleStatsModal 
@@ -280,6 +301,13 @@ export default function LOP2025() {
       <MaleStatsModal 
         isOpen={isMaleModalOpen} 
         onClose={() => setIsMaleModalOpen(false)}
+        totalRunners={totalRunners}
+      />
+      
+      <LowestDistanceModal 
+        isOpen={isLowestModalOpen} 
+        onClose={() => setIsLowestModalOpen(false)}
+        lowestDistance={lowestDistance}
         totalRunners={totalRunners}
       />
     </div>
