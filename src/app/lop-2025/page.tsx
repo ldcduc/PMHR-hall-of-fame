@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toPng } from 'html-to-image';
 import { 
   lop2025Runners, 
   getTotalRunners, 
@@ -30,6 +31,7 @@ export default function LOP2025() {
   const [isMaleModalOpen, setIsMaleModalOpen] = useState(false);
   const [isTotalDistanceModalOpen, setIsTotalDistanceModalOpen] = useState(false);
   const [isPersistentRunnerModalOpen, setIsPersistentRunnerModalOpen] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
   
   const totalRunners = getTotalRunners();
   const highestDistance = getHighestDistance();
@@ -49,6 +51,49 @@ export default function LOP2025() {
 
   const handleRowClick = (stt: number) => {
     router.push(`/lop-2025/certificate/${stt}`);
+  };
+
+  const exportTableToPNG = async () => {
+    const tableElement = document.getElementById('lop-table');
+    if (!tableElement) return;
+
+    setIsExporting(true);
+    try {
+      // Ensure all fonts are loaded
+      await document.fonts.ready;
+      
+      const dataUrl = await toPng(tableElement, {
+        quality: 1.0,
+        pixelRatio: 2,
+        backgroundColor: '#ffffff',
+        filter: (node) => {
+          // Skip comment nodes and hidden elements
+          if (node.nodeType === Node.COMMENT_NODE) return false;
+          if (node instanceof HTMLElement) {
+            const style = window.getComputedStyle(node);
+            if (style.display === 'none' || style.visibility === 'hidden') {
+              return false;
+            }
+          }
+          return true;
+        },
+      });
+
+      // Download the image
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = `LOP2025-Leaderboard-${new Date().toISOString().split('T')[0]}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      alert('✅ Bảng xếp hạng đã được tải xuống thành công!');
+    } catch (error) {
+      console.error('Export failed:', error);
+      alert('❌ Không thể xuất bảng. Vui lòng thử lại.');
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   return (
@@ -146,7 +191,7 @@ export default function LOP2025() {
 
           <br />
           
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden" id="lop-table">
             {/* Table Header with Click Instruction */}
             <div className="bg-gradient-to-r from-blue-600 to-yellow-500 px-6 py-4">
               <h3 className="text-white font-semibold text-lg">Bảng Xếp Hạng</h3>
@@ -215,6 +260,29 @@ export default function LOP2025() {
                 </tbody>
               </table>
             </div>
+          </div>
+
+          {/* Export Button */}
+          <div className="mt-6 text-center">
+            <button 
+              onClick={exportTableToPNG}
+              disabled={isExporting}
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-yellow-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg transform hover:scale-105"
+            >
+              {isExporting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                  Đang xuất...
+                </>
+              ) : (
+                <>
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Xuất Bảng Xếp Hạng (PNG)
+                </>
+              )}
+            </button>
           </div>
         </div>
       </section>
