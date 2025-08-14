@@ -218,6 +218,17 @@ export default function LOP2025Certificate({ params }: PageProps) {
           <div className="bg-gradient-to-r from-yellow-200 via-amber-300 to-blue-400 text-white py-3 md:py-6 px-3 md:px-6 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="absolute top-0 left-0 w-full h-1 md:h-2 bg-gradient-to-r from-yellow-300 via-amber-300 to-blue-300"></div>
+
+            {/* Coolmate Logo - Top Left */}
+            <div className="absolute top-2 md:top-4 left-2 md:left-4 z-10">
+              <Image 
+                src="/coolmate.png" 
+                alt="Coolmate Logo" 
+                className="w-16 h-16 md:w-24 md:h-24 object-contain"
+                width={144}
+                height={144}
+              />
+            </div>
             
             <div className="relative">
               <div className="flex justify-center mb-2 md:mb-3">
