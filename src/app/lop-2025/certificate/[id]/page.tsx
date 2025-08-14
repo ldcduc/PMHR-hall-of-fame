@@ -221,13 +221,20 @@ export default function LOP2025Certificate({ params }: PageProps) {
 
             {/* Coolmate Logo - Top Left */}
             <div className="absolute top-2 md:top-4 left-2 md:left-4 z-10">
-              <Image 
-                src="/coolmate.png" 
-                alt="Coolmate Logo" 
-                className="w-16 h-16 md:w-24 md:h-24 object-contain"
-                width={144}
-                height={144}
-              />
+              <Link 
+                href="https://www.coolmate.me/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block hover:opacity-80 transition-opacity duration-200"
+              >
+                <Image 
+                  src="/coolmate.png" 
+                  alt="Coolmate Logo" 
+                  className="w-16 h-16 md:w-24 md:h-24 object-contain"
+                  width={144}
+                  height={144}
+                />
+              </Link>
             </div>
             
             <div className="relative">
