@@ -113,7 +113,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
       document.body.removeChild(link);
 
       console.log('html-to-image export successful');
-      alert('✅ Chứng chỉ đã được tải xuống thành công, chúc mừng bạn đã hoàn thành LOP2025. 🎉');
+      alert('✅ Chứng nhận đã được tải xuống thành công, chúc mừng bạn đã hoàn thành LOP2025. 🎉');
 
     } catch (error) {
       console.error('html-to-image failed:', error);
@@ -135,7 +135,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
         document.body.removeChild(link);
 
         console.log('JPEG fallback successful');
-        alert('✅ Chứng chỉ đã được tải xuống (JPEG fallback)!\n\nĐã sử dụng format JPEG để đảm bảo tương thích. 📸');
+        alert('✅ Chứng nhận đã được tải xuống (JPEG fallback)!\n\nĐã sử dụng format JPEG để đảm bảo tương thích. 📸');
 
       } catch (fallbackError) {
         console.error('JPEG fallback also failed:', fallbackError);
@@ -151,7 +151,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
       <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-blue-50 py-8 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-yellow-500 mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600">Đang tải chứng chỉ...</p>
+          <p className="text-lg text-gray-600">Đang tải chứng nhận...</p>
         </div>
       </div>
     );
@@ -225,7 +225,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
                   <span className="text-lg md:text-2xl">{getMedalEmoji(rank)}</span>
                 </div>
               </div>
-              <h1 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-blue-900">CHỨNG CHỈ HOÀN THÀNH</h1>
+              <h1 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-blue-900">CHỨNG NHẬN HOÀN THÀNH</h1>
               <p className="text-sm md:text-lg opacity-90 text-blue-800">Legend of PMHR 2025</p>
               <div className="mt-2 md:mt-3 inline-block bg-blue-600/20 backdrop-blur-sm rounded-full px-2 md:px-4 py-1 border border-yellow-200">
                 <span className="font-semibold text-blue-900 text-xs md:text-sm">PHÚ MỸ HƯNG RUNNERS</span>
@@ -260,7 +260,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
               </div>
 
               <p className="text-base md:text-xl text-gray-700 mb-3 md:mb-6 leading-relaxed">
-                đã hoàn thành xuất sắc<br />
+                đã hoàn thành xuất sắc 45 ngày<br />
                 <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-400">
                   Legend of PMHR 2025
                 </span>
@@ -381,7 +381,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
                   <div className="border-b-2 border-gray-300 pb-1 mb-1 mx-3 md:mx-6">
                     <span className="text-xs md:text-sm font-elegant text-gray-800">12 tháng 8, 2025</span>
                   </div>
-                  <p className="text-xs text-gray-600">Ngày Cấp Chứng Chỉ</p>
+                  <p className="text-xs text-gray-600">Ngày Cấp Chứng Nhận</p>
                 </div>
               </div>
             </div>
@@ -389,7 +389,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
             {/* Certificate ID */}
             <div className="text-center mt-3 md:mt-6">
               <p className="text-xs text-gray-500">
-                Mã Chứng Chỉ: LOP2025-{runner.stt.toString().padStart(4, '0')}
+                Mã Chứng Nhận: PMHR-LOP2025-{runner.stt.toString().padStart(4, '0')}
               </p>
             </div>
           </div>
@@ -414,7 +414,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Tải Chứng Chỉ
+                Tải Chứng Nhận
               </>
             )}
           </button>
@@ -425,7 +425,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
             </svg>
-            Chia Sẻ Chứng Chỉ
+            Chia Sẻ Chứng Nhận
           </button>
         </div>
 

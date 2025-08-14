@@ -150,7 +150,7 @@ export default function LOP2025() {
             {/* Table Header with Click Instruction */}
             <div className="bg-gradient-to-r from-blue-600 to-yellow-500 px-6 py-4">
               <h3 className="text-white font-semibold text-lg">Bảng Xếp Hạng</h3>
-              <p className="text-blue-100 text-sm mt-1">💡 Nhấp vào tên vận động viên để xem chứng chỉ hoàn thành</p>
+              <p className="text-blue-100 text-sm mt-1">💡 Nhấp vào tên vận động viên để xem chứng nhận hoàn thành</p>
             </div>
             
             <div className="overflow-x-auto">
