@@ -267,7 +267,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
               </div>
 
               <p className="text-base md:text-xl text-gray-700 mb-3 md:mb-6 leading-relaxed">
-                đã hoàn thành xuất sắc 45 ngày<br />
+                đã hoàn thành xuất sắc 45 ngày{runner.persistent ? " liên tiếp" : ""}<br />
                 <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-400">
                   Legend of PMHR 2025
                 </span>

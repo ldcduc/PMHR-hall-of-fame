@@ -109,7 +109,7 @@ export const lop2025Runners: LOP2025Runner[] = [
   { stt: 97, name: "Duy Hoang Vo", distance: "236.83", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/72271846" },
   { stt: 98, name: "Luong Van Hai", distance: "235.00", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/103504357" },
   { stt: 99, name: "Huỳnh Xuân Viêt", distance: "231.40", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/10219228" },
-  { stt: 100, name: "Cat Nguyen", distance: "230.66", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/52200049" }
+  { stt: 100, name: "Cat Nguyen", distance: "230.66", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/52200049" },
 ];
 
 // Helper functions for statistics (KEEPING ALL ORIGINAL FUNCTIONS)
