@@ -175,12 +175,12 @@ export default function LOP2025Certificate({ params }: PageProps) {
     return '🏆';
   };
 
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return 'from-yellow-300 to-yellow-400';
-    if (rank === 2) return 'from-gray-200 to-gray-400';
-    if (rank === 3) return 'from-amber-300 to-amber-500';
-    return 'from-blue-400 to-blue-500';
-  };
+  // const getRankColor = (rank: number) => {
+  //   if (rank === 1) return 'from-yellow-300 to-yellow-400';
+  //   if (rank === 2) return 'from-gray-200 to-gray-400';
+  //   if (rank === 3) return 'from-amber-300 to-amber-500';
+  //   return 'from-blue-400 to-blue-500';
+  // };
 
   const shareToFacebook = () => {
     const url = window.location.href;
@@ -235,17 +235,6 @@ export default function LOP2025Certificate({ params }: PageProps) {
 
           {/* Certificate Body */}
           <div className="p-3 md:p-6 lg:p-8 relative bg-gray-100">
-            {/* Logo in top left of body */}
-            <div className="absolute top-2 left-2 md:top-3 md:left-3">
-              <Image 
-                src="/logo.png" 
-                alt="PMH Runners Logo" 
-                className="w-8 h-8 md:w-12 md:h-12 opacity-70"
-                width={48}
-                height={48}
-              />
-            </div>
-
             {/* Achievement Statement */}
             <div className="text-center mb-3 md:mb-6">
               <p className="text-base md:text-xl text-gray-700 mb-2 md:mb-4 leading-relaxed">
@@ -268,84 +257,47 @@ export default function LOP2025Certificate({ params }: PageProps) {
             </div>
 
             {/* Achievement Details Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6 mb-3 md:mb-6">
-              {/* Left Column - Rank and Stats */}
-              <div className="text-center">
-                <div
-                  className={`relative w-20 h-20 md:w-28 md:h-28 mx-auto mb-2 md:mb-4 rounded-full flex items-center justify-center border-3 md:border-6 bg-gradient-to-r ${getRankColor(rank)} shadow-xl text-white`}
-                >
-                  <div className="text-center">
-                    <div className="text-lg md:text-2xl mb-1">{getMedalEmoji(rank)}</div>
-                    <div className="text-xs md:text-lg font-bold">#{rank}</div>
-                    <div className="text-[10px] md:text-sm opacity-90">Xếp hạng</div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6 mb-3 md:mb-6">
+                {/* Left Column - Rank and Stats */}
+                <div className="flex items-center justify-center">
+                  <div>
+                    <Image 
+                      src="/logo.png" 
+                      alt="PMH Runners Logo" 
+                      className="relative w-16 h-16 md:w-28 md:h-28 mx-auto mb-2 md:mb-4 rounded-full flex items-center justify-center border-3 md:border-6 bg-gradient-to-r object-cover"
+                      width={112}
+                      height={112}
+                    />
                   </div>
                 </div>
-              </div>
 
-              {/* Right Column - Achievement Records */}
-              <div>
-                <div className="grid grid-cols-3 md:grid-cols-1 gap-2 md:gap-3">
-                  {/* Total Distance Achievement */}
-                  <div
-                    className={`bg-gradient-to-r ${
-                      runner.gender === "Nữ"
-                        ? "from-yellow-100 to-pink-100 border-l-4 border-yellow-500"
-                        : "from-yellow-100 to-blue-100 border-l-4 border-yellow-500"
-                    } rounded-lg p-2 md:p-4`}
-                  >
-                    <div className="text-center">
-                      <div className="text-xs md:text-sm text-gray-600 mb-1">
-                        Tổng Quãng Đường Tích Lũy
+                {/* Right Column - Achievement Records */}
+                <div className="flex items-center">
+                  <div className="grid grid-cols-1 gap-2 md:gap-3 w-full">
+                    {/* Total Distance Achievement */}
+                    <div
+                      className={`bg-gradient-to-r ${
+                        runner.gender === "Nữ"
+                          ? "from-yellow-100 to-pink-100 border-l-4 border-yellow-500"
+                          : "from-yellow-100 to-blue-100 border-l-4 border-yellow-500"
+                      } rounded-lg p-2 md:p-4`}
+                    >
+                      <div className="text-center">
+                        <div className="text-xs md:text-sm text-gray-600 mb-1">
+                          Tổng Quãng Đường Tích Lũy
+                        </div>
+                        <div
+                          className={`text-xl md:text-3xl font-bold font-mono ${
+                            runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"
+                          }`}
+                        >
+                          {runner.distance} KM
+                        </div>
                       </div>
-                      <div
-                        className={`text-xl md:text-3xl font-bold font-mono ${
-                          runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"
-                        }`}
-                      >
-                        {runner.distance} KM
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Rank Achievement */}
-                  <div className="bg-gradient-to-r from-yellow-50 to-blue-50 rounded-lg p-2 md:p-3 border-l-4 border-yellow-400">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-gray-700 text-xs md:text-sm">
-                        Xếp hạng cuối cùng
-                      </span>
-                      <span className="text-base md:text-xl font-bold text-yellow-500">
-                        #{rank}/{lop2025Runners.length}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Gender Rank */}
-                  <div
-                    className={`bg-gradient-to-r ${
-                      runner.gender === "Nữ"
-                        ? "from-yellow-50 to-pink-50 border-l-4 border-yellow-400"
-                        : "from-yellow-50 to-blue-50 border-l-4 border-blue-400"
-                    } rounded-lg p-2 md:p-3`}
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-gray-700 text-xs md:text-sm">
-                        Xếp hạng {runner.gender.toLowerCase()}
-                      </span>
-                      <span
-                        className={`text-base md:text-xl font-bold ${
-                          runner.gender === "Nữ" ? "text-pink-600" : "text-blue-600"
-                        }`}
-                      >
-                        #
-                        {lop2025Runners
-                          .filter((r) => r.gender === runner.gender)
-                          .findIndex((r) => r.stt === runner.stt) + 1}
-                      </span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
             {/* Achievement Highlights */}
             <div className="bg-gradient-to-r from-yellow-50 via-amber-50 to-yellow-50 rounded-lg p-3 md:p-4 mb-3 md:mb-6 border border-yellow-200">
