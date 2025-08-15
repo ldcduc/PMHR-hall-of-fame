@@ -31,22 +31,22 @@ export default function LOP2025Certificate({ params }: PageProps) {
   }, [params]);
 
   // Password check function
-  const checkPasswordAndExport = () => {
-    const password = prompt('Chức năng chưa được công khai, nhập password để tiếp tục:');
+  // const checkPasswordAndExport = () => {
+  //   const password = prompt('Chức năng chưa được công khai, nhập password để tiếp tục:');
     
-    if (password === null) {
-      // User cancelled the prompt
-      return;
-    }
+  //   if (password === null) {
+  //     // User cancelled the prompt
+  //     return;
+  //   }
     
-    if (password === '312645') {
-      // Correct password, proceed with export
-      downloadCertificateHtmlToImage();
-    } else {
-      // Wrong password
-      alert('❌ Password không đúng. Vui lòng thử lại.');
-    }
-  };
+  //   if (password === '312645') {
+  //     // Correct password, proceed with export
+  //     downloadCertificateHtmlToImage();
+  //   } else {
+  //     // Wrong password
+  //     alert('❌ Password không đúng. Vui lòng thử lại.');
+  //   }
+  // };
 
   // Method 1: html-to-image - Better for modern browsers and CSS handling
   const downloadCertificateHtmlToImage = async () => {
@@ -370,7 +370,7 @@ export default function LOP2025Certificate({ params }: PageProps) {
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <button 
-            onClick={checkPasswordAndExport}
+            onClick={downloadCertificateHtmlToImage}
             disabled={isExporting}
             className="inline-flex items-center px-6 py-3 bg-yellow-400 text-white font-semibold rounded-lg hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-lg"
           >
