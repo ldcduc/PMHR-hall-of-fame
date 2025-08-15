@@ -92,7 +92,7 @@ export const lop2025Runners: LOP2025Runner[] = [
   { stt: 80, name: "Uyên Le", distance: "263.87", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/132073496" },
   { stt: 81, name: "nghia tonduy", distance: "262.95", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/83592069" },
   { stt: 82, name: "PHI ĐANG", distance: "262.12", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/101244889" },
-  { stt: 83, name: "QUỲNH LẠI", distance: "260.71", gender: "Nữ", stravaUrl: "https://www.strava.com/athletes/165198371" },
+  { stt: 83, name: "QUỲNH LẠI", distance: "260.71", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/165198371" },
   { stt: 84, name: "Tran Bang", distance: "259.92", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/42913534" },
   { stt: 85, name: "Nhat Anh Nguyen", distance: "259.43", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/33446590" },
   { stt: 86, name: "Sang Nguyen", distance: "258.80", gender: "Nam", stravaUrl: "https://www.strava.com/athletes/32012600" },
