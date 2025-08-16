@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useRef } from 'react';
 import { lop2025Runners } from '../../../../data/lop2025Runners';
@@ -46,12 +45,16 @@ export default function BulkCertificateExport() {
 
           {/* Coolmate Logo - Top Left */}
           <div className="absolute top-4 left-4 z-10">
-            <Image 
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
               src="/coolmate.png" 
               alt="Coolmate Logo" 
               className="w-20 h-20 md:w-24 md:h-24 object-contain"
               width={96}
               height={96}
+              crossOrigin="anonymous"
+              onLoad={() => console.log('Coolmate logo loaded successfully')}
+              onError={(e) => console.error('Coolmate logo failed to load:', e)}
             />
           </div>
           
@@ -97,12 +100,20 @@ export default function BulkCertificateExport() {
             {/* Left Column - Logo */}
             <div className="flex items-center justify-center">
               <div>
-                <Image 
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
                   src="/logo.png" 
                   alt="PMH Runners Logo" 
-                  className="w-24 h-24 md:w-28 md:h-28 mx-auto mb-3 md:mb-4 rounded-full border-4 md:border-6 object-cover"
+                  className="w-24 h-24 md:w-28 md:h-28 mx-auto mb-3 md:mb-4 rounded-full shadow-lg object-cover"
                   width={112}
                   height={112}
+                  crossOrigin="anonymous"
+                  onLoad={() => console.log('PMH logo loaded successfully')}
+                  onError={(e) => console.error('PMH logo failed to load:', e)}
+                  style={{
+                    border: '4px solid #fbbf24',
+                    boxShadow: '0 4px 12px rgba(251, 191, 36, 0.3), 0 2px 6px rgba(0, 0, 0, 0.1)'
+                  }}
                 />
               </div>
             </div>
@@ -322,6 +333,29 @@ export default function BulkCertificateExport() {
     const failures: string[] = [];
 
     try {
+      // Preload images before starting export
+      console.log('Preloading images...');
+      
+      // Preload images to ensure they're cached
+      const imageUrls = ['/coolmate.png', '/logo.png'];
+      const preloadPromises = imageUrls.map(url => {
+        return new Promise<void>((resolve) => {
+          const img = document.createElement('img');
+          img.onload = () => {
+            console.log(`Preloaded: ${url}`);
+            resolve();
+          };
+          img.onerror = () => {
+            console.warn(`Failed to preload: ${url}`);
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      await Promise.all(preloadPromises);
+      console.log('All images preloaded successfully');
+      
       for (let i = 0; i < lop2025Runners.length; i++) {
         const runner = lop2025Runners[i];
         const rank = i + 1;
@@ -332,27 +366,29 @@ export default function BulkCertificateExport() {
           currentRunner: runner.name 
         });
         
-        console.log(`Processing certificate ${i + 1}/${lop2025Runners.length} for ${runner.name}...`);
+        console.log(`\n=== Processing certificate ${i + 1}/${lop2025Runners.length} for ${runner.name} ===`);
         
         // Update current runner to trigger re-render
         setCurrentRunner(runner);
         
         // Wait for component to render with new data
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 800));
         
         // Export certificate
         const success = await exportCertificate(runner, rank);
         
         if (success) {
           successCount++;
+          console.log(`✅ Success: ${runner.name}`);
         } else {
           failureCount++;
           failures.push(runner.name);
+          console.log(`❌ Failed: ${runner.name}`);
         }
         
         // Small delay between exports
         if (i < lop2025Runners.length - 1) {
-          await new Promise(resolve => setTimeout(resolve, 300));
+          await new Promise(resolve => setTimeout(resolve, 1000));
         }
       }
 
@@ -397,20 +433,17 @@ export default function BulkCertificateExport() {
 
             {/* Coolmate Logo - Top Left */}
             <div className="absolute top-4 left-4 z-10">
-              <Link 
-                href="https://www.coolmate.me/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block hover:opacity-80 transition-opacity duration-200"
-              >
-                <Image 
-                  src="/coolmate.png" 
-                  alt="Coolmate Logo" 
-                  className="w-16 h-16 md:w-24 md:h-24 object-contain"
-                  width={96}
-                  height={96}
-                />
-              </Link>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/coolmate.png" 
+                alt="Coolmate Logo" 
+                className="w-16 h-16 md:w-24 md:h-24 object-contain"
+                width={96}
+                height={96}
+                crossOrigin="anonymous"
+                onLoad={() => console.log('Header Coolmate logo loaded successfully')}
+                onError={(e) => console.error('Header Coolmate logo failed to load:', e)}
+              />
             </div>
             
             <div className="relative">
