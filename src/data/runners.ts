@@ -8,8 +8,9 @@ export const runners: Runner[] = [
     name: 'TRẦN THANH CƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20THANH%20CUONG.jpg',
     halfMarathonPR: '1:20:32',
-    fullMarathonPR: '3:07:10', // Fastest FM
+    fullMarathonPR: '3:03:52', // Fastest FM
     achievements: [
+      'HDBank Green Marathon 2025 - 31/894',
       'HCMC Marathon 2025 - 534/5804',
       'HCMCIM 2020 - 114/321',
       'TCBHCMIM 2024 - 184/4012',
