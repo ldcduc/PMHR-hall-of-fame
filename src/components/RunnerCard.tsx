@@ -50,14 +50,14 @@ export default function RunnerCard({ runner }: RunnerCardProps) {
         </div>
 
         <div className="mb-4">
-          <p className="text-xs text-gray-500 mb-1">Latest Achievement:</p>
+          {/* <p className="text-xs text-gray-500 mb-1">Latest Achievement:</p> */}
           <p className="text-sm text-gray-700 line-clamp-2">{runner.latestAchievement}</p>
         </div>
 
         <div className="flex justify-between items-center">
-          <span className="text-xs text-gray-500">
+          {/* <span className="text-xs text-gray-500">
             {runner.totalAchievements} achievements
-          </span>
+          </span> */}
           <a
             href={`/runners/${runner.id}`}
             className="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-md hover:bg-blue-700 transition-colors duration-150"

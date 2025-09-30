@@ -684,6 +684,21 @@ export const runners: Runner[] = [
     joinDate: '2023-04-16',
   },
   {
+    id: '52',
+    name: 'LÊ HUỲNH NGỌC TRUNG',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HUYNH%20NGOC%20TRUNG.jpg',
+    halfMarathonPR: '1:42:12', 
+    fullMarathonPR: '3:57:24',
+    achievements: [
+      'HDBank Green Marathon 2025 - 242/894',
+      'VIETNAM GOLD MARATHON - HO CHI MINH 20/07/2025 - 4300/5601',
+      'VGMHCM20.7.25 - 4299/5601',
+      'RTL9.3.25 - 3996/4611'
+    ],
+    bio: 'Member of PHÚ MỸ HƯNG RUNNERS team. Age group: M30-39. Bib number: 21016. Half marathon specialist with strong performance.',
+    joinDate: '2025-07-20',
+  },
+  {
     id: '47',
     name: 'NGUYỄN HỮU TIẾNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20HUU%20TIENG.jpg',
@@ -750,20 +765,6 @@ export const runners: Runner[] = [
     ],
     bio: 'Age group: M20-29. Team: PMHR. Bib number: V23359. Specialized half marathon runner with consistent performance.',
     joinDate: '2025-06-22',
-  },
-  {
-    id: '52',
-    name: 'LÊ HUỲNH NGỌC TRUNG',
-    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20HUYNH%20NGOC%20TRUNG.jpg',
-    halfMarathonPR: '1:42:12', 
-    fullMarathonPR: 'undefined',
-    achievements: [
-      'VIETNAM GOLD MARATHON - HO CHI MINH 20/07/2025 - 4300/5601',
-      'VGMHCM20.7.25 - 4299/5601',
-      'RTL9.3.25 - 3996/4611'
-    ],
-    bio: 'Member of PHÚ MỸ HƯNG RUNNERS team. Age group: M30-39. Bib number: 21016. Half marathon specialist with strong performance.',
-    joinDate: '2025-07-20',
   },
 ];
 
