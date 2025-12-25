@@ -163,7 +163,7 @@ export const runners: Runner[] = [
     id: '5',
     name: 'NGUYỄN QUANG THẮNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20QUANG%20THANG%202.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:27:06',
     achievements: [
       'TIEN PHONG MARATHON NATIONAL CHAMPIONSHIP LAN THU 60 - 24/03/2019 - 1848/6491',
@@ -248,7 +248,7 @@ export const runners: Runner[] = [
     id: '11',
     name: 'TRẦN KHÁNH CHÂN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20KHANH%20CHAN.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:30:31',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 2340/6491',
@@ -295,7 +295,7 @@ export const runners: Runner[] = [
     id: '13',
     name: 'TRẦN ĐẠI CHIẾN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20DAI%20CHIEN.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:32:00',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 2461/6491',
@@ -397,7 +397,7 @@ export const runners: Runner[] = [
     id: '19',
     name: 'LÊ QUANG ĐỨC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20QUANG%20DUC.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:43:20',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 3593/6491',
@@ -461,7 +461,7 @@ export const runners: Runner[] = [
     id: '21',
     name: 'TRANG THI NGỌC LAN',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRANG%20THI%20NGOC%20LAN.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:46:24',
     achievements: [
       'VPBANK VNEXPRESS MARATHON HO CHI MINH CITY MIDNIGHT 23/02/2025 - 278/548',
@@ -519,7 +519,7 @@ export const runners: Runner[] = [
     id: '25',
     name: 'BÙI THANH TÙNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/BUI%20THANH%20TUNG%202.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:48:12',
     achievements: [
       'VPBANK INTERNATIONAL MARATHON 08/10/2023 - 4277/6491',
@@ -576,7 +576,7 @@ export const runners: Runner[] = [
     id: '28',
     name: 'TRẦN HOÀI VŨ',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20HOAI%20VU.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:50:16',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 4524/6491',
@@ -635,7 +635,7 @@ export const runners: Runner[] = [
     id: '32',
     name: 'PHẠM HỒNG PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/PHAM%20HONG%20PHUONG.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:51:07',
     achievements: [
       'CAN THO HERITAGE MARATHON 03/12/2022 - 4621/6491',
@@ -719,7 +719,7 @@ export const runners: Runner[] = [
     id: '37',
     name: 'ĐOÀN THẾ PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DOAN%20THE%20PHUONG.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:54:40',
     achievements: [
       'LONGBIEN MARATHON 29/10/2023 - 5197/6491',
@@ -746,7 +746,7 @@ export const runners: Runner[] = [
     id: '38',
     name: 'LÊ BÁ HOÀNH',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20BA%20HOANH.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:54:58',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 5245/6491',
@@ -773,7 +773,7 @@ export const runners: Runner[] = [
     id: '39',
     name: 'ĐỖ TRUNG ÁI',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DO%20TRUNG%20AI.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:55:13',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 5288/6491',
@@ -828,7 +828,7 @@ export const runners: Runner[] = [
     id: '43',
     name: 'TÔN DUY NGHĨA',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TON%20DUY%20NGHIA.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:56:52',
     achievements: [
       'HCMC MARATHON 12/01/2025 - 5648/6491',
@@ -841,7 +841,7 @@ export const runners: Runner[] = [
     id: '44',
     name: 'VÕ THÁI VŨ',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/VO%20THAI%20VU.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:56:57',
     achievements: [
       'LONGBIEN MARATHON 29/10/2023 - 5664/6491',
@@ -854,7 +854,7 @@ export const runners: Runner[] = [
     id: '45',
     name: 'TRẦN PHÚ QUỐC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20PHU%20QUOC%202.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:57:00',
     achievements: [
       'LONGBIEN MARATHON 27/10/2024 - 4148/4771'
@@ -881,7 +881,7 @@ export const runners: Runner[] = [
     id: '47',
     name: 'NGUYỄN HỮU TIẾNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20HUU%20TIENG.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:58:19',
     achievements: [
       'TECHCOMBANK HCMC INTERNATIONAL MARATHON 8/12/2024 - 6072/6491',
@@ -907,7 +907,7 @@ export const runners: Runner[] = [
     id: '48',
     name: 'NGUYỄN THỊ NGỌC NI',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20NGOC%20NI.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:58:47',
     achievements: [
       'VIETNAM GOLD MARATHON - HO CHI MINH 20/07/2025 - 519/548',
@@ -920,7 +920,7 @@ export const runners: Runner[] = [
     id: '49',
     name: 'NGUYỄN XUÂN KHOA',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20XUAN%20KHOA.jpg',
-    halfMarathonPR: 'undefined',
+    halfMarathonPR: 'N/A',
     fullMarathonPR: '3:59:11',
     achievements: [
       'HCMC MARATHON 14/01/2024 - 6346/6491',
@@ -936,7 +936,7 @@ export const runners: Runner[] = [
     name: 'NGUYỄN LÊ THÁI DƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20LE%20THAI%20DUONG.jpg',
     halfMarathonPR: '01:40:25', // Fastest HM among those without FM
-    fullMarathonPR: 'undefined',
+    fullMarathonPR: 'N/A',
     achievements: [
       'RẰNG HÀM MẶT RUN ♡ BƯỚC CHẠY YÊU THƯƠNG 22/06/2025 - V23359',
       'HALF MARATHON - 01:40:25 - V23359 - RHM22.6.25 - 3614/5408',
