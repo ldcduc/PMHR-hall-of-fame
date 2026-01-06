@@ -14,7 +14,7 @@ const Header = () => {
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200">
-                <Image src="/favicon.ico" alt="PMH Runners Club Logo" className="w-full h-full object-contain" width={0} height={0} />
+                <Image src="/favicon.ico" alt="PMH Runners Club Logo" className="w-full h-full object-contain" width={32} height={32} />
               </div>
               <span className="text-lg font-semibold bg-gradient-to-r from-yellow-600 via-yellow-500 to-amber-500 bg-clip-text text-transparent">
                 PHU MY HUNG RUNNERS CLUB
@@ -46,6 +46,12 @@ const Header = () => {
               className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-0 after:bg-primary-600 after:transition-transform hover:after:scale-100"
             >
               LOP 2025
+            </Link>
+            <Link
+              href="/amigo-run"
+              className="text-gray-700 hover:text-yellow-600 px-3 py-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-0 after:bg-gradient-to-r after:from-yellow-500 after:to-blue-600 after:transition-transform hover:after:scale-100"
+            >
+              Amigo Run
             </Link>
             <Link
               href="/events"
@@ -98,6 +104,9 @@ const Header = () => {
               </Link>
               <Link href="/lop-2025" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
                 LOP 2025
+              </Link>
+              <Link href="/amigo-run" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-yellow-600">
+                Amigo Run
               </Link>
               <Link href="/events" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
                 Events
