@@ -2,52 +2,52 @@ import { Pacer } from '../types/pacer';
 
 export const pacers: Pacer[] = [
   // Sub 3H30 Group
-  {
-    id: 'p1',
-    name: 'LÊ ĐÌNH TẤM',
-    profileImage: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=400&fit=crop',
-    group: 'sub3h30',
-    isCaptain: true,
-    PR: '',
-  },
+  // {
+  //   id: 'p1',
+  //   name: 'Hảo Vũ',
+  //   profileImage: '/pacerhaovu.png',
+  //   group: '500',
+  //   isCaptain: true,
+  //   PR: '3h19+',
+  // },
   {
     id: 'p2',
-    name: 'NGUYỄN HỮU HÒA',
-    profileImage: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop',
-    group: 'sub3h30',
-    PR: '',
+    name: 'Lê Hoài Phương',
+    profileImage: '/pacerhoaiphuong.png',
+    group: '500',
+    PR: '3h29+',
   },
 
   // Sub 4H00 Group
   {
     id: 'p3',
-    name: '?',
-    profileImage: '/pacerhaovu.png',
-    group: 'sub4h00',
+    name: 'Đậu Danh',
+    profileImage: '/daudanhpacer2.png',
+    group: '530',
     isCaptain: true,
-    PR: '3h19+',
+    PR: '3h28+',
   },
   {
     id: 'p4',
-    name: '?',
-    profileImage: '/pacerkhanhdao.png',
-    group: 'sub4h00',
-    PR: '3h27+',
+    name: 'TrungCTXD',
+    profileImage: '/trunglepacer.png',
+    group: '530',
+    PR: '3h57+',
   },
 
   // Sub 4H30 Group
   {
     id: 'p5',
-    name: '?',
-    profileImage: '/daudanhpacer.png',
+    name: 'Tôn Duy Nghĩa',
+    profileImage: '/nghiatonpacer.png',
     group: 'sub4h30',
     isCaptain: true,
-    PR: '3h28+',
+    PR: '3h56+',
   },
   {
     id: 'p6',
-    name: '?',
-    profileImage: '/duclepacer.png',
+    name: 'Chú Kỹ Sư',
+    profileImage: '/duclepacer2.png',
     group: 'sub4h30',
     PR: '3h46+',
   },
@@ -55,17 +55,15 @@ export const pacers: Pacer[] = [
   // Newbie Group
   {
     id: 'p7',
-    name: 'NGUYỄN HỒNG ANH KHOA',
-    profileImage: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=400&fit=crop',
-    group: 'newbie',
+    name: 'Khuất Linh',
+    profileImage: '/khuatlinhpacer.png',
+    group: 'newbie2',
     isCaptain: true,
-    PR: '',
   },
-  {
-    id: 'p8',
-    name: 'LÊ TRẦN VIỆT THU',
-    profileImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
-    group: 'newbie',
-    PR: '',
-  },
+  // {
+  //   id: 'p8',
+  //   name: '?',
+  //   profileImage: '',
+  //   group: 'newbie2',
+  // },
 ];

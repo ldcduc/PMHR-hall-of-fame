@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import RunnerCard from '../components/RunnerCard';
-import RunnersTable from '../components/RunnersTable';
-import { runners } from '../data/runners';
-import Logo from '../components/Logo';
+import { useState } from "react";
+import RunnerCard from "../components/RunnerCard";
+import RunnersTable from "../components/RunnersTable";
+import { runners } from "../data/runners";
+import Logo from "../components/Logo";
 
 export default function Home() {
-  const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
+  const [viewMode, setViewMode] = useState<"cards" | "table">("cards");
 
   return (
     <>
@@ -31,21 +31,21 @@ export default function Home() {
           <div className="flex justify-center mb-8">
             <div className="bg-white rounded-full shadow-sm inline-flex p-1 border border-gray-200">
               <button
-                onClick={() => setViewMode('cards')}
+                onClick={() => setViewMode("cards")}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  viewMode === 'cards'
-                    ? 'bg-blue-500 text-white shadow-sm'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  viewMode === "cards"
+                    ? "bg-blue-500 text-white shadow-sm"
+                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                 }`}
               >
                 Cards
               </button>
               <button
-                onClick={() => setViewMode('table')}
+                onClick={() => setViewMode("table")}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  viewMode === 'table'
-                    ? 'bg-blue-500 text-white shadow-sm'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  viewMode === "table"
+                    ? "bg-blue-500 text-white shadow-sm"
+                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                 }`}
               >
                 Table
@@ -57,11 +57,47 @@ export default function Home() {
 
       {/* Runner Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {viewMode === 'cards' ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-16">
-            {runners.map((runner) => (
-              <RunnerCard key={runner.id} runner={runner} />
-            ))}
+        {viewMode === "cards" ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-16">
+            {runners.map((runner, index) => {
+              const rank = index + 1;
+              const isTop5 = rank <= 5;
+
+              const tierStyle = isTop5
+                ? "ring-2 ring-yellow-400 shadow-lg shadow-yellow-100 bg-gradient-to-b from-yellow-50 to-white"
+                : "ring-1 ring-gray-100 bg-white hover:ring-gray-200";
+
+              const badgeStyle = isTop5
+                ? "bg-gradient-to-br from-yellow-400 to-amber-500 text-white shadow-md"
+                : "bg-gray-100 text-gray-400";
+
+              const badgeLabel = isTop5 ? `🥇 #${rank}` : `#${rank}`;
+
+              return (
+                <div
+                  key={runner.id}
+                  className={`relative rounded-xl overflow-hidden transition-transform duration-150 hover:-translate-y-1 ${tierStyle}`}
+                >
+                  {/* Gold top bar for top 5 only */}
+                  {isTop5 && (
+                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400" />
+                  )}
+
+                  {/* Rank badge */}
+                  <div
+                    className={`absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-xs font-bold ${badgeStyle}`}
+                  >
+                    {badgeLabel}
+                  </div>
+
+                  <RunnerCard
+                    key={runner.id}
+                    runner={runner}
+                    isGolden={rank <= 5}
+                  />
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div className="mb-16">
@@ -74,23 +110,32 @@ export default function Home() {
       <section className="bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Club Statistics</h3>
-            <p className="text-gray-600">Our runners&apos; achievements at a glance</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              Club Statistics
+            </h3>
+            <p className="text-gray-600">
+              Our runners&apos; achievements at a glance
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-md p-6 text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">{runners.length}</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">
+                {runners.length}
+              </div>
               <div className="text-gray-600">Total Runners</div>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6 text-center">
               <div className="text-3xl font-bold text-yellow-500 mb-2">
-                {runners.filter(r => r.isElite).length}
+                {runners.filter((r) => r.isElite).length}
               </div>
               <div className="text-gray-600">Elite Athletes</div>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6 text-center">
               <div className="text-3xl font-bold text-green-600 mb-2">
-                {runners.reduce((sum, r) => sum + (r.totalAchievements || 0), 0)}
+                {runners.reduce(
+                  (sum, r) => sum + (r.totalAchievements || 0),
+                  0,
+                )}
               </div>
               <div className="text-gray-600">Total Achievements</div>
             </div>

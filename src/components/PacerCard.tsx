@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import { Pacer } from '../types/pacer';
+import Image from "next/image";
+import { Pacer } from "../types/pacer";
 
 interface PacerCardProps {
   pacer: Pacer;
@@ -11,7 +11,7 @@ export default function PacerCard({ pacer }: PacerCardProps) {
       {/* Profile Image */}
       <div className="relative h-48 bg-gradient-to-br from-yellow-100 to-blue-100">
         <Image
-          src={pacer.profileImage || '/placeholder-runner.png'}
+          src={pacer.profileImage || "/placeholder-runner.png"}
           alt={pacer.name}
           fill
           className="object-cover"
@@ -30,16 +30,18 @@ export default function PacerCard({ pacer }: PacerCardProps) {
           {pacer.name}
         </h4>
         {pacer.role && (
-          <p className="text-xs text-gray-600 text-center mt-1">
-            {pacer.role}
-          </p>
+          <p className="text-xs text-gray-600 text-center mt-1">{pacer.role}</p>
         )}
       </div>
 
       {/* Energy Gel Badge */}
-      <div className="absolute bottom-14 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded shadow-sm">
-        <span className="text-xs font-bold text-green-600">PR {pacer.PR}</span>
-      </div>
+      {pacer.PR && (
+        <div className="absolute bottom-14 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded shadow-sm">
+          <span className="text-xs font-bold text-green-600">
+            PR {pacer.PR}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
