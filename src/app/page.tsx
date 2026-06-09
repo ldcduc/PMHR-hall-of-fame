@@ -7,7 +7,22 @@ import { runners } from "../data/runners";
 import Logo from "../components/Logo";
 
 export default function Home() {
+  const [cardSort, setCardSort] = useState<"fm" | "hm">("fm");
   const [viewMode, setViewMode] = useState<"cards" | "table">("cards");
+
+  const timeToSeconds = (time: string | null | undefined): number => {
+    if (!time) return Infinity;
+    const parts = time.split(":").map(Number);
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if (parts.length === 2) return parts[0] * 60 + parts[1]; // MM:SS fallback
+    return Infinity;
+  };
+
+  const sortedRunners = [...runners].sort(
+    (a, b) =>
+      timeToSeconds(cardSort === "fm" ? a.fullMarathonPR : a.halfMarathonPR) -
+      timeToSeconds(cardSort === "fm" ? b.fullMarathonPR : b.halfMarathonPR),
+  );
 
   return (
     <>
@@ -58,46 +73,67 @@ export default function Home() {
       {/* Runner Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {viewMode === "cards" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-16">
-            {runners.map((runner, index) => {
-              const rank = index + 1;
-              const isTop5 = rank <= 5;
-
-              const tierStyle = isTop5
-                ? "ring-2 ring-yellow-400 shadow-lg shadow-yellow-100 bg-gradient-to-b from-yellow-50 to-white"
-                : "ring-1 ring-gray-100 bg-white hover:ring-gray-200";
-
-              const badgeStyle = isTop5
-                ? "bg-gradient-to-br from-yellow-400 to-amber-500 text-white shadow-md"
-                : "bg-gray-100 text-gray-400";
-
-              const badgeLabel = isTop5 ? `🥇 #${rank}` : `#${rank}`;
-
-              return (
-                <div
-                  key={runner.id}
-                  className={`relative rounded-xl overflow-hidden transition-transform duration-150 hover:-translate-y-1 ${tierStyle}`}
+          <div>
+            {/* Sort toggle */}
+            <div className="flex justify-end mb-4">
+              <div className="inline-flex rounded-lg border border-gray-300 bg-gray-100 p-1">
+                <button
+                  onClick={() => setCardSort("fm")}
+                  className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${
+                    cardSort === "fm"
+                      ? "bg-white text-gray-900 shadow"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
                 >
-                  {/* Gold top bar for top 5 only */}
-                  {isTop5 && (
-                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400" />
-                  )}
+                  🏃 Full Marathon
+                </button>
+                <button
+                  onClick={() => setCardSort("hm")}
+                  className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${
+                    cardSort === "hm"
+                      ? "bg-white text-gray-900 shadow"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  🏃 Half Marathon
+                </button>
+              </div>
+            </div>
 
-                  {/* Rank badge */}
+            {/* Cards grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-16">
+              {sortedRunners.map((runner, index) => {
+                const rank = index + 1;
+                const isTop5 = rank <= 5;
+
+                const tierStyle = isTop5
+                  ? "ring-2 ring-yellow-400 shadow-lg shadow-yellow-100 bg-gradient-to-b from-yellow-50 to-white"
+                  : "ring-1 ring-gray-100 bg-white hover:ring-gray-200";
+
+                const badgeStyle = isTop5
+                  ? "bg-gradient-to-br from-yellow-400 to-amber-500 text-white shadow-md"
+                  : "bg-gray-100 text-gray-400";
+
+                const badgeLabel = isTop5 ? `🥇 #${rank}` : `#${rank}`;
+
+                return (
                   <div
-                    className={`absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-xs font-bold ${badgeStyle}`}
-                  >
-                    {badgeLabel}
-                  </div>
-
-                  <RunnerCard
                     key={runner.id}
-                    runner={runner}
-                    isGolden={rank <= 5}
-                  />
-                </div>
-              );
-            })}
+                    className={`relative rounded-xl overflow-hidden transition-transform duration-150 hover:-translate-y-1 ${tierStyle}`}
+                  >
+                    {isTop5 && (
+                      <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400" />
+                    )}
+                    <div
+                      className={`absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-xs font-bold ${badgeStyle}`}
+                    >
+                      {badgeLabel}
+                    </div>
+                    <RunnerCard runner={runner} isGolden={rank <= 5} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ) : (
           <div className="mb-16">
