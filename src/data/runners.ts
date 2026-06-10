@@ -972,6 +972,20 @@ export const runners: Runner[] = [
     joinDate: '2025-06-22',
   },
   {
+    id: '63',
+    name: 'NGUYỄN HOÀNG SƠN',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20HOANG%20SON.jpg',
+    halfMarathonPR: '1:40:31', // From VnExpress Marathon All-Star 08/02/2026 - 54/107 (PR)
+    fullMarathonPR: 'N/A',
+    achievements: [
+      'VnExpress Marathon All-Star 08/02/2026 - 54/107',
+      'Tết Run Miền Nam 01/02/2026 - 237/369',
+      'VnExpress Marathon Green Paradise Can Gio 01/05/2026 - 45/67'
+    ],
+    bio: 'Member of Adidas Runners Saigon team. Age group: M20-29. Half marathon specialist with Ironman 140.6 pending.',
+    joinDate: '2026-02-01', // Based on earliest visible race
+  },
+  {
     id: '62',
     name: 'NGUYỄN THỊ THU HƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20THU%20HUONG%206.jpg',
