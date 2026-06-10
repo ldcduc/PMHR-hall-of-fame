@@ -614,6 +614,18 @@ export const runners: Runner[] = [
     joinDate: '2025-01-12',
   },
   {
+    id: '61',
+    name: 'KHUẤT HOẠT',
+    profileImage: '/khuathoat.jpg',
+    halfMarathonPR: 'N/A',
+    fullMarathonPR: '3:50:00',
+    achievements: [
+      'Tien Phong Marathon National Championship Lần Thứ 67 29/03/2026', // New PR!
+    ],
+    bio: 'Member of PMHR team. Age group: M (Male).',
+    joinDate: '',
+  },
+  {
     id: '29',
     name: 'THÁI THỊ PHƯƠNG',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/THAI%20THI%20PHUONG.jpg',
@@ -744,7 +756,7 @@ export const runners: Runner[] = [
     id: '50',
     name: 'NGUYỄN TRƯỜNG LÂM',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20TRUONG%20LAM.jpg',
-    halfMarathonPR: 'N/A', // ✅ No half marathon data available
+    halfMarathonPR: '1:44:35', // ✅ No half marathon data available
     fullMarathonPR: '3:54:46', // ✅ Corrected - from TCBHCM 7.12.25
     achievements: [
       // Full Marathons
@@ -958,6 +970,19 @@ export const runners: Runner[] = [
     ],
     bio: 'Age group: M20-29. Team: PMHR. Bib number: V23359. Specialized half marathon runner with consistent performance.',
     joinDate: '2025-06-22',
+  },
+  {
+    id: '62',
+    name: 'NGUYỄN THỊ THU HƯƠNG',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/NGUYEN%20THI%20THU%20HUONG%206.jpg',
+    halfMarathonPR: '1:42:01', // From Tết Run Miền Nam 01/02/2026 - 25/32 (PR)
+    fullMarathonPR: 'N/A', // Full marathon rank shown (6499/8057) but no PR time visible
+    achievements: [
+      // Half Marathon
+      'Tết Run Miền Nam 01/02/2026 - 387/561',
+    ],
+    bio: 'Member of PMHR team. Age group: F20-29. Multi-distance runner competing in half marathon and ultra trail events. Ironman 140.6 pending.',
+    joinDate: '2026-02-01', // Based on earliest visible PR race
   },
 ];
 
