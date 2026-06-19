@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import Image from 'next/image';
+import Link from "next/link";
+import { useState } from "react";
+import Image from "next/image";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,7 +14,13 @@ const Header = () => {
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200">
-                <Image src="/favicon.ico" alt="PMH Runners Club Logo" className="w-full h-full object-contain" width={32} height={32} />
+                <Image
+                  src="/favicon.ico"
+                  alt="PMH Runners Club Logo"
+                  className="w-full h-full object-contain"
+                  width={32}
+                  height={32}
+                />
               </div>
               <span className="text-lg font-semibold bg-gradient-to-r from-yellow-600 via-yellow-500 to-amber-500 bg-clip-text text-transparent">
                 PHU MY HUNG RUNNERS CLUB
@@ -46,6 +52,12 @@ const Header = () => {
               className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-0 after:bg-primary-600 after:transition-transform hover:after:scale-100"
             >
               LOP 2025
+            </Link>
+            <Link
+              href="/lop-2026"
+              className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-0 after:bg-primary-600 after:transition-transform hover:after:scale-100"
+            >
+              LOP 2026
             </Link>
             <Link
               href="/amigo-run"
@@ -82,8 +94,18 @@ const Header = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 focus:outline-none"
             >
-              <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="h-6 w-6"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
           </div>
@@ -93,25 +115,46 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              <Link href="/" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
+              <Link
+                href="/"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600"
+              >
                 Hall of Fame
               </Link>
-              <Link href="/runners" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
+              <Link
+                href="/runners"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600"
+              >
                 All Runners
               </Link>
-              <Link href="/lop-2024" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
+              <Link
+                href="/lop-2024"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600"
+              >
                 LOP 2024
               </Link>
-              <Link href="/lop-2025" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
+              <Link
+                href="/lop-2025"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600"
+              >
                 LOP 2025
               </Link>
-              <Link href="/amigo-run" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-yellow-600">
+              <Link
+                href="/amigo-run"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-yellow-600"
+              >
                 Amigo Run
               </Link>
-              <Link href="/events" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
+              <Link
+                href="/events"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600"
+              >
                 Events
               </Link>
-              <Link href="/about" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600">
+              <Link
+                href="/about"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600"
+              >
                 About
               </Link>
               <Link
