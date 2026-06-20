@@ -235,7 +235,7 @@ export default function LOP26Page() {
             </h2>
             <p className="text-sm text-gray-500">
               Những chiến binh dẫn đầu hành trình vòng quanh thế giới (Hết ngày
-              18/06/2026)
+              20/06/2026)
             </p>
           </div>
 
