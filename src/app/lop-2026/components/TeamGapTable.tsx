@@ -16,13 +16,14 @@ interface ApiResponse {
   runners: Record<string, RunnerRecord>;
 }
 
-const CUTOFFS = [20, 40, 60, 80, 100, 120];
-const SYNC_INTERVAL_MS = 5 * 60 * 1000; // matches instrumentation.ts's backend sync interval
+const PER_TEAM_CUTOFFS = [20, 40, 60, 80, 100, 120];
+const COMBINED_CUTOFFS = [50, 100, 150, 200, -1]; // -1 = "Toàn bộ" (all)
+const SYNC_INTERVAL_MS = 5 * 60 * 1000;
 
 interface TeamTotals {
   todayKm: number;
   totalKm: number;
-  count: number; // actual number of runners included (may be < N if team has fewer)
+  count: number;
 }
 
 function sumTopN(rows: RunnerRecord[], n: number): TeamTotals {
@@ -54,10 +55,14 @@ function DiffBadge({ value }: { value: number }) {
           : "text-yellow-600 font-semibold"
       }
     >
-      {isPositive ? "🐢 +" : "🐇 +"}
+      {isPositive ? "🐢 +" : "🐰 +"}
       {fmt(Math.abs(value))}
     </span>
   );
+}
+
+interface CombinedRunner extends RunnerRecord {
+  name: string;
 }
 
 export default function TeamGapTable() {
@@ -108,36 +113,42 @@ export default function TeamGapTable() {
     .filter((r) => r.team === "tho")
     .sort((a, b) => b.totalKm - a.totalKm);
 
+  // Combined pool: merge both teams into one list, sorted once by totalKm.
+  const combinedRows: CombinedRunner[] = Object.entries(data.runners)
+    .map(([name, r]) => ({ name, ...r }))
+    .sort((a, b) => b.totalKm - a.totalKm);
+
   return (
     <section id="so-sanh" className="max-w-7xl mx-auto px-4 pb-16">
+      {/* ───────────── Section 1: Per-team comparison ───────────── */}
       <div className="mb-6">
         <h2 className="text-2xl font-black text-gray-900">
           So sánh Top N giữa 2 team
         </h2>
         <p className="text-sm text-gray-500">
-          Tổng km (hôm nay / tổng) của Top 20, 40, 60... runners mỗi team — dữ
-          liệu real-time từ pmhr.fun
+          Tổng km (hôm nay / tổng) của Top 20, 40, 60... runners{" "}
+          <strong>mỗi team</strong> — dữ liệu real-time từ pmhr.fun
         </p>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-10">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-xs uppercase text-gray-500">
               <tr>
                 <th className="text-left px-4 py-3">Top N</th>
                 <th className="text-right px-4 py-3">🐢 Rùa — Hôm nay</th>
-                <th className="text-right px-4 py-3">🐇 Thỏ — Hôm nay</th>
+                <th className="text-right px-4 py-3">🐰 Thỏ — Hôm nay</th>
                 <th className="text-right px-4 py-3">Chênh lệch hôm nay</th>
                 <th className="text-right px-4 py-3 border-l border-gray-100">
                   🐢 Rùa — Tổng
                 </th>
-                <th className="text-right px-4 py-3">🐇 Thỏ — Tổng</th>
+                <th className="text-right px-4 py-3">🐰 Thỏ — Tổng</th>
                 <th className="text-right px-4 py-3">Chênh lệch tổng</th>
               </tr>
             </thead>
             <tbody>
-              {CUTOFFS.map((n) => {
+              {PER_TEAM_CUTOFFS.map((n) => {
                 const rua = sumTopN(ruaRows, n);
                 const tho = sumTopN(thoRows, n);
                 const todayDiff = rua.todayKm - tho.todayKm;
@@ -177,8 +188,105 @@ export default function TeamGapTable() {
         </div>
 
         <div className="px-4 py-3 border-t border-gray-100 text-xs text-gray-400">
-          🐢 = Rùa dẫn trước · 🐇 = Thỏ dẫn trước · So sánh dựa trên tổng km của
-          N runners đứng đầu mỗi team (xếp theo Tổng km)
+          🐢 = Rùa dẫn trước · 🐰 = Thỏ dẫn trước · So sánh dựa trên tổng km của
+          N runners đứng đầu <strong>mỗi team</strong> (xếp theo Tổng km)
+        </div>
+      </div>
+
+      {/* ───────────── Section 2: Combined pool comparison ───────────── */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-black text-gray-900">
+          So sánh Top N tổng (gộp 2 team)
+        </h2>
+        <p className="text-sm text-gray-500">
+          Gộp tất cả runners của <strong>cả 2 team</strong> vào 1 danh sách, xếp
+          theo Tổng km, rồi lấy Top N — xem mỗi team góp bao nhiêu km và bao
+          nhiêu runner trong nhóm dẫn đầu chung.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-50 text-xs uppercase text-gray-500">
+              <tr>
+                <th className="text-left px-4 py-3">Top N (tổng)</th>
+                <th className="text-right px-4 py-3">🐢 Rùa — Số runner</th>
+                <th className="text-right px-4 py-3">🐰 Thỏ — Số runner</th>
+                <th className="text-right px-4 py-3 border-l border-gray-100">
+                  🐢 Rùa — Hôm nay
+                </th>
+                <th className="text-right px-4 py-3">🐰 Thỏ — Hôm nay</th>
+                <th className="text-right px-4 py-3 border-l border-gray-100">
+                  🐢 Rùa — Tổng km
+                </th>
+                <th className="text-right px-4 py-3">🐰 Thỏ — Tổng km</th>
+                <th className="text-right px-4 py-3">Chênh lệch km</th>
+              </tr>
+            </thead>
+            <tbody>
+              {COMBINED_CUTOFFS.map((n) => {
+                const label = n === -1 ? "Toàn bộ" : `Top ${n}`;
+                const slice =
+                  n === -1 ? combinedRows : combinedRows.slice(0, n);
+
+                const ruaInSlice = slice.filter((r) => r.team === "rua");
+                const thoInSlice = slice.filter((r) => r.team === "tho");
+
+                const ruaTodayKm = ruaInSlice.reduce(
+                  (acc, r) => acc + (r.todayKm ?? 0),
+                  0,
+                );
+                const thoTodayKm = thoInSlice.reduce(
+                  (acc, r) => acc + (r.todayKm ?? 0),
+                  0,
+                );
+
+                const ruaKm = ruaInSlice.reduce((acc, r) => acc + r.totalKm, 0);
+                const thoKm = thoInSlice.reduce((acc, r) => acc + r.totalKm, 0);
+                const kmDiff = ruaKm - thoKm;
+
+                return (
+                  <tr
+                    key={n}
+                    className="border-t border-gray-100 hover:bg-gray-50"
+                  >
+                    <td className="px-4 py-3 font-bold text-gray-900">
+                      {label}
+                    </td>
+                    <td className="px-4 py-3 text-right text-blue-700">
+                      {ruaInSlice.length}
+                    </td>
+                    <td className="px-4 py-3 text-right text-yellow-600">
+                      {thoInSlice.length}
+                    </td>
+                    <td className="px-4 py-3 text-right text-blue-700 border-l border-gray-100">
+                      {fmt(ruaTodayKm)}
+                    </td>
+                    <td className="px-4 py-3 text-right text-yellow-600">
+                      {fmt(thoTodayKm)}
+                    </td>
+                    <td className="px-4 py-3 text-right text-blue-700 border-l border-gray-100">
+                      {fmt(ruaKm)}
+                    </td>
+                    <td className="px-4 py-3 text-right text-yellow-600">
+                      {fmt(thoKm)}
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      <DiffBadge value={kmDiff} />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="px-4 py-3 border-t border-gray-100 text-xs text-gray-400">
+          🐢 = Rùa dẫn trước · 🐰 = Thỏ dẫn trước · Bảng này gộp{" "}
+          <strong>tất cả runner của 2 team vào 1 danh sách chung</strong>, xếp
+          theo Tổng km, rồi cắt lấy N người đầu — khác với bảng trên (mỗi team
+          xếp riêng).
         </div>
       </div>
     </section>
