@@ -262,6 +262,15 @@ export default function LOP26Page() {
           >
             📝 Báo cáo thiếu km
           </a>
+
+          <a
+            href="https://pmhr.fun"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gray-50 border border-gray-200 text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:border-gray-300 transition-colors shadow-sm"
+          >
+            🔗 Quay về pmhr.fun
+          </a>
         </div>
       </div>
 
