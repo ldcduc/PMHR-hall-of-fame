@@ -16,6 +16,10 @@ interface ApiResponse {
   runners: Record<string, RunnerRecord>;
 }
 
+interface TeamGapTableProps {
+  fallbackData: ApiResponse;
+}
+
 const PER_TEAM_CUTOFFS = [20, 40, 60, 80, 100, 120];
 const COMBINED_CUTOFFS = [50, 100, 150, 200, -1]; // -1 = "Toàn bộ" (all)
 const SYNC_INTERVAL_MS = 5 * 60 * 1000;
@@ -65,9 +69,10 @@ interface CombinedRunner extends RunnerRecord {
   name: string;
 }
 
-export default function TeamGapTable() {
+export default function TeamGapTable({ fallbackData }: TeamGapTableProps) {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isLive, setIsLive] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -76,12 +81,24 @@ export default function TeamGapTable() {
       try {
         const res = await fetch("/api/lop26-roster");
         const json: ApiResponse = await res.json();
+
         if (!cancelled) {
-          setData(json);
+          if (json.size > 0) {
+            setData(json);
+            setIsLive(true);
+          } else {
+            // Live store empty (cold start / sync failed) — fall back to static snapshot.
+            setData(fallbackData);
+            setIsLive(false);
+          }
           setLoading(false);
         }
       } catch {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setData(fallbackData);
+          setIsLive(false);
+          setLoading(false);
+        }
       }
     }
 
@@ -91,7 +108,7 @@ export default function TeamGapTable() {
       cancelled = true;
       clearInterval(interval);
     };
-  }, []);
+  }, [fallbackData]);
 
   if (loading) {
     return (
@@ -120,6 +137,13 @@ export default function TeamGapTable() {
 
   return (
     <section id="so-sanh" className="max-w-7xl mx-auto px-4 pb-16">
+      {!isLive && (
+        <div className="mb-4 px-4 py-2 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-700">
+          ⚠️ Đang hiển thị dữ liệu từ lần đồng bộ gần nhất (chưa kết nối được
+          pmhr.fun real-time)
+        </div>
+      )}
+
       {/* ───────────── Section 1: Per-team comparison ───────────── */}
       <div className="mb-6">
         <h2 className="text-2xl font-black text-gray-900">

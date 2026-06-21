@@ -17,6 +17,8 @@ export interface RosterRunner {
   profileImage: string; // left empty — fill in avatar URLs as available
 }
 
+export const lastSyncedAt = '2026-06-21T12:22:07.251Z';
+
 // ───────────────────────────── 🐢 Rùa team ─────────────────────────────
 export const fullRosterRua: RosterRunner[] = [
   { rank: 1,   name: 'Đậu Danh',                        status: 'legend',    todayKm: 10.2, totalKm: 267.9, streak: 9, profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DAU%20DANH.jpg' },

@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { fullRoster, type RosterRunner } from "./data/runners";
+import {
+  fullRosterRua,
+  fullRosterTho,
+  lastSyncedAt,
+  type RosterRunner,
+} from "./data/runners";
 import LastSyncedBadge from "./components/LastSyncedBadge";
 import TeamGapTable from "./components/TeamGapTable";
 import AllRunnersTable from "./components/AllRunnersTable";
@@ -13,15 +18,23 @@ interface DisplayRunner extends RosterRunner {
   overallRank: number; // rank within the currently selected view (1-based)
 }
 
+interface RunnerRecord {
+  todayKm: number | null;
+  totalKm: number;
+  streak: number;
+  team: string;
+  updatedAt: string;
+}
+
+interface ApiResponseShape {
+  size: number;
+  lastSyncedAt: string | null;
+  runners: Record<string, RunnerRecord>;
+}
+
 const TEAM_COLORS: Record<
   TeamKey,
-  {
-    bg: string;
-    light: string;
-    border: string;
-    text: string;
-    emoji: string;
-  }
+  { bg: string; light: string; border: string; text: string; emoji: string }
 > = {
   rua: {
     bg: "bg-blue-600",
@@ -51,36 +64,64 @@ function getInitials(name: string) {
 }
 
 // Top 20 per team — explicitly sorted by totalKm (descending), not by array/rank order.
-const top20Rua: DisplayRunner[] = fullRoster.rua
+const top20Rua: DisplayRunner[] = fullRosterRua
   .map((r) => ({ ...r, team: "rua" as const, overallRank: r.rank }))
   .sort((a, b) => b.totalKm - a.totalKm)
   .slice(0, 20)
   .map((r, i) => ({ ...r, overallRank: i + 1 }));
 
-const top20Tho: DisplayRunner[] = fullRoster.tho
+const top20Tho: DisplayRunner[] = fullRosterTho
   .map((r) => ({ ...r, team: "tho" as const, overallRank: r.rank }))
   .sort((a, b) => b.totalKm - a.totalKm)
   .slice(0, 20)
   .map((r, i) => ({ ...r, overallRank: i + 1 }));
 
 // Combined "overall" top 20 — merge both full rosters (rua + tho), sort by totalKm, re-rank 1-20.
-const allRunners: DisplayRunner[] = [
-  ...fullRoster.rua.map((r) => ({
+const allRunnersForOverall: DisplayRunner[] = [
+  ...fullRosterRua.map((r) => ({
     ...r,
     team: "rua" as const,
     overallRank: r.rank,
   })),
-  ...fullRoster.tho.map((r) => ({
+  ...fullRosterTho.map((r) => ({
     ...r,
     team: "tho" as const,
     overallRank: r.rank,
   })),
 ];
 
-const top20Overall: DisplayRunner[] = [...allRunners]
+const top20Overall: DisplayRunner[] = [...allRunnersForOverall]
   .sort((a, b) => b.totalKm - a.totalKm)
   .slice(0, 20)
   .map((r, i) => ({ ...r, overallRank: i + 1 }));
+
+// Convert the static roster arrays into the same shape the live API
+// (/api/lop26-roster) returns, so TeamGapTable / AllRunnersTable can fall
+// back to this data if the live in-memory sync is empty or has failed.
+function staticRosterAsFallback(): ApiResponseShape {
+  const runners: Record<string, RunnerRecord> = {};
+
+  for (const r of fullRosterRua) {
+    runners[r.name] = {
+      todayKm: r.todayKm,
+      totalKm: r.totalKm,
+      streak: r.streak,
+      team: "rua",
+      updatedAt: lastSyncedAt,
+    };
+  }
+  for (const r of fullRosterTho) {
+    runners[r.name] = {
+      todayKm: r.todayKm,
+      totalKm: r.totalKm,
+      streak: r.streak,
+      team: "tho",
+      updatedAt: lastSyncedAt,
+    };
+  }
+
+  return { size: Object.keys(runners).length, lastSyncedAt, runners };
+}
 
 function RunnerCard({ runner }: { runner: DisplayRunner }) {
   const [imgError, setImgError] = useState(false);
@@ -90,7 +131,13 @@ function RunnerCard({ runner }: { runner: DisplayRunner }) {
 
   return (
     <div
-      className={`relative rounded-2xl overflow-hidden shadow-lg border-2 ${rank <= 5 ? "border-yellow-400" : tc.border} flex flex-col transition-transform hover:-translate-y-1 hover:shadow-2xl ${rank <= 5 ? "bg-gradient-to-b from-yellow-50 via-amber-50 to-yellow-100" : "bg-white"}`}
+      className={`relative rounded-2xl overflow-hidden shadow-lg border-2 ${
+        rank <= 5 ? "border-yellow-400" : tc.border
+      } flex flex-col transition-transform hover:-translate-y-1 hover:shadow-2xl ${
+        rank <= 5
+          ? "bg-gradient-to-b from-yellow-50 via-amber-50 to-yellow-100"
+          : "bg-white"
+      }`}
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
       {/* Rank badge */}
@@ -210,6 +257,7 @@ const TAB_CONFIG: Record<
 export default function LOP26Page() {
   const [tab, setTab] = useState<Tab>("overall");
   const runners = TAB_CONFIG[tab].data;
+  const fallbackData = staticRosterAsFallback();
 
   return (
     <div
@@ -283,7 +331,7 @@ export default function LOP26Page() {
             </h2>
             <p className="text-sm text-gray-500">
               Những chiến binh dẫn đầu hành trình vòng quanh thế giới{" "}
-              <LastSyncedBadge />
+              <LastSyncedBadge fallbackLastSyncedAt={lastSyncedAt} />
             </p>
           </div>
 
@@ -315,10 +363,11 @@ export default function LOP26Page() {
         </div>
       </section>
 
-      {/* NEW: Team gap comparison table */}
-      <TeamGapTable />
-      {/* NEW: All runners sortable table */}
-      <AllRunnersTable />
+      {/* Team gap comparison table, with fallback to static file if live sync is empty/failed */}
+      <TeamGapTable fallbackData={fallbackData} />
+
+      {/* All runners sortable/searchable/paginated table, same fallback behavior */}
+      <AllRunnersTable fallbackData={fallbackData} />
     </div>
   );
 }

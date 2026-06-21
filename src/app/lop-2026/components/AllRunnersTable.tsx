@@ -16,6 +16,10 @@ interface ApiResponse {
   runners: Record<string, RunnerRecord>;
 }
 
+interface AllRunnersTableProps {
+  fallbackData: ApiResponse;
+}
+
 type Tab = "all" | "rua" | "tho";
 type SortKey = "totalKm" | "todayKm" | "streak";
 type SortDir = "asc" | "desc";
@@ -131,9 +135,12 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
   );
 }
 
-export default function AllRunnersTable() {
+export default function AllRunnersTable({
+  fallbackData,
+}: AllRunnersTableProps) {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isLive, setIsLive] = useState(true);
   const [tab, setTab] = useState<Tab>("all");
   const [sortKey, setSortKey] = useState<SortKey>("totalKm");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
@@ -148,12 +155,24 @@ export default function AllRunnersTable() {
       try {
         const res = await fetch("/api/lop26-roster");
         const json: ApiResponse = await res.json();
+
         if (!cancelled) {
-          setData(json);
+          if (json.size > 0) {
+            setData(json);
+            setIsLive(true);
+          } else {
+            // Live store empty (cold start / sync failed) — fall back to static snapshot.
+            setData(fallbackData);
+            setIsLive(false);
+          }
           setLoading(false);
         }
       } catch {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setData(fallbackData);
+          setIsLive(false);
+          setLoading(false);
+        }
       }
     }
 
@@ -163,7 +182,7 @@ export default function AllRunnersTable() {
       cancelled = true;
       clearInterval(interval);
     };
-  }, []);
+  }, [fallbackData]);
 
   const allRunners: NamedRunner[] = useMemo(() => {
     if (!data) return [];
@@ -239,6 +258,13 @@ export default function AllRunnersTable() {
 
   return (
     <section id="tat-ca-runners" className="max-w-7xl mx-auto px-4 pb-16">
+      {!isLive && (
+        <div className="mb-4 px-4 py-2 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-700">
+          ⚠️ Đang hiển thị dữ liệu từ lần đồng bộ gần nhất (chưa kết nối được
+          pmhr.fun real-time)
+        </div>
+      )}
+
       <div className="flex flex-col gap-4 mb-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>

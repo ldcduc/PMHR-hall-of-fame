@@ -3,19 +3,29 @@
 
 import { useEffect, useState } from "react";
 
+interface LastSyncedBadgeProps {
+  fallbackLastSyncedAt?: string;
+}
+
 function formatVNDateTime(iso: string): string {
   const d = new Date(iso);
-  return d.toLocaleString("vi-VN", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
+  const hh = d.toLocaleTimeString("vi-VN", {
     hour: "2-digit",
     minute: "2-digit",
   });
+  const dd = d.toLocaleDateString("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+  return `${hh} ${dd}`;
 }
 
-export default function LastSyncedBadge() {
+export default function LastSyncedBadge({
+  fallbackLastSyncedAt,
+}: LastSyncedBadgeProps) {
   const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null);
+  const [isLive, setIsLive] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -24,34 +34,38 @@ export default function LastSyncedBadge() {
       try {
         const res = await fetch("/api/lop26-roster");
         const data = await res.json();
-        if (!cancelled) setLastSyncedAt(data.lastSyncedAt ?? null);
+
+        if (!cancelled) {
+          if (data.lastSyncedAt) {
+            setLastSyncedAt(data.lastSyncedAt);
+            setIsLive(true);
+          } else if (fallbackLastSyncedAt) {
+            setLastSyncedAt(fallbackLastSyncedAt);
+            setIsLive(false);
+          }
+        }
       } catch {
-        // silently ignore — badge just won't show a time
+        if (!cancelled && fallbackLastSyncedAt) {
+          setLastSyncedAt(fallbackLastSyncedAt);
+          setIsLive(false);
+        }
       }
     }
 
     load();
-    const interval = setInterval(load, 60_000); // refresh every minute
+    const interval = setInterval(load, 60_000);
     return () => {
       cancelled = true;
       clearInterval(interval);
     };
-  }, []);
+  }, [fallbackLastSyncedAt]);
 
   if (!lastSyncedAt) return null;
 
   return (
     <span>
-      (Cập nhật lần cuối từ{" "}
-      <a
-        href="https://pmhr.fun"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="underline hover:text-gray-700"
-      >
-        pmhr.fun
-      </a>
-      : {formatVNDateTime(lastSyncedAt)})
+      Cập nhật lần cuối từ pmhr.fun: {formatVNDateTime(lastSyncedAt)}
+      {!isLive && <span className="text-amber-500"> (cached)</span>}
     </span>
   );
 }

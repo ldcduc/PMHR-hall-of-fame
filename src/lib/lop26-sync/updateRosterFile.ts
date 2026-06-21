@@ -1,13 +1,9 @@
 // Updates the `todayKm`, `totalKm`, and `streak` fields inside
 // runners.ts (or lop26FullRoster.ts) in place, matching runners by name
-// within each team's array (fullRosterRua / fullRosterTho).
-//
-// Approach: rather than re-generating the whole file (which would lose
-// any hand-edited profileImage URLs, comments, formatting, etc.), this
-// does a targeted regex replace on each runner's object literal line,
-// keyed by the `name:` field. This keeps the diff minimal.
+// within each team's array (fullRosterRua / fullRosterTho). Also updates
+// (or inserts) a `lastSyncedAt` export tracking when this file was last
+// refreshed from pmhr.fun.
 
-// src/lib/lop26-sync/updateRosterFile.ts
 import fs from 'fs';
 import type { ParsedRunnerRow } from './parsePage';
 
@@ -79,12 +75,44 @@ function updateArrayBlock(
   return { source: newSource, updated, notFound };
 }
 
+/**
+ * Update (or insert, if missing) an `export const lastSyncedAt = '...'`
+ * line near the top of the file, right after the imports/type
+ * declarations and before the first array export.
+ */
+function updateLastSyncedAt(source: string, isoTimestamp: string): string {
+  const existingRe = /export const lastSyncedAt\s*=\s*['"][^'"]*['"];?/;
+
+  if (existingRe.test(source)) {
+    return source.replace(existingRe, `export const lastSyncedAt = '${isoTimestamp}';`);
+  }
+
+  // Not present yet — insert it right before the first `export const full...`
+  // array declaration, so it sits near the top of the file alongside the
+  // other top-level exports.
+  const firstArrayRe = /export const full\w+/;
+  const match = source.match(firstArrayRe);
+
+  if (!match || match.index === undefined) {
+    // Fallback: just prepend it at the very top of the file.
+    return `export const lastSyncedAt = '${isoTimestamp}';\n\n${source}`;
+  }
+
+  return (
+    source.slice(0, match.index) +
+    `export const lastSyncedAt = '${isoTimestamp}';\n\n` +
+    source.slice(match.index)
+  );
+}
+
 export function updateRosterFile(
   filePath: string,
   data: { rua?: ParsedRunnerRow[]; tho?: ParsedRunnerRow[] }
-): { rua?: UpdateReport; tho?: UpdateReport } {
+): { rua?: UpdateReport; tho?: UpdateReport; lastSyncedAt: string } {
   let source = fs.readFileSync(filePath, 'utf-8');
-  const report: { rua?: UpdateReport; tho?: UpdateReport } = {};
+  const report: { rua?: UpdateReport; tho?: UpdateReport; lastSyncedAt: string } = {
+    lastSyncedAt: '',
+  };
 
   if (data.rua) {
     const result = updateArrayBlock(source, 'fullRosterRua', data.rua);
@@ -97,6 +125,10 @@ export function updateRosterFile(
     source = result.source;
     report.tho = { updated: result.updated, notFound: result.notFound };
   }
+
+  const isoTimestamp = new Date().toISOString();
+  source = updateLastSyncedAt(source, isoTimestamp);
+  report.lastSyncedAt = isoTimestamp;
 
   fs.writeFileSync(filePath, source, 'utf-8');
   return report;
