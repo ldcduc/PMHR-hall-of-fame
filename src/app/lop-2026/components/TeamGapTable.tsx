@@ -21,7 +21,7 @@ interface TeamGapTableProps {
 }
 
 const PER_TEAM_CUTOFFS = [20, 40, 60, 80, 100, 120];
-const COMBINED_CUTOFFS = [50, 100, 150, 200, -1]; // -1 = "Toàn bộ" (all)
+const COMBINED_CUTOFFS = [25, 50, 75, 100, 125, 150, 175, 200, 225, -1]; // -1 = "Toàn bộ" (all)
 const SYNC_INTERVAL_MS = 5 * 60 * 1000;
 
 interface TeamTotals {
@@ -246,10 +246,22 @@ export default function TeamGapTable({ fallbackData }: TeamGapTableProps) {
                 </th>
                 <th className="text-right px-4 py-3">🐰 Thỏ — Tổng km</th>
                 <th className="text-right px-4 py-3">Chênh lệch km</th>
+                <th className="text-right px-4 py-3 border-l border-gray-100">
+                  🐢 Rùa — So với mốc trước
+                </th>
+                <th className="text-right px-4 py-3">
+                  🐰 Thỏ — So với mốc trước
+                </th>
+                <th className="text-right px-4 py-3 border-l border-gray-100">
+                  🐢 Rùa — Trung bình mỗi runner
+                </th>
+                <th className="text-right px-4 py-3">
+                  🐰 Thỏ — Trung bình mỗi runner
+                </th>
               </tr>
             </thead>
             <tbody>
-              {COMBINED_CUTOFFS.map((n) => {
+              {COMBINED_CUTOFFS.map((n, idx) => {
                 const label = n === -1 ? "Toàn bộ" : `Top ${n}`;
                 const slice =
                   n === -1 ? combinedRows : combinedRows.slice(0, n);
@@ -269,6 +281,30 @@ export default function TeamGapTable({ fallbackData }: TeamGapTableProps) {
                 const ruaKm = ruaInSlice.reduce((acc, r) => acc + r.totalKm, 0);
                 const thoKm = thoInSlice.reduce((acc, r) => acc + r.totalKm, 0);
                 const kmDiff = ruaKm - thoKm;
+
+                const ruaAvg =
+                  ruaInSlice.length > 0 ? ruaKm / ruaInSlice.length : 0;
+                const thoAvg =
+                  thoInSlice.length > 0 ? thoKm / thoInSlice.length : 0;
+
+                // Compare against the previous checkpoint's slice to see how much each
+                // team's km total grew between this cutoff and the last one.
+                let ruaVsPrev: number | null = null;
+                let thoVsPrev: number | null = null;
+
+                if (idx > 0) {
+                  const prevN = COMBINED_CUTOFFS[idx - 1];
+                  const prevSlice =
+                    prevN === -1 ? combinedRows : combinedRows.slice(0, prevN);
+                  const prevRuaKm = prevSlice
+                    .filter((r) => r.team === "rua")
+                    .reduce((acc, r) => acc + r.totalKm, 0);
+                  const prevThoKm = prevSlice
+                    .filter((r) => r.team === "tho")
+                    .reduce((acc, r) => acc + r.totalKm, 0);
+                  ruaVsPrev = ruaKm - prevRuaKm;
+                  thoVsPrev = thoKm - prevThoKm;
+                }
 
                 return (
                   <tr
@@ -298,6 +334,32 @@ export default function TeamGapTable({ fallbackData }: TeamGapTableProps) {
                     </td>
                     <td className="px-4 py-3 text-right">
                       <DiffBadge value={kmDiff} />
+                    </td>
+                    <td className="px-4 py-3 text-right text-blue-700 border-l border-gray-100">
+                      {ruaVsPrev === null ? (
+                        <span className="text-gray-300">—</span>
+                      ) : (
+                        <>
+                          {ruaVsPrev >= (thoVsPrev ?? -Infinity) && "🐢 "}+
+                          {fmt(ruaVsPrev)}
+                        </>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-right text-yellow-600">
+                      {thoVsPrev === null ? (
+                        <span className="text-gray-300">—</span>
+                      ) : (
+                        <>
+                          {thoVsPrev > (ruaVsPrev ?? Infinity) && "🐰 "}+
+                          {fmt(thoVsPrev)}
+                        </>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-right text-blue-700 border-l border-gray-100">
+                      {fmt(ruaAvg)}
+                    </td>
+                    <td className="px-4 py-3 text-right text-yellow-600">
+                      {fmt(thoAvg)}
                     </td>
                   </tr>
                 );
