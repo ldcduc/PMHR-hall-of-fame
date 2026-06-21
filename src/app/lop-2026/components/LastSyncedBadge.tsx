@@ -42,7 +42,7 @@ export default function LastSyncedBadge() {
 
   return (
     <span>
-      Cập nhật lần cuối từ{" "}
+      (Cập nhật lần cuối từ{" "}
       <a
         href="https://pmhr.fun"
         target="_blank"
@@ -51,7 +51,7 @@ export default function LastSyncedBadge() {
       >
         pmhr.fun
       </a>
-      : {formatVNDateTime(lastSyncedAt)}
+      : {formatVNDateTime(lastSyncedAt)})
     </span>
   );
 }

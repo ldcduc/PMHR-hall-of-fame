@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { fullRoster, type RosterRunner } from "./data/runners";
 import LastSyncedBadge from "./components/LastSyncedBadge";
+import TeamGapTable from "./components/TeamGapTable";
+import AllRunnersTable from "./components/AllRunnersTable";
 
 type TeamKey = "rua" | "tho";
 
@@ -228,6 +230,41 @@ export default function LOP26Page() {
         </p>
       </header>
 
+      {/* Quick jump shortcuts */}
+      <div className="max-w-7xl mx-auto px-4 pt-6">
+        <div className="flex gap-2 flex-wrap">
+          <a
+            href="/lop-2026/luat-choi"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-colors shadow-sm"
+          >
+            📖 Luật chơi (Cập nhật sau)
+          </a>
+
+          <a
+            href="#so-sanh"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-colors shadow-sm"
+          >
+            📊 So sánh 2 team
+          </a>
+
+          <a
+            href="#tat-ca-runners"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-colors shadow-sm"
+          >
+            🏃 Tất cả Runners
+          </a>
+
+          <a
+            href="https://forms.gle/3SMpTuVLoSE1fGWq9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-sm font-semibold text-orange-700 hover:bg-orange-100 hover:border-orange-300 transition-colors shadow-sm"
+          >
+            📝 Báo cáo thiếu km
+          </a>
+        </div>
+      </div>
+
       {/* Top 20 section */}
       <section className="max-w-7xl mx-auto px-4 py-10 pb-16">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
@@ -268,6 +305,11 @@ export default function LOP26Page() {
           ))}
         </div>
       </section>
+
+      {/* NEW: Team gap comparison table */}
+      <TeamGapTable />
+      {/* NEW: All runners sortable table */}
+      <AllRunnersTable />
     </div>
   );
 }
