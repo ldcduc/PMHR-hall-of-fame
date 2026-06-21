@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { fullRoster, type RosterRunner } from "./data/runners";
+import LastSyncedBadge from "./components/LastSyncedBadge";
 
 type TeamKey = "rua" | "tho";
 
@@ -234,8 +235,8 @@ export default function LOP26Page() {
               Top 20 Runners
             </h2>
             <p className="text-sm text-gray-500">
-              Những chiến binh dẫn đầu hành trình vòng quanh thế giới (Hết ngày
-              20/06/2026)
+              Những chiến binh dẫn đầu hành trình vòng quanh thế giới{" "}
+              <LastSyncedBadge />
             </p>
           </div>
 

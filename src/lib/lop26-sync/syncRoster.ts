@@ -2,40 +2,47 @@
 //   1. Fetch all pages for 'rua' and 'tho' from pmhr.fun
 //   2. Parse each page into runner rows
 //   3. Update the in-memory kmStore (name -> {todayKm, totalKm, streak, team})
-//   4. Patch src/app/lop-2026/data/runners.ts in place with the fresh totals
+//   4. Patch src/data/runners.ts (or lop26FullRoster.ts) in place with fresh totals
 //
-// CLI:           node src/lib/lop26-sync/syncRoster.js [path/to/runners.ts]
-// Programmatic:  const { syncRoster } = require('./syncRoster');
+// CLI:           npx tsx src/lib/lop26-sync/syncRoster.ts [path/to/runners.ts]
+// Programmatic:  import { syncRoster } from './syncRoster';
 
-const path = require('path');
-const { fetchAllPages } = require('./fetchAllPages');
-const kmStore = require('./kmStore');
-const { updateRosterFile } = require('./updateRosterFile');
+import path from 'path';
+import { fetchAllPages } from './fetchAllPages';
+import * as kmStore from './kmStore';
+import { updateRosterFile, type UpdateReport } from './updateRosterFile';
 
-// Adjust this default if your data file lives somewhere else relative to this module.
 const DEFAULT_ROSTER_PATH = path.resolve(__dirname, '../../app/lop-2026/data/runners.ts');
 
-/**
- * @param {string} [rosterFilePath]
- * @param {Object} [opts]
- * @param {boolean} [opts.writeFile=true]
- */
-async function syncRoster(rosterFilePath = DEFAULT_ROSTER_PATH, opts = {}) {
+interface SyncReport {
+  rua: { rowCount: number; totalCount: number | null; fileReport?: UpdateReport };
+  tho: { rowCount: number; totalCount: number | null; fileReport?: UpdateReport };
+  storeSize: number;
+}
+
+export async function syncRoster(
+  rosterFilePath: string = DEFAULT_ROSTER_PATH,
+  opts: { writeFile?: boolean } = {}
+): Promise<SyncReport> {
   const { writeFile = true } = opts;
 
   console.log('[syncRoster] Fetching Rùa team pages...');
   const ruaResult = await fetchAllPages('rua');
-  console.log(`[syncRoster] Rùa: parsed ${ruaResult.rows.length} rows (site reports ${ruaResult.totalCount} total)`);
+  console.log(
+    `[syncRoster] Rùa: parsed ${ruaResult.rows.length} rows (site reports ${ruaResult.totalCount} total)`
+  );
 
   console.log('[syncRoster] Fetching Thỏ team pages...');
   const thoResult = await fetchAllPages('tho');
-  console.log(`[syncRoster] Thỏ: parsed ${thoResult.rows.length} rows (site reports ${thoResult.totalCount} total)`);
+  console.log(
+    `[syncRoster] Thỏ: parsed ${thoResult.rows.length} rows (site reports ${thoResult.totalCount} total)`
+  );
 
   kmStore.setMany('rua', ruaResult.rows);
   kmStore.setMany('tho', thoResult.rows);
   console.log(`[syncRoster] In-memory store now holds ${kmStore.size()} runners`);
 
-  const report = {
+  const report: SyncReport = {
     rua: { rowCount: ruaResult.rows.length, totalCount: ruaResult.totalCount },
     tho: { rowCount: thoResult.rows.length, totalCount: thoResult.totalCount },
     storeSize: kmStore.size(),
@@ -51,16 +58,17 @@ async function syncRoster(rosterFilePath = DEFAULT_ROSTER_PATH, opts = {}) {
     report.tho.fileReport = fileReport.tho;
 
     if (fileReport.rua?.notFound.length) {
-      console.warn(`[syncRoster] Rùa: not found in file:`, fileReport.rua.notFound);
+      console.warn('[syncRoster] Rùa: not found in file:', fileReport.rua.notFound);
     }
     if (fileReport.tho?.notFound.length) {
-      console.warn(`[syncRoster] Thỏ: not found in file:`, fileReport.tho.notFound);
+      console.warn('[syncRoster] Thỏ: not found in file:', fileReport.tho.notFound);
     }
   }
 
   return report;
 }
 
+// CLI entry point
 if (require.main === module) {
   const targetPath = process.argv[2] || DEFAULT_ROSTER_PATH;
   syncRoster(targetPath)
@@ -73,5 +81,3 @@ if (require.main === module) {
       process.exit(1);
     });
 }
-
-module.exports = { syncRoster, DEFAULT_ROSTER_PATH };

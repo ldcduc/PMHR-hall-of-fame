@@ -1,45 +1,58 @@
 // Updates the `todayKm`, `totalKm`, and `streak` fields inside
-// runners.ts in place, matching runners by name within each
-// team's array (fullRosterRua / fullRosterTho).
+// runners.ts (or lop26FullRoster.ts) in place, matching runners by name
+// within each team's array (fullRosterRua / fullRosterTho).
 //
 // Approach: rather than re-generating the whole file (which would lose
 // any hand-edited profileImage URLs, comments, formatting, etc.), this
 // does a targeted regex replace on each runner's object literal line,
 // keyed by the `name:` field. This keeps the diff minimal.
 
-const fs = require('fs');
+// src/lib/lop26-sync/updateRosterFile.ts
+import fs from 'fs';
+import type { ParsedRunnerRow } from './parsePage';
 
-function escapeRegex(str) {
+export interface UpdateReport {
+  updated: string[];
+  notFound: string[];
+}
+
+function escapeRegex(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function fmtKm(value) {
+function fmtKm(value: number | null | undefined): string {
   if (value === null || value === undefined) return 'null';
   return Number(value.toFixed(1)).toString();
 }
 
-/**
- * @param {string} source - full file contents
- * @param {string} arrayName - e.g. 'fullRosterRua'
- * @param {{ name: string, todayKm: number|null, totalKm: number, streak: number }[]} rows
- */
-function updateArrayBlock(source, arrayName, rows) {
-  const updated = [];
-  const notFound = [];
+function updateArrayBlock(
+  source: string,
+  arrayName: string,
+  rows: ParsedRunnerRow[]
+): { source: string; updated: string[]; notFound: string[] } {
+  const updated: string[] = [];
+  const notFound: string[] = [];
 
-  // Isolate the array's source block so name collisions in OTHER arrays
-  // (e.g. same name appearing in both rua/tho) don't get touched.
   const arrayStartRe = new RegExp(`export const ${arrayName}[^=]*=\\s*\\[`);
   const startMatch = source.match(arrayStartRe);
-  if (!startMatch) {
-    throw new Error(`Could not find array "${arrayName}" in source file`);
+  if (!startMatch || startMatch.index === undefined) {
+    const availableExports = [...source.matchAll(/export const (\w+)/g)].map(
+      (m) => m[1]
+    );
+    throw new Error(
+      `Could not find array "${arrayName}" in source file. ` +
+        `Available exports in this file: ${availableExports.join(', ') || '(none found)'}`
+    );
   }
   const blockStart = startMatch.index + startMatch[0].length;
-  const blockEndRel = source.slice(blockStart).indexOf('\n];');
-  if (blockEndRel === -1) {
+
+  // Find the matching closing "];" for this array. Tolerant of \n or \r\n.
+  const endRe = /\r?\n\];/;
+  const endMatch = source.slice(blockStart).match(endRe);
+  if (!endMatch || endMatch.index === undefined) {
     throw new Error(`Could not find end of array "${arrayName}"`);
   }
-  const blockEnd = blockStart + blockEndRel;
+  const blockEnd = blockStart + endMatch.index;
 
   let block = source.slice(blockStart, blockEnd);
 
@@ -67,13 +80,12 @@ function updateArrayBlock(source, arrayName, rows) {
   return { source: newSource, updated, notFound };
 }
 
-/**
- * @param {string} filePath - path to runners.ts
- * @param {{ rua?: any[], tho?: any[] }} data
- */
-function updateRosterFile(filePath, data) {
+export function updateRosterFile(
+  filePath: string,
+  data: { rua?: ParsedRunnerRow[]; tho?: ParsedRunnerRow[] }
+): { rua?: UpdateReport; tho?: UpdateReport } {
   let source = fs.readFileSync(filePath, 'utf-8');
-  const report = {};
+  const report: { rua?: UpdateReport; tho?: UpdateReport } = {};
 
   if (data.rua) {
     const result = updateArrayBlock(source, 'fullRosterRua', data.rua);
@@ -90,5 +102,3 @@ function updateRosterFile(filePath, data) {
   fs.writeFileSync(filePath, source, 'utf-8');
   return report;
 }
-
-module.exports = { updateRosterFile, updateArrayBlock, fmtKm };
