@@ -118,6 +118,7 @@ function RunnerCard({ runner }: { runner: DisplayRunner }) {
         className={`w-full h-44 flex items-center justify-center ${tc.light} overflow-hidden`}
       >
         {profileImage && !imgError ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={profileImage}
             alt={runner.name}

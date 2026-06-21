@@ -43,8 +43,9 @@ export function startRosterSync(opts: StartRosterSyncOptions = {}): void {
           `${thoResult.rows.length} Thỏ = ${kmStore.size()} runners total ` +
           `(synced at ${kmStore.getLastSyncedAt()})`
       );
-    } catch (err: any) {
-      console.error('[lop26-sync] Sync failed:', err?.message || err);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error('[lop26-sync] Sync failed:', message);
     }
   }
 

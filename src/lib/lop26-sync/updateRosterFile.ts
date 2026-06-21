@@ -36,7 +36,7 @@ function updateArrayBlock(
   const arrayStartRe = new RegExp(`export const ${arrayName}[^=]*=\\s*\\[`);
   const startMatch = source.match(arrayStartRe);
   if (!startMatch || startMatch.index === undefined) {
-    const availableExports = [...source.matchAll(/export const (\w+)/g)].map(
+    const availableExports = Array.from(source.matchAll(/export const (\w+)/g)).map(
       (m) => m[1]
     );
     throw new Error(
@@ -46,7 +46,6 @@ function updateArrayBlock(
   }
   const blockStart = startMatch.index + startMatch[0].length;
 
-  // Find the matching closing "];" for this array. Tolerant of \n or \r\n.
   const endRe = /\r?\n\];/;
   const endMatch = source.slice(blockStart).match(endRe);
   if (!endMatch || endMatch.index === undefined) {
