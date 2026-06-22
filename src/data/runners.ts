@@ -173,7 +173,7 @@ export const runners: Runner[] = [
   },
   {
     id: '17',
-    name: 'ĐÀO NGUYỄN BẢO KHÁNH',
+    name: 'ĐÀO NGUYÊN BẢO KHÁNH',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/DAO%20NGUYEN%20BAO%20KHANH.jpg',
     halfMarathonPR: '01:34:03', // ✅ Updated - from HCMCM 11/01/2026
     fullMarathonPR: '03:27:44', // ✅ Updated - from TCBHCM 7.12.25
