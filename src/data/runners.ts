@@ -1016,6 +1016,18 @@ export const runners: Runner[] = [
     bio: 'Male runner competing across multiple half marathon events with an Ironman 140.6 pending.',
     joinDate: '2024-03-10', // Based on earliest race - Run To Live 10/03/2024
   },
+  {
+    id: '65',
+    name: 'MAI THỊ THU HOÀ',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/MAI%20THI%20THU%20HOA.jpg',
+    halfMarathonPR: '1:42:48', // From Binh Duong New City Half Marathon 14/04/2024 - 5/6 (PR)
+    fullMarathonPR: 'N/A', // No full marathon data
+    achievements: [
+      'Binh Duong New City Half Marathon 14/04/2024 - 429/561'
+    ],
+    bio: 'Female runner with Ironman 140.6 pending. Half marathon specialist.',
+    joinDate: '2024-04-14', // Based on her only recorded race
+  }
 ];
 
 // Helper functions to determine if times are competitive
