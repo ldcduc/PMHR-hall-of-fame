@@ -558,15 +558,16 @@ export const runners: Runner[] = [
     id: '26',
     name: 'TRẦN BÁ PHƯỚC',
     profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/TRAN%20BA%20PHUOC.jpg',
-    halfMarathonPR: '01:44:13',
-    fullMarathonPR: '03:48:21',
+    halfMarathonPR: '01:39:40', // ✅ Corrected - from UPRACE DAY 14/12/2025
+    fullMarathonPR: '03:48:21', // ✅ Correct - unchanged
     achievements: [
       'TECHCOMBANK HCMC INTERNATIONAL MARATHON 8/12/2024 - 324046',
       'FULL MARATHON - 03:48:21 - 324046 - TCBHCMIM8.12.24 - 3626/5557',
-      'HALF MARATHON - 01:44:13 - 71288 - RTL10.3.24 - 2058/2195'
+      'UPrace Day 14/12/2025 - 17/28',
+      'Run To Live 10/03/2024 - 86/94'
     ],
-    bio: 'Age group: M. Bib number: 324046. Multi-distance runner with records in Full Marathon, Half Marathon, Ultra Trail, Ironman 70.3, and Ultra Road events.',
-    joinDate: '2024-12-08',
+    bio: 'Age group: M. Bib number: 324046. Multi-distance runner with records in Full Marathon, Half Marathon, Ultra Trail, Ironman 70.3, and Ultra Road events. Ironman 140.6 pending.',
+    joinDate: '2024-03-10', // Updated based on earliest race - Run To Live 10/03/2024
   },
   {
     id: '42',
