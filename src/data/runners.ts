@@ -998,6 +998,23 @@ export const runners: Runner[] = [
     bio: 'Member of PMHR team. Age group: F20-29. Multi-distance runner competing in half marathon and ultra trail events. Ironman 140.6 pending.',
     joinDate: '2026-02-01', // Based on earliest visible PR race
   },
+  {
+    id: '64',
+    name: 'LÊ MINH TÚ',
+    profileImage: 'https://bestmarathon.vn/wp-content/themes/flatsome-child/avatar/LE%20MINH%20TU.jpg',
+    halfMarathonPR: '1:37:32', // From Tết Run Miền Nam 19/01/2025 - 47/89 (PR)
+    fullMarathonPR: '3:53:07', // From overview card (6130/8058)
+    achievements: [
+      'Tết Run Miền Nam 19/01/2025 - 47/89',
+      'Tết Run Miền Nam 01/02/2026 - 188/369',
+      'HCMC Marathon 11/01/2026 - 69/128',
+      'Techcombank HCMC International Marathon 08/12/2024 - 96/111',
+      'District 1 Midnight Run 13/10/2024 - 52/52',
+      'Run To Live 10/03/2024 - 92/94'
+    ],
+    bio: 'Male runner competing across multiple half marathon events with an Ironman 140.6 pending.',
+    joinDate: '2024-03-10', // Based on earliest race - Run To Live 10/03/2024
+  },
 ];
 
 // Helper functions to determine if times are competitive
