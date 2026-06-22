@@ -21,7 +21,7 @@ interface TeamGapTableProps {
 }
 
 const PER_TEAM_CUTOFFS = [20, 40, 60, 80, 100, 120];
-const COMBINED_CUTOFFS = [25, 50, 75, 100, 125, 150, 175, 200, 225, -1]; // -1 = "Toàn bộ" (all)
+const COMBINED_CUTOFFS = [26, 50, 76, 100, 126, 150, 176, 200, 226, -1]; // -1 = "Toàn bộ" (all)
 const SYNC_INTERVAL_MS = 5 * 60 * 1000;
 
 interface TeamTotals {
